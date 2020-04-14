@@ -19,6 +19,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "babel-preset-minify": "^0.5.1",
+    "gh-pages": "^2.2.0",
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "node-sass": "^4.13.1",
