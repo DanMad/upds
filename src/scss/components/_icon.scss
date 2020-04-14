@@ -1,0 +1,97 @@
+// Table of Contents
+//
+// 1 Pattern outline
+// 2 Imports
+// 3 Small devices
+//   3.1 Medium devices
+//   3.2 Large devices
+
+// 1 Pattern outline
+// =============================================================================
+
+// .icon
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+
+// 3 Small devices
+// =============================================================================
+
+.#{$ns}-highlight {
+  position: absolute;
+  top: rem(-8px);
+  left: rem(-8px);
+  pointer-events: none;
+}
+
+.#{$ns}-highlight__tint {
+  transform: scale(0);
+  transform-origin: 50% 50%;
+  fill: rgba($primary-1, $opacity-3);
+  transition: fill $duration-3 $easing-default;
+}
+
+.#{$ns}-active > .#{$ns}-highlight > .#{$ns}-highlight__tint {
+  fill: $primary-1;
+}
+
+.#{$ns}-highlight__mask {
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+.#{$ns}-icon {
+  opacity: $opacity-3;
+  transition: opacity $duration-1 $easing-default;
+  pointer-events: none;
+}
+
+.#{$ns}-icon--complete {
+  opacity: $tertiary-3;
+}
+
+.#{$ns}-icon--incomplete {
+  opacity: $opacity-1;
+}
+
+:hover > .#{$ns}-icon {
+  opacity: $opacity-5;
+}
+
+.#{$ns}-icon__stroke {
+  fill: none;
+  stroke: rgb(0, 0, 9);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1;
+  transition: stroke $duration-1 $easing-default;
+}
+
+.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
+  transform-origin: rem(12px 7.5px);
+  transition: transform $duration-3 $easing-bounce-out;
+}
+
+.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
+  transition-delay: $duration-2;
+}
+
+.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
+  transform-origin: rem(12px 16.5px);
+  transition: transform $duration-3 $easing-bounce-out;
+}
+
+.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
+  transform: translate(#{rem(0, 4.5px)}) rotate(45deg);
+}
+
+.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
+  stroke: rgba($black, 0);
+  transition-delay: 0ms;
+}
+
+.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
+  transform: translate(#{rem(0, -4.5px)}) rotate(-45deg);
+}

@@ -1,0 +1,40 @@
+{
+  "name": "up-design-system",
+  "displayName": "UP Design System",
+  "description": "UP Education's Design System",
+  "license": "MIT",
+  "author": "DanMad",
+  "version": "0.1.0",
+  "main": "index.html",
+  "homepage": "https://github.com/DanMad/UPDS#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanMad/UPDS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DanMad/UPDS/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-preset-minify": "^0.5.1",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "node-sass": "^4.13.1",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1"
+  },
+  "scripts": {
+    "build": "npm run css & npm run js",
+    "css": "node-sass src/scss/up.scss dist/css/up.min.css --output-style compressed",
+    "deploy": "gh-pages -d dist",
+    "js": "babel src --out-file dist/js/up.min.js --ignore '**/*.test.js'",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}

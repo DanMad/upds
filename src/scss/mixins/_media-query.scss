@@ -1,0 +1,13 @@
+@import '../utilities/variables';
+
+@mixin media-query($args...) {
+  $str: 'only screen';
+
+  @each $arg in $args {
+    $str: $str + ' and #{map-get($media-queries, $arg)}';
+  }
+
+  @media #{$str} {
+    @content;
+  }
+}

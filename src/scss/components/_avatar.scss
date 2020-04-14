@@ -1,0 +1,75 @@
+// Table of Contents
+//
+// 1 Pattern outline
+// 2 Imports
+// 3 Touch devices
+
+// 1 Pattern outline
+// =============================================================================
+
+// .avatar
+// |  .avatar__img
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+
+// 3 Touch devices
+// =============================================================================
+
+.#{$ns}-avatar {
+  position: relative;
+  box-sizing: border-box;
+  border: rem(1px) solid $grey-1;
+  border-radius: 100%;
+
+  // The vertical-align property set to bottom removes the default margin-bottom
+  // that some browsers apply to the img element.
+  vertical-align: bottom;
+
+  transition: border-color $duration-1 $easing-default,
+    box-shadow $duration-2 $easing-bounce-out;
+}
+
+.#{$ns}-avatar:hover {
+  border-color: $secondary-3;
+}
+.#{$ns}-avatar:focus {
+  border-color: $secondary-3;
+  box-shadow: 0 0 0 rem(3px) rgba($secondary-1, 0.3);
+}
+.#{$ns}-avatar:active {
+  border-color: $secondary-4;
+}
+
+.#{$ns}-avatar--xs {
+  width: rem(32px);
+  height: rem(32px);
+}
+
+.#{$ns}-avatar--s {
+  width: rem(48px);
+  height: rem(48px);
+}
+
+.#{$ns}-avatar--m {
+  width: rem(64px);
+  height: rem(64px);
+}
+
+.#{$ns}-avatar--l {
+  width: rem(80px);
+  height: rem(80px);
+}
+
+.#{$ns}-avatar--xl {
+  width: rem(96px);
+  height: rem(96px);
+}
+
+.#{$ns}-avatar__img {
+  position: absolute;
+  top: rem(1px);
+  left: rem(1px);
+}

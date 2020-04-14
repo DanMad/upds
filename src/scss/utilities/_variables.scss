@@ -1,0 +1,137 @@
+// Imports
+// =============================================================================
+
+@import '../vendors/rem';
+
+// Namespace
+// =============================================================================
+
+$ns: 'up' !global;
+
+// Media Queries
+// =============================================================================
+
+$media-queries: (
+  small: '(min-width: 0em)',
+  medium: '(min-width: 30.0625em)',
+  large: '(min-width: 48.0625em)',
+  extra-large: '(min-width: 80.0625em)',
+  retina: '(min-resolution: 2dppx)'
+);
+
+// Opacity
+// =============================================================================
+
+$opacity-transparent: 0;
+
+$opacity-1: 0.0915;
+$opacity-2: 0.3025;
+$opacity-3: 0.55;
+$opacity-4: 0.7975;
+$opacity-5: 0.959;
+
+$opacity-full: 1;
+
+// Color
+// =============================================================================
+
+$white: #fff !default;
+
+$grey-1: rgba(0, 0, 9, $opacity-1) !default;
+$grey-2: rgba(0, 0, 9, $opacity-2) !default;
+$grey-3: rgba(0, 0, 9, $opacity-3) !default;
+$grey-4: rgba(0, 0, 9, $opacity-4) !default;
+
+$black: rgba(0, 0, 9, $opacity-5) !default;
+
+$bg-1: $white !default;
+$bg-2: #f6f6f9 !default;
+$bg-3: #ededf0 !default;
+
+$shadow: #221141 !default;
+
+$primary-1: #f97a62 !default;
+$primary-2: #ea4f3d !default;
+$primary-3: #d61811 !default;
+$primary-4: #980101 !default;
+
+$secondary-1: #00bbdb !default;
+$secondary-2: #009ac2 !default;
+$secondary-3: #006990 !default;
+$secondary-4: #002d57 !default;
+
+$tertiary-1: #07cd4e !default;
+$tertiary-2: #05af37 !default;
+$tertiary-3: #037d21 !default;
+$tertiary-4: #003f07 !default;
+
+$error-1: $primary-3 !default;
+$error-2: $primary-4 !default;
+
+$success-1: $tertiary-3 !default;
+$success-2: $tertiary-4 !default;
+
+$accent-1: $primary-2 !default;
+$accent-2: #743cc6 !default;
+$accent-3: $secondary-2 !default;
+$accent-4: #ffd200 !default;
+$accent-5: $tertiary-2 !default;
+
+// Typography
+// ============================================================================
+
+$headings: 'DM Serif Text', Georgia, serif;
+$subheadings: 'Oswald', Tahoma, sans-serif;
+
+$body-copy: 'Roboto', Arial, sans-serif;
+
+$plain-text: 'Roboto Mono', Courier, monospace;
+
+// Grid
+// ============================================================================
+
+$columns: 12;
+
+// Border radius
+// =============================================================================
+
+$border-radius-xs: rem(4px);
+$border-radius-s: rem(8px);
+$border-radius-m: rem(16px);
+$border-radius-l: rem(32px);
+$border-radius-xl: rem(64px);
+
+// Space
+// =============================================================================
+
+$space-xs: rem(8px);
+$space-s: rem(16px);
+$space-m: rem(24px);
+$space-l: rem(40px);
+$space-xl: rem(64px);
+
+// Shadow
+// =============================================================================
+
+$foreshadow: 0 0 rem(20px 4px) rgba($primary-4, 0.02);
+
+$shadow-1: none;
+$shadow-2: $foreshadow, 0 rem(8px 8px -2px) rgba($shadow, 0.25);
+$shadow-3: $foreshadow, 0 rem(16px 16px -4px) rgba($shadow, 0.2);
+$shadow-4: $foreshadow, 0 rem(24px 24px -6px) rgba($shadow, 0.15);
+$shadow-5: $foreshadow, 0 rem(40px 40px -10px) rgba($shadow, 0.1);
+
+// Duration
+// =============================================================================
+
+$duration-1: 0.1s;
+$duration-2: 0.2s;
+$duration-3: 0.3s;
+$duration-4: 0.5s;
+$duration-5: 0.8s;
+
+// Easing
+// =============================================================================
+
+$easing-default: ease-out;
+$easing-bounce-out: cubic-bezier(0.6, 0, 0.5, 1.4);

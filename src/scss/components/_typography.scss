@@ -1,0 +1,623 @@
+// Table of Contents
+//
+// 1 Pattern outline
+// 2 Imports
+// 3 Small devices
+//   3.1 Medium devices
+//   3.2 Large devices
+// 4 Retina devices
+
+// 1 Pattern outline
+// =============================================================================
+
+// .h1
+// .h2
+// .h3
+// .h4
+// .h5
+// .h6
+// .p
+// .a
+// .code
+// .em
+// .small
+// .strong
+// .sub
+// .sup
+// .blockquote
+// .ol
+// .ul
+// .li
+// .pre
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+@import '../vendors/rem';
+@import '../mixins/media-query';
+
+// 3 Small devices
+// =============================================================================
+
+.#{$ns}-h1 {
+  font-family: $headings;
+  font-size: rem(43px);
+  line-height: rem(48px);
+}
+
+.#{$ns}-h2 {
+  margin-top: $space-xl;
+  font-family: $headings;
+  font-size: rem(36px);
+  line-height: rem(40px);
+}
+
+.#{$ns}-h3 {
+  margin-top: $space-l;
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(30px);
+  font-weight: 500;
+  line-height: rem(40px);
+}
+
+.#{$ns}-h4 {
+  margin-top: $space-m;
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(24px);
+  font-weight: 500;
+  line-height: rem(32px);
+}
+
+.#{$ns}-h5 {
+  margin-top: $space-s;
+  color: $grey-3;
+  font-family: $subheadings;
+  font-size: rem(18px);
+  font-weight: 500;
+  line-height: rem(24px);
+  text-transform: uppercase;
+}
+
+.#{$ns}-h6 {
+  margin-top: $space-xs;
+  color: $grey-3;
+  font-family: $subheadings;
+  font-size: rem(12px);
+  font-weight: 500;
+  line-height: rem(16px);
+  text-transform: uppercase;
+}
+
+.#{$ns}-p + .#{$ns}-h6 {
+  margin-top: 0;
+}
+
+@for $i from 1 through 6 {
+  .#{$ns}-h#{$i} {
+    margin-bottom: $space-m;
+    font-style: normal;
+
+    // The word-wrap property set to break-word enables long URLs to reflow
+    // over multiple lines, rather than text flowing outside its container.
+    word-wrap: break-word;
+  }
+
+  .#{$ns}-h#{$i}--left {
+    text-align: left;
+  }
+  .#{$ns}-h#{$i}--center {
+    text-align: center;
+  }
+  .#{$ns}-h#{$i}--right {
+    text-align: right;
+  }
+  .#{$ns}-h#{$i}--justify {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  // Contextual styles will overwrite the original styles in order to support
+  // subheadings.
+  @if $i != 1 {
+    .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+      margin-top: rem(-16px);
+      color: $grey-3;
+      font-family: $subheadings;
+      font-size: rem(18px);
+      font-weight: 500;
+      line-height: rem(24px);
+      text-transform: uppercase;
+    }
+  }
+}
+
+.#{$ns}-p {
+  display: block;
+  margin-bottom: $space-xs;
+  font-size: rem(15px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: rem(24px);
+}
+
+// Ensure this scales. I expect it will, though.
+.#{$ns}-p:last-child {
+  margin-bottom: $space-xl;
+}
+
+@for $i from 1 through 6 {
+  .#{$ns}-h#{$i} + .#{$ns}-p {
+    margin-top: rem(-16px);
+  }
+}
+
+.#{$ns}-p--left {
+  text-align: left;
+}
+.#{$ns}-p--center {
+  text-align: center;
+}
+.#{$ns}-p--right {
+  text-align: right;
+}
+.#{$ns}-p--justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.#{$ns}-a:link {
+  color: $secondary-3;
+  font-weight: 400;
+  text-decoration: underline;
+  white-space: nowrap;
+  transition: color $duration-2 $easing-default;
+}
+
+.#{$ns}-a:visited {
+  color: $accent-2;
+}
+
+.#{$ns}-a:hover {
+  color: $secondary-3;
+  text-decoration: none;
+}
+
+.#{$ns}-a:focus {
+  outline: none;
+  color: $secondary-3;
+  text-decoration: none;
+}
+
+.#{$ns}-a:active {
+  color: $secondary-4;
+  text-decoration: underline;
+}
+
+// .#{$ns}-code {
+//   padding-left: rem(4px);
+//   padding-right: rem(4px);
+//   border: rem(1px) solid $grey-1;
+//   border-radius: $border-radius-xs;
+//   background-color: rgba($black, 0.02);
+//   color: $grey-3;
+//   font-size: rem(14px);
+//   font-family: $plain-text;
+// }
+
+.#{$ns}-em {
+  font-style: italic;
+}
+
+.#{$ns}-small {
+  font-size: rem(12px);
+}
+
+.#{$ns}-strong {
+  font-weight: 500;
+}
+
+.#{$ns}-sub {
+  position: relative;
+  top: rem(4px);
+  font-size: rem(12px);
+  vertical-align: baseline;
+}
+
+.#{$ns}-sup {
+  position: relative;
+  top: rem(-4px);
+  font-size: rem(12px);
+  vertical-align: baseline;
+}
+
+.#{$ns}-blockquote {
+  position: relative;
+  margin-top: $space-s;
+  margin-bottom: rem(48px);
+}
+
+.#{$ns}-blockquote__quote {
+  margin-left: $space-m;
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(30px);
+  font-weight: 500;
+  line-height: rem(40px);
+  text-transform: uppercase;
+}
+
+.#{$ns}-blockquote--compact > .#{$ns}-blockquote__quote {
+  font-size: rem(18px);
+  line-height: rem(24px);
+}
+
+.#{$ns}-blockquote__quote::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: rem(3px);
+  height: 100%;
+  background-color: $grey-4;
+}
+
+.#{$ns}-blockquote__citation {
+  position: absolute;
+  bottom: rem(-32px);
+  left: $space-m;
+  color: $grey-3;
+  font-size: rem(12px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: rem(24px);
+}
+
+.#{$ns}-blockquote__citation::before {
+  content: '— ';
+}
+
+.#{$ns}-ol {
+  counter-reset: item;
+  margin-bottom: $space-xs;
+  margin-left: rem(32px);
+}
+
+@for $i from 1 through 6 {
+  .#{$ns}-h#{$i} + .#{$ns}-ol {
+    margin-top: rem(-16px);
+  }
+}
+
+.#{$ns}-ol .#{$ns}-ol,
+.#{$ns}-ul .#{$ns}-ol {
+  margin-top: $space-xs;
+  margin-bottom: 0;
+}
+
+.#{$ns}-ul {
+  margin-bottom: $space-xs;
+  margin-left: rem(32px);
+}
+
+@for $i from 1 through 6 {
+  .#{$ns}-h#{$i} + .#{$ns}-ul {
+    margin-top: rem(-16px);
+  }
+}
+
+.#{$ns}-ol .#{$ns}-ul,
+.#{$ns}-ul .#{$ns}-ul {
+  margin-top: $space-xs;
+  margin-bottom: 0;
+}
+
+.#{$ns}-li {
+  position: relative;
+  margin-bottom: $space-xs;
+  font-size: rem(15px);
+  line-height: rem(24px);
+}
+
+.#{$ns}-ol > .#{$ns}-li::before {
+  counter-increment: item;
+  content: counter(item);
+  position: absolute;
+  top: 0;
+  left: rem(-24px);
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(12px);
+  font-weight: 500;
+  text-align: right;
+}
+
+.#{$ns}-ol .#{$ns}-ol > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ol > .#{$ns}-li::before {
+  content: counter(item, upper-alpha);
+}
+
+.#{$ns}-ol .#{$ns}-ol .#{$ns}-ol > .#{$ns}-li::before,
+.#{$ns}-ol .#{$ns}-ul .#{$ns}-ol > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ol .#{$ns}-ol > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ul .#{$ns}-ol > .#{$ns}-li::before {
+  content: counter(item, upper-roman);
+}
+
+.#{$ns}-ul > .#{$ns}-li::before {
+  content: '';
+  position: absolute;
+  top: $space-xs;
+  left: rem(-24px);
+  box-sizing: border-box;
+  width: rem(8px);
+  height: rem(8px);
+  border-radius: 100%;
+  background-color: $grey-4;
+}
+
+.#{$ns}-ol .#{$ns}-ul > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ul > .#{$ns}-li::before {
+  border: rem(2px) solid $grey-4;
+  background-color: transparent;
+}
+
+.#{$ns}-ol .#{$ns}-ol .#{$ns}-ul > .#{$ns}-li::before,
+.#{$ns}-ol .#{$ns}-ul .#{$ns}-ul > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ol .#{$ns}-ul > .#{$ns}-li::before,
+.#{$ns}-ul .#{$ns}-ul .#{$ns}-ul > .#{$ns}-li::before {
+  border: rem(1px) solid $grey-4;
+}
+
+// .#{$ns}-pre {
+//   box-sizing: border-box;
+//   margin-top: $space-s;
+//   margin-bottom: $space-m;
+//   padding: $space-xs;
+//   border: rem(1px) solid $grey-1;
+//   border-radius: $border-radius-xs;
+//   background-color: rgba($black, 0.02);
+//   color: $grey-3;
+//   font-family: $plain-text;
+//   font-size: rem(14px);
+//   line-height: rem(24px);
+//   white-space: pre-wrap;
+//   word-wrap: break-word;
+// }
+
+// 3.1 Medium devices
+// -----------------------------------------------------------------------------
+
+@include media-query('medium') {
+  .#{$ns}-h1 {
+    font-size: rem(50px);
+    line-height: rem(56px);
+  }
+
+  .#{$ns}-h2 {
+    font-size: rem(43px);
+    line-height: rem(48px);
+  }
+
+  .#{$ns}-h3 {
+    font-size: rem(36px);
+    line-height: rem(48px);
+  }
+
+  .#{$ns}-h4 {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
+  .#{$ns}-h5 {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
+  .#{$ns}-h6 {
+    font-size: rem(18px);
+    line-height: rem(24px);
+  }
+
+  .#{$ns}-p + .#{$ns}-h6 {
+    margin-top: rem(-8px);
+  }
+
+  @for $i from 1 through 6 {
+    // Contextual styles will overwrite the original styles in order to support
+    // subheadings.
+    @if $i != 1 {
+      .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+        font-size: rem(24px);
+        line-height: rem(32px);
+      }
+    }
+  }
+
+  .#{$ns}-p {
+    margin-bottom: $space-s;
+    font-size: rem(17px);
+    line-height: rem(32px);
+  }
+
+  //   .#{$ns}-code {
+  //     padding-top: rem(1px);
+  //     padding-bottom: rem(1px);
+  //     font-size: rem(15px);
+  //   }
+
+  .#{$ns}-small {
+    font-size: rem(13px);
+  }
+
+  .#{$ns}-sub {
+    font-size: rem(13px);
+  }
+
+  .#{$ns}-sup {
+    font-size: rem(13px);
+  }
+
+  .#{$ns}-blockquote {
+    margin-bottom: rem(56px);
+  }
+
+  .#{$ns}-blockquote__quote {
+    margin-left: $space-l;
+    font-size: rem(36px);
+    line-height: rem(48px);
+  }
+
+  .#{$ns}-blockquote--compact > .#{$ns}-blockquote__quote {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
+  .#{$ns}-blockquote__quote::before {
+    width: rem(5px);
+  }
+
+  .#{$ns}-blockquote__citation {
+    bottom: rem(-40px);
+    left: $space-l;
+    font-size: rem(13px);
+    line-height: rem(32px);
+  }
+
+  .#{$ns}-ol {
+    margin-bottom: $space-s;
+    margin-left: $space-l;
+  }
+
+  .#{$ns}-ul {
+    margin-bottom: $space-s;
+    margin-left: $space-l;
+  }
+
+  .#{$ns}-li {
+    font-size: rem(17px);
+    line-height: rem(32px);
+  }
+
+  .#{$ns}-ol > .#{$ns}-li::before {
+    font-size: rem(14px);
+  }
+
+  .#{$ns}-ul > .#{$ns}-li::before {
+    top: rem(12px);
+  }
+
+  //   .#{$ns}-pre {
+  //     margin-top: $space-m;
+  //     margin-bottom: $space-l;
+  //     font-size: rem(15px);
+  //     line-height: rem(32px);
+  //   }
+}
+
+// 3.2 Large devices
+// -----------------------------------------------------------------------------
+
+@include media-query('large') {
+  .#{$ns}-h1 {
+    font-size: rem(58px);
+    line-height: rem(64px);
+  }
+
+  .#{$ns}-h2 {
+    font-size: rem(50px);
+    line-height: rem(56px);
+  }
+
+  .#{$ns}-h3 {
+    font-size: rem(42px);
+    line-height: rem(56px);
+  }
+
+  .#{$ns}-h4 {
+    font-size: rem(36px);
+    line-height: rem(48px);
+  }
+
+  .#{$ns}-h5 {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
+  .#{$ns}-h6 {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
+  @for $i from 1 through 6 {
+    // Contextual styles will overwrite the original styles in order to support
+    // subheadings.
+    @if $i != 1 {
+      .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+        font-size: rem(30px);
+        line-height: rem(40px);
+      }
+    }
+  }
+
+  .#{$ns}-p {
+    font-size: rem(18px);
+  }
+
+  //   .#{$ns}-code {
+  //     padding-top: rem(2px);
+  //     padding-bottom: rem(2px);
+  //     font-size: rem(16px);
+  //   }
+
+  .#{$ns}-small {
+    font-size: rem(14px);
+  }
+
+  .#{$ns}-sub {
+    font-size: rem(14px);
+  }
+
+  .#{$ns}-sup {
+    font-size: rem(14px);
+  }
+
+  .#{$ns}-blockquote__quote {
+    font-size: rem(42px);
+    line-height: rem(56px);
+  }
+
+  .#{$ns}-blockquote--compact > .#{$ns}-blockquote__quote {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
+  .#{$ns}-blockquote__citation {
+    font-size: rem(14px);
+  }
+
+  .#{$ns}-li {
+    font-size: rem(18px);
+  }
+
+  .#{$ns}-ol > .#{$ns}-li::before {
+    font-size: rem(15px);
+  }
+
+  //   .#{$ns}-pre {
+  //     margin-top: $space-l;
+  //     margin-bottom: $space-xl;
+  //     font-size: rem(16px);
+  //   }
+}
+
+// 4 Retina displays.
+// =============================================================================
+
+@include media-query('retina') {
+  .#{$ns}-p {
+    font-weight: 300;
+  }
+}

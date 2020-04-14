@@ -1,0 +1,71 @@
+// Imports
+// =============================================================================
+
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Text|Oswald:400,500|Roboto+Mono:500,500i|Roboto:300,300i,400,400i,500,500i&display=swap');
+
+@import '../utilities/variables';
+@import '../vendors/rem';
+@import '../mixins/media-query';
+
+// Declarations
+// =============================================================================
+
+// The background-color property of the ::-moz-selection rule gives control of the
+// browser window's selection color in Firefox.
+::-moz-selection {
+  background-color: rgba($primary-1, 0.55);
+  // color: $white;
+}
+
+// The background-color property of the ::selection rule gives control of the
+// browser window's selection color.
+::selection {
+  background-color: rgba($primary-1, 0.55);
+  // color: $white;
+}
+
+html,
+body {
+  background-color: $bg-3;
+  color: $black;
+  font-family: $body-copy;
+  font-size: rem(16px);
+  font-weight: 400;
+
+  // -webkit-font-smoothing and -moz-osx-font-smoothing properties improve font
+  // antialiasing on Mac OS.
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Improve default text rendering.
+  text-rendering: optimizeLegibility;
+
+  // The -webkit-tap-highlight-color property controls the tinted overlay that
+  // appears on elements when tapped in Mobile Safari.
+  -webkit-tap-highlight-color: rgba($black, 0);
+
+  // The caret-color property gives control over that caret color in browsers
+  // that support it.
+  caret-color: $black;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Autofill highlight color.
+input:-webkit-autofill {
+  box-shadow: rgba($primary-1, 0.3) 0, 0, 0, rem(20px) inset !important;
+}
+
+// Retina displays.
+// =============================================================================
+
+@include media-query('retina') {
+  html,
+  body {
+    font-weight: 300;
+  }
+}

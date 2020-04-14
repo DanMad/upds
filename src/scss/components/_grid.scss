@@ -1,0 +1,206 @@
+// Table of Contents
+//
+// 1 Pattern outline
+// 2 Imports
+// 3 Small devices
+//   3.1 Medium devices
+//   3.2 Large devices
+//   3.3 Extra large devices
+
+// 1 Pattern outline
+// =============================================================================
+
+// .grid
+// | .grid__item
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+@import '../vendors/rem';
+@import '../mixins/media-query';
+
+// 3 Small devices
+// =============================================================================
+
+.#{$ns}-grid {
+  box-sizing: border-box;
+  max-width: rem(1280px);
+  margin: 0 auto;
+}
+
+.#{$ns}-grid--gutter {
+  // The max-width property is set to 1360px to support the 16px outside gutters
+  // of the .grid--gutter modifier, with a content area spanning 1280px.
+  max-width: rem(1360px);
+
+  padding: $space-xs;
+  margin: 0 auto;
+}
+.#{$ns}-grid--gutter-x {
+  // The max-width property is set to 1360px to support the 16px outside gutters
+  // of the .grid--gutter-x modifier, with a content area spanning 1280px.
+  max-width: rem(1360px);
+
+  padding: 0 $space-xs;
+  // margin: 0 auto;
+}
+.#{$ns}-grid--gutter-y {
+  padding: $space-xs 0;
+  margin: 0 auto;
+}
+
+.#{$ns}-grid--gutter .#{$ns}-grid--gutter {
+  margin: rem(-16px);
+}
+.#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
+  margin: 0 rem(-16px);
+}
+.#{$ns}-grid--gutter .#{$ns}-grid--gutter-y {
+  margin: rem(-16px) 0;
+}
+
+.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
+  margin: 0 rem(-16px);
+}
+.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
+  margin: 0 rem(-16px);
+}
+.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-y {
+  margin: rem(-16px) 0;
+}
+
+.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter {
+  margin: rem(-16px) 0;
+}
+.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter-x {
+  margin: rem(-16px) 0;
+}
+.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter-y {
+  margin: rem(-16px) 0;
+}
+
+.#{$ns}-grid::before {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.#{$ns}-grid::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.#{$ns}-grid__item {
+  float: left;
+  box-sizing: border-box;
+  min-height: rem(1px);
+}
+
+.#{$ns}-grid--gutter > .#{$ns}-grid__item {
+  padding: $space-xs;
+}
+.#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+  padding: 0 $space-xs;
+}
+.#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+  padding: $space-xs 0;
+}
+
+@for $i from 0 through $columns {
+  $result: (100% / $columns) * $i;
+
+  @if $i != 0 {
+    .#{$ns}-grid__item--s-#{$i} {
+      width: $result;
+    }
+  }
+}
+
+// 3.1 Medium devices
+// -----------------------------------------------------------------------------
+
+@include media-query('medium') {
+  .#{$ns}-grid--gutter {
+    padding: $space-xs $space-s;
+  }
+  .#{$ns}-grid--gutter-x {
+    padding: 0 $space-s;
+  }
+
+  .#{$ns}-grid--gutter .#{$ns}-grid--gutter {
+    margin: rem(-16px -24px);
+  }
+  .#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
+    margin: 0 rem(-24px);
+  }
+
+  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
+    margin: 0 rem(-24px);
+  }
+  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
+    margin: 0 rem(-24px);
+  }
+
+  @for $i from 0 through $columns {
+    $result: (100% / $columns) * $i;
+
+    @if $i != 0 {
+      .#{$ns}-grid__item--m-#{$i} {
+        width: $result;
+      }
+    }
+  }
+}
+
+// 3.2 Large devices
+// -----------------------------------------------------------------------------
+
+@include media-query('large') {
+  .#{$ns}-grid--gutter {
+    padding: $space-xs rem(32px);
+  }
+  .#{$ns}-grid--gutter-x {
+    padding: 0 rem(32px);
+  }
+
+  .#{$ns}-grid--gutter .#{$ns}-grid--gutter {
+    margin: rem(-16px -40px);
+  }
+  .#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
+    margin: 0 rem(-40px);
+  }
+
+  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
+    margin: 0 rem(-40px);
+  }
+  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
+    margin: 0 rem(-40px);
+  }
+
+  @for $i from 0 through $columns {
+    $result: (100% / $columns) * $i;
+
+    @if $i != 0 {
+      .#{$ns}-grid__item--l-#{$i} {
+        width: $result;
+      }
+    }
+  }
+}
+
+// 3.3 Extra large devices
+// -----------------------------------------------------------------------------
+
+@include media-query('extra-large') {
+  @for $i from 0 through $columns {
+    $result: (100% / $columns) * $i;
+
+    @if $i != 0 {
+      .#{$ns}-grid__item--xl-#{$i} {
+        width: $result;
+      }
+    }
+  }
+}
