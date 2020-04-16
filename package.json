@@ -32,7 +32,7 @@
     "prod-css": "node-sass src/scss/up.scss dist/css/up.min.css --output-style compressed",
     "prod-js": "babel src --out-file dist/js/up.min.js --ignore '**/*.test.js'",
     "staging-build": "npm run staging-css & npm run staging-js",
-    "staging-css": "node-sass src/scss/up.scss dist/staging/css/up.min.css --output-style expanded",
+    "staging-css": "node-sass src/scss/up.scss dist/staging/css/up.min.css --output-style compressed",
     "staging-js": "babel src --out-file dist/staging/js/up.min.js --ignore '**/*.test.js'",
     "test": "jest"
   },
