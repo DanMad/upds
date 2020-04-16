@@ -6,13 +6,13 @@
   "author": "DanMad",
   "version": "0.1.0",
   "main": "index.html",
-  "homepage": "https://github.com/DanMad/UPDS#readme",
+  "homepage": "https://github.com/DanMad/upds#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DanMad/UPDS.git"
+    "url": "git+https://github.com/DanMad/upds.git"
   },
   "bugs": {
-    "url": "https://github.com/DanMad/UPDS/issues"
+    "url": "https://github.com/DanMad/upds/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -27,10 +27,13 @@
     "pretty-quick": "^2.0.1"
   },
   "scripts": {
-    "build": "npm run css & npm run js",
-    "css": "node-sass src/scss/up.scss dist/css/up.min.css --output-style compressed",
     "deploy": "gh-pages -d dist",
-    "js": "babel src --out-file dist/js/up.min.js --ignore '**/*.test.js'",
+    "prod-build": "npm run prod-css & npm run prod-js",
+    "prod-css": "node-sass src/scss/up.scss dist/css/up.min.css --output-style compressed",
+    "prod-js": "babel src --out-file dist/js/up.min.js --ignore '**/*.test.js'",
+    "staging-build": "npm run staging-css & npm run staging-js",
+    "staging-css": "node-sass src/scss/up.scss dist/staging/css/up.min.css --output-style expanded",
+    "staging-js": "babel src --out-file dist/staging/js/up.min.js --ignore '**/*.test.js'",
     "test": "jest"
   },
   "husky": {
