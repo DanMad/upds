@@ -143,9 +143,9 @@
   line-height: rem(24px);
 }
 
-// Ensure this scales. I expect it will, though.
+// Test
 .#{$ns}-p:last-child {
-  margin-bottom: $space-xl;
+  margin-bottom: 0;
 }
 
 @for $i from 1 through 6 {

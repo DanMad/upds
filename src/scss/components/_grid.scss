@@ -29,56 +29,38 @@
   margin: 0 auto;
 }
 
-.#{$ns}-grid--gutter {
-  // The max-width property is set to 1360px to support the 16px outside gutters
-  // of the .grid--gutter modifier, with a content area spanning 1280px.
-  max-width: rem(1360px);
+// ! remove
+.#{$ns}-grid * {
+  outline: black 1px solid;
+}
 
-  padding: $space-xs;
-  margin: 0 auto;
+.#{$ns}-grid--gutter {
+  // The max-width property is set to 1408px to support the 64px outside gutters
+  // of the .grid--gutter modifier, with a content area spanning 1280px.
+  max-width: rem(1408px);
+
+  padding: $space-s;
 }
 .#{$ns}-grid--gutter-x {
-  // The max-width property is set to 1360px to support the 16px outside gutters
+  // The max-width property is set to 1408px to support the 64px outside gutters
   // of the .grid--gutter-x modifier, with a content area spanning 1280px.
-  max-width: rem(1360px);
+  max-width: rem(1408px);
 
-  padding: 0 $space-xs;
-  // margin: 0 auto;
+  padding: 0 $space-s;
 }
 .#{$ns}-grid--gutter-y {
-  padding: $space-xs 0;
-  margin: 0 auto;
+  padding: $space-s 0;
 }
 
-.#{$ns}-grid--gutter .#{$ns}-grid--gutter {
-  margin: rem(-16px);
-}
-.#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
-  margin: 0 rem(-16px);
-}
-.#{$ns}-grid--gutter .#{$ns}-grid--gutter-y {
-  margin: rem(-16px) 0;
-}
-
-.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
-  margin: 0 rem(-16px);
-}
-.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
-  margin: 0 rem(-16px);
-}
-.#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-y {
-  margin: rem(-16px) 0;
-}
-
-.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter {
-  margin: rem(-16px) 0;
-}
-.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter-x {
-  margin: rem(-16px) 0;
-}
-.#{$ns}-grid--gutter-y .#{$ns}-grid--gutter-y {
-  margin: rem(-16px) 0;
-}
+// .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+//   margin: rem(-24px);
+// }
+// .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+//   margin: 0 rem(-24px);
+// }
+// .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+//   margin: rem(-24px) 0;
+// }
 
 .#{$ns}-grid::before {
   content: '';
@@ -108,13 +90,11 @@
   padding: $space-xs 0;
 }
 
-@for $i from 0 through $columns {
+@for $i from 1 through $columns {
   $result: (100% / $columns) * $i;
 
-  @if $i != 0 {
-    .#{$ns}-grid__item--s-#{$i} {
-      width: $result;
-    }
+  .#{$ns}-grid__item--s-#{$i} {
+    width: $result;
   }
 }
 
@@ -123,33 +103,40 @@
 
 @include media-query('medium') {
   .#{$ns}-grid--gutter {
-    padding: $space-xs $space-s;
+    padding: rem(28px);
   }
   .#{$ns}-grid--gutter-x {
-    padding: 0 $space-s;
+    padding: 0 rem(28px);
+  }
+  .#{$ns}-grid--gutter-y {
+    padding: rem(28px) 0;
   }
 
-  .#{$ns}-grid--gutter .#{$ns}-grid--gutter {
-    margin: rem(-16px -24px);
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+  //   margin: rem(-40px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+  //   margin: 0 rem(-40px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+  //   margin: rem(-40px) 0;
+  // }
+
+  .#{$ns}-grid--gutter > .#{$ns}-grid__item {
+    padding: rem(12px);
   }
-  .#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
-    margin: 0 rem(-24px);
+  .#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+    padding: 0 rem(12px);
+  }
+  .#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+    padding: rem(12px) 0;
   }
 
-  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
-    margin: 0 rem(-24px);
-  }
-  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
-    margin: 0 rem(-24px);
-  }
-
-  @for $i from 0 through $columns {
+  @for $i from 1 through $columns {
     $result: (100% / $columns) * $i;
 
-    @if $i != 0 {
-      .#{$ns}-grid__item--m-#{$i} {
-        width: $result;
-      }
+    .#{$ns}-grid__item--m-#{$i} {
+      width: $result;
     }
   }
 }
@@ -159,47 +146,236 @@
 
 @include media-query('large') {
   .#{$ns}-grid--gutter {
-    padding: $space-xs rem(32px);
+    padding: rem(44px);
   }
   .#{$ns}-grid--gutter-x {
-    padding: 0 rem(32px);
+    padding: 0 rem(44px);
+  }
+  .#{$ns}-grid--gutter-y {
+    padding: rem(44px) 0;
   }
 
-  .#{$ns}-grid--gutter .#{$ns}-grid--gutter {
-    margin: rem(-16px -40px);
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+  //   margin: rem(-64px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+  //   margin: 0 rem(-64px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+  //   margin: rem(-64px) 0;
+  // }
+
+  .#{$ns}-grid--gutter > .#{$ns}-grid__item {
+    padding: rem(20px);
   }
-  .#{$ns}-grid--gutter .#{$ns}-grid--gutter-x {
-    margin: 0 rem(-40px);
+  .#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+    padding: 0 rem(20px);
+  }
+  .#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+    padding: rem(20px) 0;
   }
 
-  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter {
-    margin: 0 rem(-40px);
-  }
-  .#{$ns}-grid--gutter-x .#{$ns}-grid--gutter-x {
-    margin: 0 rem(-40px);
-  }
-
-  @for $i from 0 through $columns {
+  @for $i from 1 through $columns {
     $result: (100% / $columns) * $i;
 
-    @if $i != 0 {
-      .#{$ns}-grid__item--l-#{$i} {
-        width: $result;
-      }
+    .#{$ns}-grid__item--l-#{$i} {
+      width: $result;
     }
   }
 }
 
-// 3.3 Extra large devices
-// -----------------------------------------------------------------------------
+// 4 Devices with grid support
+// =============================================================================
 
-@include media-query('extra-large') {
-  @for $i from 0 through $columns {
+@supports (display: grid) {
+  .#{$ns}-grid {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat($columns, 1fr);
+    padding: 0;
+  }
+
+  .#{$ns}-grid--gutter {
+    grid-gap: $space-s;
+    padding: 0 $space-m;
+    margin: $space-m auto;
+  }
+  .#{$ns}-grid--gutter-x {
+    grid-gap: 0 $space-s;
+    padding: 0 $space-m;
+  }
+  .#{$ns}-grid--gutter-y {
+    grid-gap: $space-s 0;
+    margin: $space-m auto;
+  }
+
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+  //   margin: rem(-24px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+  //   margin: 0 rem(-24px);
+  // }
+  // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+  //   margin: rem(-24px) 0;
+  // }
+
+  .#{$ns}-grid--top {
+    align-items: start;
+  }
+  .#{$ns}-grid--middle {
+    align-items: center;
+  }
+  .#{$ns}-grid--bottom {
+    align-items: end;
+  }
+
+  .#{$ns}-grid--left {
+    justify-items: start;
+  }
+  .#{$ns}-grid--center {
+    justify-items: center;
+  }
+  .#{$ns}-grid--right {
+    justify-items: end;
+  }
+
+  .#{$ns}-grid::before {
+    display: none;
+  }
+
+  .#{$ns}-grid::after {
+    display: none;
+  }
+
+  .#{$ns}-grid__item {
+    min-height: initial;
+  }
+
+  .#{$ns}-grid--gutter > .#{$ns}-grid__item {
+    padding: 0;
+  }
+  .#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+    padding: 0;
+  }
+  .#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+    padding: 0;
+  }
+
+  @for $i from 1 through $columns {
     $result: (100% / $columns) * $i;
 
-    @if $i != 0 {
-      .#{$ns}-grid__item--xl-#{$i} {
-        width: $result;
+    .#{$ns}-grid__item--s-#{$i} {
+      grid-column-end: span $i;
+      width: auto;
+    }
+  }
+
+  .#{$ns}-grid__item--top {
+    align-self: start;
+  }
+  .#{$ns}-grid__item--middle {
+    align-self: center;
+  }
+  .#{$ns}-grid__item--bottom {
+    align-self: end;
+  }
+
+  .#{$ns}-grid__item--left {
+    justify-self: start;
+  }
+  .#{$ns}-grid__item--center {
+    justify-self: center;
+  }
+  .#{$ns}-grid__item--right {
+    justify-self: end;
+  }
+
+  @include media-query('medium') {
+    .#{$ns}-grid--gutter {
+      grid-gap: $space-m;
+      padding: 0 $space-l;
+      margin: $space-l auto;
+    }
+    .#{$ns}-grid--gutter-x {
+      grid-gap: 0 $space-m;
+      padding: 0 $space-l;
+    }
+    .#{$ns}-grid--gutter-y {
+      grid-gap: $space-m 0;
+      margin: $space-l auto;
+    }
+
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+    //   margin: rem(-40px);
+    // }
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+    //   margin: 0 rem(-40px);
+    // }
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+    //   margin: rem(-40px) 0;
+    // }
+
+    .#{$ns}-grid--gutter > .#{$ns}-grid__item {
+      padding: 0;
+    }
+    .#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+      padding: 0;
+    }
+    .#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+      padding: 0;
+    }
+
+    @for $i from 1 through $columns {
+      $result: (100% / $columns) * $i;
+
+      .#{$ns}-grid__item--m-#{$i} {
+        grid-column-end: span $i;
+        width: auto;
+      }
+    }
+  }
+
+  @include media-query('large') {
+    .#{$ns}-grid--gutter {
+      grid-gap: $space-l;
+      padding: 0 $space-xl;
+      margin: $space-xl auto;
+    }
+    .#{$ns}-grid--gutter-x {
+      grid-gap: 0 $space-l;
+      padding: 0 $space-xl;
+    }
+    .#{$ns}-grid--gutter-y {
+      grid-gap: $space-l 0;
+      margin: $space-xl auto;
+    }
+
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter {
+    //   margin: rem(-64px);
+    // }
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-x {
+    //   margin: 0 rem(-64px);
+    // }
+    // .#{$ns}-grid > .#{$ns}-grid__item > .#{$ns}-grid--gutter-y {
+    //   margin: rem(-64px) 0;
+    // }
+
+    .#{$ns}-grid--gutter > .#{$ns}-grid__item {
+      padding: 0;
+    }
+    .#{$ns}-grid--gutter-x > .#{$ns}-grid__item {
+      padding: 0;
+    }
+    .#{$ns}-grid--gutter-y > .#{$ns}-grid__item {
+      padding: 0;
+    }
+
+    @for $i from 1 through $columns {
+      $result: (100% / $columns) * $i;
+
+      .#{$ns}-grid__item--l-#{$i} {
+        grid-column-end: span $i;
+        width: auto;
       }
     }
   }
