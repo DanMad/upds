@@ -28,9 +28,9 @@
   },
   "scripts": {
     "deploy": "gh-pages -d dist",
-    "prod-build": "node-sass src/scss/up.scss dist/css/up.min.css --output-style compressed & babel src --out-file dist/js/up.min.js --ignore '**/*.test.js'",
-    "staging-build": "node-sass src/scss/up.scss dist/staging/css/up.min.css --output-style compressed & babel src --out-file dist/staging/js/up.min.js --ignore '**/*.test.js'",
-    "watch": "node-sass src/scss/up.scss dist/staging/css/up.min.css --watch & babel src --watch --out-file dist/staging/js/up.min.js --ignore '**/*.test.js'",
+    "prod-build": "node-sass src/scss/upds.scss dist/css/upds.min.css --output-style compressed & babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
+    "staging-build": "node-sass src/scss/upds.scss dist/staging/css/upds.min.css --output-style compressed & babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
+    "watch": "node-sass src/scss/upds.scss dist/staging/css/upds.min.css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
     "test": "jest"
   },
   "husky": {
