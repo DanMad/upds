@@ -1,5 +1,29 @@
 'use strict';
 
+const Up = (() => {
+  // Private
+  // ---------------------------------------------------------------------------
+  const _namespace = `up`;
+
+  // Public
+  // ---------------------------------------------------------------------------
+  const getNamespace = () => {
+    return _namespace;
+  };
+
+  // Components
+  const accordion = () => {
+    console.log(
+      `PiggyBack.js: Successfully called Up.js API and referenced the accordion component.`
+    );
+  };
+
+  return {
+    accordion,
+    getNamespace,
+  };
+})();
+
 const PiggyBack = (() => {
   // Private
   // ---------------------------------------------------------------------------
@@ -36,30 +60,6 @@ const PiggyBack = (() => {
     `abbr`,
     `mark`,
   ];
-
-  const Up = (() => {
-    // Private
-    // ---------------------------------------------------------------------------
-    const _namespace = `up`;
-
-    // Public
-    // ---------------------------------------------------------------------------
-    const getNamespace = () => {
-      return _namespace;
-    };
-
-    // Components
-    const accordion = () => {
-      console.log(
-        `PiggyBack.js: Successfully called Up.js API and referenced the accordion component.`
-      );
-    };
-
-    return {
-      accordion,
-      getNamespace,
-    };
-  })();
 
   const _addCSS = (...URLs) => {
     URLs.forEach((URL) => {
