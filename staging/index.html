@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UP's Design System | Staging</title>
-    <link href="./css/up.min.css" />
+    <script src="./js/anime.min.js" defer></script>
+    <script src="./js/up.min.js" defer></script>
   </head>
   <body>
-    <div class="up-entry-point">
+    <div id="page-content">
       <h1>Staging environment</h1>
-      <p>Go ahead an break it!</p>
+      <p>Go ahead and break it!</p>
       <table>
         <thead>
           <tr>
@@ -29,10 +30,49 @@
         </tbody>
       </table>
       <h2>Accordion testing</h2>
-      <button class="up-accordion">Accordion</button>
+      <div class="up-accordion">
+        <button class="up-accordion__btn">Accordion</button>
+        <div class="up-accordion__outer" style="height: 100px;">
+          <p>Sausages</p>
+          <p>Eggs</p>
+        </div>
+      </div>
+      <div class="up-accordion">
+        <button class="up-accordion__btn">Accordion</button>
+        <div class="up-accordion__outer" style="height: 150px;">
+          <p>Sausages</p>
+          <p>Eggs</p>
+        </div>
+      </div>
     </div>
     <p>Outside of <code>.up-entry-point</code>.</p>
-    <script src="./js/anime.min.js" defer></script>
-    <script src="./js/up.min.js" defer></script>
+    <h3>foo</h3>
+    <div class="up-grid up-grid--gutter">
+      <div class="up-grid__item up-grid__item--s-10">
+        <div class="up-grid up-grid--gutter-x">
+          <div class="up-grid__item up-grid__item--s-6">
+            <p>6</p>
+          </div>
+          <div class="up-grid__item up-grid__item--s-6">
+            <p>6</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="up-grid__item up-grid__item--s-6 up-grid__item--m-8 up-grid__item--l-12"
+      >
+        <p>2</p>
+      </div>
+      <div
+        class="up-grid__item up-grid__item--s-9 up-grid__item--m-9 up-grid__item--l-11"
+      >
+        <p>3</p>
+      </div>
+      <div
+        class="up-grid__item up-grid__item--s-12 up-grid__item--m-11 up-grid__item--l-8"
+      >
+        <p>4</p>
+      </div>
+    </div>
   </body>
 </html>
