@@ -1,0 +1,23 @@
+// Table of Contents
+//
+// 1 Pattern outline
+// 2 Imports
+// 3 Touch devices
+
+// 1 Pattern outline
+// =============================================================================
+
+// .accordion
+// |  .accordion__btn
+// |  .accordion__outer
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+
+// 3 Touch devices
+// =============================================================================
+.#{$ns}-accordion {
+  color: red;
+}
