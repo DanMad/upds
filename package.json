@@ -6,13 +6,13 @@
   "author": "DanMad",
   "version": "0.1.0",
   "main": "index.html",
-  "homepage": "https://github.com/DanMad/upds#readme",
+  "homepage": "https://github.com/danmad/upds#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DanMad/upds.git"
+    "url": "git+https://github.com/danmad/upds.git"
   },
   "bugs": {
-    "url": "https://github.com/DanMad/upds/issues"
+    "url": "https://github.com/danmad/upds/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -28,9 +28,9 @@
   },
   "scripts": {
     "deploy": "gh-pages -d dist",
-    "prod-build": "node-sass src/scss/upds.scss dist/css/upds.min.css --output-style compressed & babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
-    "staging-build": "node-sass src/scss/upds.scss dist/staging/css/upds.min.css --output-style compressed & babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
-    "watch": "node-sass src/scss/upds.scss dist/staging/css/upds.min.css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
+    "prod-build": "node-sass src/scss -o dist/css --output-style compressed & babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
+    "staging-build": "node-sass src/scss -o dist/staging/css --output-style compressed & babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
+    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
     "test": "jest"
   },
   "husky": {
