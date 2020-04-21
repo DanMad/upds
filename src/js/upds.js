@@ -1,35 +1,104 @@
 'use strict';
 
-const Up = (() => {
-  // Private
-  // ---------------------------------------------------------------------------
-  const _namespace = `up`;
-
-  // Public
-  // ---------------------------------------------------------------------------
-  const getNamespace = () => {
-    return _namespace;
-  };
-
-  // Components
-  const accordion = () => {
-    console.log(
-      `PiggyBack.js: Successfully called Up.js API and referenced the accordion component.`
-    );
-  };
-
-  return {
-    accordion,
-    getNamespace,
-  };
-})();
-
 const PiggyBack = (() => {
-  // Private
-  // ---------------------------------------------------------------------------
+  const UpDS = (() => {
+    const _namespace = `up`;
+
+    const _BEM = (block) => {
+      const getBlock = () => {
+        return `${_namespace}-${block}`;
+      };
+
+      const getElem = (...elems) => {
+        const addedElems = [];
+        let str = ``;
+
+        elems.forEach((elem) => {
+          if (addedElems.indexOf(elem) === -1) {
+            str += `${_namespace}-${block}__${elem} `;
+
+            addedElems.push(elem);
+          }
+        });
+
+        return str.trim();
+      };
+
+      const getModifier = (...modifiers) => {
+        const addedModifiers = [];
+        let str = ``;
+
+        modifiers.forEach((modifier) => {
+          if (addedModifiers.indexOf(modifier) === -1) {
+            str += `${_namespace}-${block}--${modifier} `;
+
+            addedModifiers.push(modifier);
+          }
+        });
+
+        return str.trim();
+      };
+
+      return {
+        getBlock,
+        getElem,
+        getModifier,
+      };
+    };
+
+    // Public
+    // ---------------------------------------------------------------------------
+    const utils = {
+      getNamespace: () => {
+        return _namespace;
+      },
+    };
+
+    const components = {
+      accordion: {
+        fn: (node) => {
+          const bem = _BEM(`accordion`);
+          const btn = node.querySelector(`.${bem.getElem(`btn`)}`);
+          const outer = node.querySelector(`.${bem.getElem(`outer`)}`);
+
+          function handleClick(e) {
+            e.preventDefault();
+
+            if (node.classList.contains(`${_namespace}-active`)) {
+              node.classList.remove(`${_namespace}-active`);
+              anime({
+                targets: outer,
+                height: [outer.offsetHeight, 0],
+                easing: `linear`,
+              });
+            } else {
+              node.classList.add(`${_namespace}-active`);
+              anime({
+                targets: outer,
+                height: [0, outer.offsetHeight],
+                easing: `linear`,
+              });
+            }
+          }
+
+          function resetHeight() {
+            console.log(`Firing!`);
+          }
+
+          btn.onclick = handleClick;
+          window.onresize = resetHeight;
+        },
+        selector: `.${_namespace}-accordion`,
+      },
+    };
+
+    return {
+      components,
+      utils,
+    };
+  })();
+
   const _addedCSS = [];
-  const _namespace = Up.getNamespace();
-  let _piggyBacked = false;
   const _contentElems = [
     `h1`,
     `h2`,
@@ -60,16 +129,19 @@ const PiggyBack = (() => {
     `abbr`,
     `mark`,
   ];
+  const _namespace = UpDS.utils.getNamespace();
+  let _piggyBacked = false;
 
   const _addCSS = (...URLs) => {
     URLs.forEach((URL) => {
       if (_addedCSS.indexOf(URL) === -1) {
+        const head = document.head;
         const link = document.createElement(`link`);
 
         link.href = URL;
         link.rel = `stylesheet`;
 
-        document.head.appendChild(link);
+        head.appendChild(link);
 
         _addedCSS.push(URL);
       } else {
@@ -81,24 +153,34 @@ const PiggyBack = (() => {
   };
 
   const _addDefaultClassNamesToElems = (entryPoint) => {
-    const elems = entryPoint.querySelectorAll(_contentElems);
+    const nodes = entryPoint.querySelectorAll(_contentElems);
 
-    elems.forEach((elem) => {
-      const tag = elem.tagName.toLowerCase();
+    nodes.forEach((node) => {
+      const tag = node.tagName.toLowerCase();
 
-      if (!elem.classList.contains(`${_namespace}-${tag}`)) {
-        elem.classList.add(`${_namespace}-${tag}`);
+      if (!node.classList.contains(`${_namespace}-${tag}`)) {
+        node.classList.add(`${_namespace}-${tag}`);
       }
     });
   };
 
   // Public
   // ---------------------------------------------------------------------------
-  const run = (...components) => {
+  const run = () => {
+    const components = Object.keys(UpDS.components);
     const entryPoints = document.querySelectorAll(`#page-content`);
 
     if (!_piggyBacked) {
-      _addCSS(`./css/upds.min.css`); // Contextualise address at build time: ./ --> https://danmad.github.io/upds/
+      _addCSS(
+        // Staging
+        `./css/components.css`,
+        `./css/layouts.css`
+
+        // Prod
+        //   `https://danmad.github.io/upds/css/components.css`,
+        //   `https://danmad.github.io/upds/css/layouts.css`,
+        //   `https://danmad.github.io/upds/css/piggyback.css`
+      );
 
       _piggyBacked = true;
     }
@@ -114,16 +196,14 @@ const PiggyBack = (() => {
     }
 
     components.forEach((component) => {
-      if (typeof component === `string`) {
-        component = component.toLowerCase();
+      const nodes = document.querySelectorAll(
+        UpDS.components[component].selector
+      );
 
-        if (!!Up[component]) {
-          Up[component]();
-        } else {
-          console.warn(`Up.js: '${component}' components are not supported.`);
-        }
-      } else {
-        console.warn(`PiggyBack.js: run() only accepts 'string' arguments.`);
+      if (!!nodes.length) {
+        nodes.forEach((node) => {
+          UpDS.components[component].fn(node);
+        });
       }
     });
   };
