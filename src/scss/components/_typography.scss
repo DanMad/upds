@@ -143,11 +143,6 @@
   line-height: rem(24px);
 }
 
-// Test
-.#{$ns}-p:last-child {
-  margin-bottom: 0;
-}
-
 @for $i from 1 through 6 {
   .#{$ns}-h#{$i} + .#{$ns}-p {
     margin-top: rem(-16px);

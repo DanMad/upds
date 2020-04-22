@@ -30,9 +30,9 @@
 }
 
 // ! remove
-.#{$ns}-grid * {
-  outline: black 1px solid;
-}
+// .#{$ns}-grid * {
+//   outline: black 1px solid;
+// }
 
 .#{$ns}-grid--gutter {
   // The max-width property is set to 1408px to support the 64px outside gutters
