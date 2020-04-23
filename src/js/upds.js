@@ -7,11 +7,11 @@ const PiggyBack = (() => {
     const _namespace = `up`;
 
     const _BEM = (block) => {
-      const getBlockName = () => {
+      const B = () => {
         return `${_namespace}-${block}`;
       };
 
-      const getElementName = (...elems) => {
+      const E = (...elems) => {
         const addedElems = [];
         let str = ``;
 
@@ -26,7 +26,7 @@ const PiggyBack = (() => {
         return str.trim();
       };
 
-      const getModifierName = (...modifiers) => {
+      const M = (...modifiers) => {
         const addedModifiers = [];
         let str = ``;
 
@@ -41,12 +41,10 @@ const PiggyBack = (() => {
         return str.trim();
       };
 
-      return {
-        getBlockName,
-        getElementName,
-        getModifierName,
-      };
+      return { B, E, M };
     };
+
+    const _pxToRem = (pixels, basePixels = 16) => {};
 
     // Public
     // ---------------------------------------------------------------------------
@@ -59,83 +57,151 @@ const PiggyBack = (() => {
     const components = {
       accordion: {
         fn: (elem) => {
-          let isActive = false;
-          let isTransitioning = false;
-
           const BEM = _BEM(`accordion`);
 
-          const btn = elem.getElementsByClassName(BEM.getElementName(`btn`))[0];
-          const highlight = elem.getElementsByClassName(
-            BEM.getElementName(`highlight`)
-          )[0];
-          const inner = elem.getElementsByClassName(
-            BEM.getElementName(`inner`)
-          )[0];
-          const mask = elem.getElementsByClassName(
-            BEM.getElementName(`mask`)
-          )[0];
+          const btn = elem.getElementsByClassName(BEM.E(`btn`))[0];
+          const inner = elem.getElementsByClassName(BEM.E(`inner`))[0];
+          const highlight = elem.getElementsByClassName(BEM.E(`highlight`))[0];
+          const mask = elem.getElementsByClassName(BEM.E(`mask`))[0];
 
-          let btnHeight = btn.clientHeight;
-          let innerHeight = inner.offsetHeight;
+          let height = inner.offsetHeight;
 
-          // console.log(`btnHeight: ` + btnHeight);
-          console.log(`innerHeight: ` + innerHeight);
-
-          inner.style.height = 0;
+          let isActive = false;
+          let isFocused = false;
+          let isHovered = false;
+          let isTransitioning = false;
 
           const handleClick = (e) => {
+            const activeClassName = `${_namespace}-active`;
+            const animeProps = {
+              complete: () => {
+                isTransitioning = false;
+              },
+              duration: 500,
+              easing: `easeInOutSine`,
+              targets: inner,
+            };
+
             e.preventDefault();
 
-            elem.classList.toggle(`${_namespace}-active`);
+            if (!isTransitioning) {
+              isTransitioning = true;
+              isActive = !isActive;
+              elem.classList.toggle(activeClassName);
 
-            if (elem.classList.contains(`${_namespace}-active`)) {
-              anime({
-                duration: 800,
-                targets: inner,
-                height: [0, innerHeight],
-                easing: `easeOutBounce`,
-              });
-            } else {
-              anime({
-                delay: 200,
-                duration: 300,
-                targets: inner,
-                height: [innerHeight, 0],
-                easing: `easeInOutSine`,
-              });
+              if (elem.classList.contains(activeClassName)) {
+                anime({
+                  ...animeProps,
+                  height: [0, height],
+                });
+              } else {
+                anime({
+                  ...animeProps,
+                  height: [height, 0],
+                  delay: 100,
+                });
+              }
             }
           };
 
-          btn.onclick = handleClick;
+          const highlightContract = () => {
+            anime({
+              easing: `easeOutSine`,
+              duration: 200,
+              scale: [1, 0],
+              targets: highlight,
+            });
+          };
 
-          //       function handleMouseEnter() {
-          //         const highlight = node.querySelector(
-          //           // `.${bem.getElementName(`highlight`)}`
-          //           `.${_namespace}-highlight__tint`
-          //         );
-          //         anime({
-          //           easing: `easeOutElastic(1, .6)`,
-          //           scale: [0, 1],
-          //           targets: highlight,
-          //         });
-          //       }
-          //       function handleMouseLeave() {
-          //         const highlight = node.querySelector(
-          //           // `.${bem.getElementName(`highlight`)}`
-          //           `.${_namespace}-highlight__tint`
-          //         );
-          //         anime({
-          //           easing: `easeOutElastic(1, .6)`,
-          //           scale: 0,
-          //           targets: highlight,
-          //         });
-          //       }
-          //       function handleResize() {
-          //         console.log(`Firing!`);
-          //       }
-          //       btn.onmouseenter = handleMouseEnter;
-          //       btn.onmouseleave = handleMouseLeave;
-          //       window.onresize = handleResize;
+          const highlightExpand = () => {
+            anime({
+              easing: `easeOutBounce`,
+              duration: 500,
+              scale: [0, 1],
+              targets: highlight,
+            });
+          };
+
+          const maskContract = () => {
+            anime({
+              easing: `easeOutSine`,
+              duration: 200,
+              scale: [1, 0],
+              targets: mask,
+            });
+          };
+
+          const maskExpand = () => {
+            anime({
+              easing: `easeOutBounce`,
+              duration: 500,
+              scale: [0, 1],
+              targets: mask,
+            });
+          };
+
+          const handleBlur = () => {
+            if (!isHovered) {
+              highlightContract();
+            }
+
+            isFocused = false;
+          };
+
+          const handleFocus = () => {
+            if (!isHovered) {
+              highlightExpand();
+            }
+
+            isFocused = true;
+          };
+
+          const handleMouseDown = () => {
+            maskExpand();
+          };
+
+          const handleMouseEnter = () => {
+            if (!isFocused) {
+              highlightExpand();
+            }
+
+            isHovered = true;
+          };
+
+          const handleMouseLeave = () => {
+            if (!isFocused) {
+              highlightContract();
+            }
+
+            isHovered = false;
+          };
+
+          const handleMouseUp = () => {
+            maskContract();
+          };
+
+          const handleResize = () => {
+            inner.setAttribute(`style`, ``);
+            height = inner.offsetHeight;
+
+            if (!!isActive) {
+              inner.setAttribute(`style`, `height:${height};`);
+            } else {
+              inner.setAttribute(`style`, `height:0;`);
+            }
+          };
+
+          inner.setAttribute(`style`, `height:0;`);
+
+          btn.addEventListener(`click`, handleClick, false);
+          btn.addEventListener(`blur`, handleBlur, false);
+          btn.addEventListener(`focus`, handleFocus, false);
+          // btn.addEventListener(`mousedown`, handleMouseDown, false);
+          btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+          btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+          // btn.addEventListener(`mouseup`, handleMouseUp, false);
+
+          window.addEventListener(`resize`, handleResize, false);
         },
         className: `${_namespace}-accordion`,
       },
@@ -148,7 +214,6 @@ const PiggyBack = (() => {
   })();
 
   let _isPiggyBacked = false;
-  const _namespace = UpDS.utils.getNamespace();
 
   const _addComponents = (comps) => {
     const compNames = Object.keys(comps);
@@ -207,7 +272,7 @@ const PiggyBack = (() => {
 
       elems.forEach((elem) => {
         const tagName = elem.tagName.toLowerCase();
-        const defaultClassName = `${_namespace}-${tagName}`;
+        const defaultClassName = `${UpDS.utils.getNamespace()}-${tagName}`;
 
         if (!elem.classList.contains(defaultClassName)) {
           elem.classList.add(defaultClassName);
