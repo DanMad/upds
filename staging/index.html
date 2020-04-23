@@ -4,75 +4,186 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UP's Design System | Staging</title>
-    <script src="./js/anime.min.js" defer></script>
-    <script src="./js/upds.min.js" defer></script>
+    <script src="./js/anime.min.js"></script>
+    <script src="./js/upds.min.js"></script>
+    <link href="./css/base.css" rel="stylesheet" />
   </head>
   <body>
     <main id="page-content">
-      <h1>Staging environment</h1>
-      <p>Go ahead and break it!</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Environment</th>
-            <th>URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Staging</td>
-            <td><code>https://danmad.github.io/upds/staging/</code></td>
-          </tr>
-          <tr>
-            <td>Prod</td>
-            <td><code>https://danmad.github.io/upds/</code></td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Accordion testing</h2>
-      <div class="up-accordion">
-        <button class="up-accordion__btn">Accordion</button>
-        <div class="up-accordion__outer" style="height: 100px;">
-          <p>Sausages</p>
-          <p>Eggs</p>
-        </div>
-      </div>
-      <div class="up-accordion">
-        <button class="up-accordion__btn">Accordion</button>
-        <div class="up-accordion__outer" style="height: 150px;">
-          <p>Sausages</p>
-          <p>Eggs</p>
+      <div class="up-grid up-grid--gutter">
+        <div class="up-grid__item up-grid__item--s-12">
+          <h1>Staging environment</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Environment</th>
+                <th>URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Staging</td>
+                <td><code>https://danmad.github.io/upds/staging/</code></td>
+              </tr>
+              <tr>
+                <td>Prod</td>
+                <td><code>https://danmad.github.io/upds/</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>Accordion component</h2>
+          <div class="up-accordion">
+            <button class="up-accordion__btn">
+              Dagobah
+              <svg
+                class="up-accordion__highlight"
+                width="64"
+                height="64"
+                viewBox="0 0 64 64"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+              >
+                <defs>
+                  <mask id="accordionMaskA">
+                    <rect x="0" y="0" width="64" height="64" fill="#fff" />
+                    <circle
+                      class="up-accordion__mask"
+                      cx="32"
+                      cy="32"
+                      r="18"
+                      fill="#000"
+                    />
+                  </mask>
+                </defs>
+                <circle cx="32" cy="32" r="20" mask="url(#accordionMaskA)" />
+              </svg>
+              <svg
+                class="up-accordion__icon"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <line x1="12" y1="4.5" x2="12" y2="19.5" />
+                <line x1="4.5" y1="12" x2="19.5" y2="12" />
+              </svg>
+            </button>
+            <div class="up-accordion__inner">
+              <p>
+                Dagobah was a planet in the Dagobah system, and one of the
+                purest places in the galaxy within the Force. A remote world of
+                swamps and forests, it served as a refuge for Jedi Grand Master
+                Yoda during his exile after the destruction of the Jedi Order.
+              </p>
+            </div>
+          </div>
+          <div class="up-accordion">
+            <button class="up-accordion__btn">
+              Hoth
+              <svg
+                class="up-accordion__highlight"
+                width="64"
+                height="64"
+                viewBox="0 0 64 64"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+              >
+                <defs>
+                  <mask id="accordionMaskB">
+                    <rect x="0" y="0" width="64" height="64" fill="#fff" />
+                    <circle
+                      class="up-accordion__mask"
+                      cx="32"
+                      cy="32"
+                      r="18"
+                      fill="#000"
+                    />
+                  </mask>
+                </defs>
+                <circle cx="32" cy="32" r="20" mask="url(#accordionMaskB)" />
+              </svg>
+              <svg
+                class="up-accordion__icon"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <line x1="12" y1="4.5" x2="12" y2="19.5" />
+                <line x1="4.5" y1="12" x2="19.5" y2="12" />
+              </svg>
+            </button>
+            <div class="up-accordion__inner">
+              <p>
+                Hoth was the arena of a battle between the Galactic Empire and
+                the Rebel Alliance, which had installed its temporary
+                headquarters, Echo Base, on the ice planet.
+              </p>
+            </div>
+          </div>
+          <div class="up-accordion">
+            <button class="up-accordion__btn">
+              Endor
+              <svg
+                class="up-accordion__highlight"
+                width="64"
+                height="64"
+                viewBox="0 0 64 64"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+              >
+                <defs>
+                  <mask id="accordionMaskC">
+                    <rect x="0" y="0" width="64" height="64" fill="#fff" />
+                    <circle
+                      class="up-accordion__mask"
+                      cx="32"
+                      cy="32"
+                      r="18"
+                      fill="#000"
+                    />
+                  </mask>
+                </defs>
+                <circle cx="32" cy="32" r="20" mask="url(#accordionMaskC)" />
+              </svg>
+              <svg
+                class="up-accordion__icon"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <line x1="12" y1="4.5" x2="12" y2="19.5" />
+                <line x1="4.5" y1="12" x2="19.5" y2="12" />
+              </svg>
+            </button>
+            <div class="up-accordion__inner">
+              <p>
+                Endor, designated IX3244-A, also known as the Forest Moon of
+                Endor or the Sanctuary Moon, was a small forested moon that
+                orbited the Outer Rim planet of the same name and was the
+                homeworld of the sentient Dulok, Ewok, and Yuzzum species, as
+                well as the semi-sentient Gorax and Wistie races.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
-    <p>Outside of <code>.up-entry-point</code>.</p>
-    <h3>foo</h3>
-    <div class="up-grid up-grid--gutter">
-      <div class="up-grid__item up-grid__item--s-10">
-        <div class="up-grid up-grid--gutter-x">
-          <div class="up-grid__item up-grid__item--s-6">
-            <p>6</p>
-          </div>
-          <div class="up-grid__item up-grid__item--s-6">
-            <p>6</p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="up-grid__item up-grid__item--s-6 up-grid__item--m-8 up-grid__item--l-12"
-      >
-        <p>2</p>
-      </div>
-      <div
-        class="up-grid__item up-grid__item--s-9 up-grid__item--m-9 up-grid__item--l-11"
-      >
-        <p>3</p>
-      </div>
-      <div
-        class="up-grid__item up-grid__item--s-12 up-grid__item--m-11 up-grid__item--l-8"
-      >
-        <p>4</p>
-      </div>
-    </div>
+    <script>
+      PiggyBack.run();
+    </script>
   </body>
 </html>
