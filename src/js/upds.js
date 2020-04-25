@@ -44,7 +44,12 @@ const PiggyBack = (() => {
       return { B, E, M };
     };
 
-    const _pxToRem = (pixels, basePixels = 16) => {};
+    const _pxToRem = (pixels, basePixels = 16) => {
+      basePixels = parseFloat(basePixels);
+      pixels = parseFloat(pixels);
+
+      return `${pixels / basePixels}rem`;
+    };
 
     // Public
     // ---------------------------------------------------------------------------
@@ -92,12 +97,12 @@ const PiggyBack = (() => {
               if (elem.classList.contains(activeClassName)) {
                 anime({
                   ...animeProps,
-                  height: [0, height],
+                  height: [0, _pxToRem(height)],
                 });
               } else {
                 anime({
                   ...animeProps,
-                  height: [height, 0],
+                  height: [_pxToRem(height), 0],
                   delay: 100,
                 });
               }
@@ -185,27 +190,21 @@ const PiggyBack = (() => {
             height = inner.offsetHeight;
 
             if (!!isActive) {
-              inner.setAttribute(`style`, `height:${height};`);
+              inner.setAttribute(`style`, `height:${_pxToRem(height)};`);
             } else {
-              inner.setAttribute(`style`, `height:0;`);
+              inner.setAttribute(`style`, `height:${_pxToRem(0)};`);
             }
           };
 
-          inner.setAttribute(`style`, `height:0;`);
+          inner.setAttribute(`style`, `height:${_pxToRem(0)};`);
 
-          // btn.addEventListener(`click`, handleClick, false);
-          // btn.addEventListener(`blur`, handleBlur, false);
-          // btn.addEventListener(`focus`, handleFocus, false);
-          // // btn.addEventListener(`mousedown`, handleMouseDown, false);
-          // btn.addEventListener(`mouseenter`, handleMouseEnter, false);
-          // btn.addEventListener(`mouseleave`, handleMouseLeave, false);
-          // // btn.addEventListener(`mouseup`, handleMouseUp, false);
-
-          btn.onclick = handleClick;
-          btn.onblur = handleBlur;
-          btn.onfocus = handleFocus;
-          btn.onmouseenter = handleMouseEnter;
-          btn.onmouseleave = handleMouseLeave;
+          btn.addEventListener(`click`, handleClick, false);
+          btn.addEventListener(`blur`, handleBlur, false);
+          btn.addEventListener(`focus`, handleFocus, false);
+          // btn.addEventListener(`mousedown`, handleMouseDown, false);
+          btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+          btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+          // btn.addEventListener(`mouseup`, handleMouseUp, false);
 
           window.addEventListener(`resize`, handleResize, false);
         },
@@ -269,7 +268,9 @@ const PiggyBack = (() => {
 
       head.appendChild(style);
 
-      style.onload = fn;
+      // style.onload = fn;
+
+      style.addEventListener(`load`, fn, false);
     } else {
       fn();
     }
