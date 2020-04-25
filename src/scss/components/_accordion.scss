@@ -133,6 +133,10 @@
 // =============================================================================
 
 @include media-query('medium') {
+  .#{$ns}-accordion {
+    margin-bottom: $space-m;
+  }
+
   .#{$ns}-accordion__btn {
     padding-top: $space-xs;
     padding-bottom: $space-xs;
