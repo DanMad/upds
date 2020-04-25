@@ -10,9 +10,12 @@
 // =============================================================================
 
 // .table
-// .tr
-// .th
-// .td
+// | .thead
+// | | .tr
+// | | | .th
+// | .tbody
+// | | .tr
+// | | | .td
 
 // 2 Imports
 // =============================================================================
@@ -72,6 +75,11 @@
   border-bottom: none;
 }
 
+// ?
+.#{$ns}-table--compact .#{$ns}-tr:last-of-type {
+  padding: $space-xs $space-xs rem(6px);
+}
+
 .#{$ns}-tr--left {
   text-align: left;
 }
@@ -99,6 +107,7 @@
   font-weight: 500;
   text-transform: uppercase;
   vertical-align: bottom;
+  word-wrap: break-word;
 }
 
 .#{$ns}-table--compact .#{$ns}-th {
@@ -125,10 +134,15 @@
   text-align: right;
 }
 
+.#{$ns}-th :last-child {
+  margin-bottom: 0;
+}
+
 .#{$ns}-td {
   box-sizing: border-box;
   padding: $space-s $space-xs rem(15px);
   vertical-align: top;
+  word-wrap: break-word;
 }
 
 .#{$ns}-table .#{$ns}-tr:first-of-type > .#{$ns}-td {
@@ -143,9 +157,6 @@
 }
 .#{$ns}-table--compact .#{$ns}-tr:first-of-type > .#{$ns}-td {
   padding: rem(7px) $space-xs;
-}
-.#{$ns}-table--compact .#{$ns}-tr:last-of-type {
-  padding: $space-xs $space-xs rem(6px);
 }
 
 .#{$ns}-td--top {
@@ -166,6 +177,10 @@
 }
 .#{$ns}-td--right {
   text-align: right;
+}
+
+.#{$ns}-td :last-child {
+  margin-bottom: 0;
 }
 
 // 3.1 Medium devices
