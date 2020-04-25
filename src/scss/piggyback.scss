@@ -1,0 +1,13 @@
+// 1 Imports
+// =============================================================================
+
+@import './utilities/variables';
+@import './vendors/rem';
+@import './mixins/media-query';
+
+// 2 Small devices
+// =============================================================================
+
+#page-content {
+  padding: 0;
+}
