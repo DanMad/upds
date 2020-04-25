@@ -27,11 +27,11 @@
     "pretty-quick": "^2.0.1"
   },
   "scripts": {
+    "build-prod": "node-sass src/scss/base.scss dist/css/base.min.css --output-style compressed && node-sass src/scss/components.scss dist/css/components.min.css --output-style compressed && node-sass src/scss/piggyback.scss dist/css/piggyback.min.css --output-style compressed && babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
+    "build-staging": "node-sass src/scss -o dist/staging/css --output-style compressed && babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
     "deploy": "gh-pages -d dist",
-    "prod-build": "node-sass src/scss -o dist/css --output-style compressed & babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
-    "staging-build": "node-sass src/scss -o dist/staging/css --output-style compressed & babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
-    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
-    "test": "jest"
+    "test": "jest",
+    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
   },
   "husky": {
     "hooks": {
