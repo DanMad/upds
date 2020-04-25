@@ -193,13 +193,19 @@ const PiggyBack = (() => {
 
           inner.setAttribute(`style`, `height:0;`);
 
-          btn.addEventListener(`click`, handleClick, false);
-          btn.addEventListener(`blur`, handleBlur, false);
-          btn.addEventListener(`focus`, handleFocus, false);
-          // btn.addEventListener(`mousedown`, handleMouseDown, false);
-          btn.addEventListener(`mouseenter`, handleMouseEnter, false);
-          btn.addEventListener(`mouseleave`, handleMouseLeave, false);
-          // btn.addEventListener(`mouseup`, handleMouseUp, false);
+          // btn.addEventListener(`click`, handleClick, false);
+          // btn.addEventListener(`blur`, handleBlur, false);
+          // btn.addEventListener(`focus`, handleFocus, false);
+          // // btn.addEventListener(`mousedown`, handleMouseDown, false);
+          // btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+          // btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+          // // btn.addEventListener(`mouseup`, handleMouseUp, false);
+
+          btn.onclick = handleClick;
+          btn.onblur = handleBlur;
+          btn.onfocus = handleFocus;
+          btn.onmouseenter = handleMouseEnter;
+          btn.onmouseleave = handleMouseLeave;
 
           window.addEventListener(`resize`, handleResize, false);
         },
@@ -235,30 +241,35 @@ const PiggyBack = (() => {
     if (!_isPiggyBacked) {
       _isPiggyBacked = true;
 
+      const addedCSS = [];
       const head = document.head;
       const style = document.createElement(`style`);
 
       style.textContent = ``;
-
-      const addedCSS = [];
 
       URLs.forEach((URL) => {
         if (addedCSS.indexOf(URL) === -1) {
           style.textContent += `@import"${URL}";`;
           addedCSS.push(URL);
         }
+
+        // Possible JS latch option
+
+        // const link = document.createElement(`link`);
+
+        // link.rel = `stylesheet`;
+        // link.href = URL;
+
+        // link.onload = () => {
+        //   console.log(`${URL} has now loaded...`);
+        // };
+
+        // head.appendChild(link);
       });
 
       head.appendChild(style);
 
-      const isCSSLoaded = () => {
-        if (!!style.sheet.cssRules) {
-          fn();
-          clearInterval(i);
-        }
-      };
-
-      const i = setInterval(isCSSLoaded, 10);
+      style.onload = fn;
     } else {
       fn();
     }
@@ -318,8 +329,8 @@ const PiggyBack = (() => {
     ];
     const stagingCSS = [`./css/components.css`];
     // const prodCSS = [
-    //   `https://danmad.github.io/upds/css/components.css`,
-    //   `https://danmad.github.io/upds/css/piggyback.css`,
+    //   `https://danmad.github.io/upds/css/components.min.css`,
+    //   `https://danmad.github.io/upds/css/piggyback.min.css`,
     // ];
 
     _addCSS(stagingCSS, () => {
