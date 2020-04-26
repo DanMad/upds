@@ -61,154 +61,224 @@ const PiggyBack = (() => {
 
     const components = {
       accordion: {
-        fn: (elem) => {
+        fn: (elems) => {
           const BEM = _BEM(`accordion`);
 
-          const btn = elem.getElementsByClassName(BEM.E(`btn`))[0];
-          const inner = elem.getElementsByClassName(BEM.E(`inner`))[0];
-          const highlight = elem.getElementsByClassName(BEM.E(`highlight`))[0];
-          const mask = elem.getElementsByClassName(BEM.E(`mask`))[0];
+          elems.forEach((elem) => {
+            const btn = elem.querySelector(`.${BEM.E(`btn`)}`);
+            const highlight = elem.querySelector(`.${BEM.E(`highlight`)}`);
+            const inner = elem.querySelector(`.${BEM.E(`inner`)}`);
+            const mask = elem.querySelector(`.${BEM.E(`mask`)}`);
 
-          let height = inner.offsetHeight;
+            let innerHeight = inner.offsetHeight;
 
-          let isActive = false;
-          let isFocused = false;
-          let isHovered = false;
-          let isTransitioning = false;
+            let isAccordionActive = false;
+            let isBtnFocused = false;
+            let isBtnHovered = false;
+            let isInnerAnimating = false;
 
-          const handleClick = (e) => {
-            const activeClassName = `${_namespace}-active`;
-            const animeProps = {
-              complete: () => {
-                isTransitioning = false;
-              },
-              duration: 500,
-              easing: `easeInOutSine`,
-              targets: inner,
+            const handleBlur = () => {
+              isBtnFocused = false;
+
+              anime.remove([mask, highlight]);
+
+              if (!isBtnHovered) {
+                const timeline = anime.timeline({
+                  duration: 200,
+                  easing: `easeOutSine`,
+                });
+
+                timeline
+                  .add(
+                    {
+                      fill: `rgba(249, 122, 98, 0.55)`,
+                      targets: highlight,
+                      scale: `0`,
+                    },
+                    0
+                  )
+                  .add(
+                    {
+                      targets: mask,
+                      scale: `0`,
+                    },
+                    0
+                  );
+              }
             };
 
-            e.preventDefault();
+            const handleClick = (e) => {
+              const activeClassName = `${_namespace}-active`;
 
-            if (!isTransitioning) {
-              isTransitioning = true;
-              isActive = !isActive;
-              elem.classList.toggle(activeClassName);
+              e.preventDefault();
 
-              if (elem.classList.contains(activeClassName)) {
-                anime({
-                  ...animeProps,
-                  height: [0, _pxToRem(height)],
+              if (!isInnerAnimating) {
+                const animeProps = {
+                  complete: () => {
+                    isInnerAnimating = false;
+                  },
+                  duration: 500,
+                  easing: `easeInOutSine`,
+                  targets: inner,
+                };
+
+                isAccordionActive = !isAccordionActive;
+                isInnerAnimating = true;
+
+                elem.classList.toggle(activeClassName);
+
+                if (elem.classList.contains(activeClassName)) {
+                  anime({
+                    ...animeProps,
+                    height: [0, _pxToRem(innerHeight)],
+                  });
+                } else {
+                  anime({
+                    ...animeProps,
+                    height: [_pxToRem(innerHeight), 0],
+                    delay: 100,
+                  });
+                }
+              }
+            };
+
+            const handleFocus = () => {
+              isBtnFocused = true;
+
+              anime.remove([mask, highlight]);
+
+              if (!isBtnHovered) {
+                const timeline = anime.timeline({
+                  duration: 500,
+                  easing: `easeOutBounce`,
                 });
+
+                timeline
+                  .add(
+                    {
+                      fill: `rgb(249, 122, 98)`,
+                      scale: [`0`, `1`],
+                      targets: highlight,
+                    },
+                    0
+                  )
+                  .add(
+                    {
+                      scale: [`0`, `1`],
+                      targets: mask,
+                    },
+                    0
+                  );
+              }
+            };
+
+            const handleMouseEnter = () => {
+              isBtnHovered = true;
+
+              anime.remove(highlight);
+
+              if (isBtnFocused) {
+                const timeline = anime.timeline({
+                  duration: 200,
+                  easing: `easeInOutSine`,
+                });
+
+                timeline
+                  .add(
+                    {
+                      fill: `rgba(249, 122, 98, 0.55)`,
+                      targets: highlight,
+                    },
+                    0
+                  )
+                  .add(
+                    {
+                      scale: [`1`, `0`],
+                      targets: mask,
+                    },
+                    0
+                  );
               } else {
                 anime({
-                  ...animeProps,
-                  height: [_pxToRem(height), 0],
-                  delay: 100,
+                  easing: `easeOutBounce`,
+                  duration: 500,
+                  scale: [0, 1],
+                  targets: highlight,
                 });
               }
-            }
-          };
+            };
 
-          const highlightContract = () => {
-            anime({
-              easing: `easeOutSine`,
-              duration: 200,
-              scale: [1, 0],
-              targets: highlight,
-            });
-          };
+            const handleMouseLeave = () => {
+              isBtnHovered = false;
 
-          const highlightExpand = () => {
-            anime({
-              easing: `easeOutBounce`,
-              duration: 500,
-              scale: [0, 1],
-              targets: highlight,
-            });
-          };
+              anime.remove(highlight);
 
-          const maskContract = () => {
-            anime({
-              easing: `easeOutSine`,
-              duration: 200,
-              scale: [1, 0],
-              targets: mask,
-            });
-          };
+              if (isBtnFocused) {
+                const timeline = anime.timeline({
+                  duration: 200,
+                  easing: `easeInOutSine`,
+                });
 
-          const maskExpand = () => {
-            anime({
-              easing: `easeOutBounce`,
-              duration: 500,
-              scale: [0, 1],
-              targets: mask,
-            });
-          };
+                timeline
+                  .add(
+                    {
+                      fill: `rgb(249, 122, 98)`,
+                      targets: highlight,
+                    },
+                    0
+                  )
+                  .add(
+                    {
+                      duration: 500,
+                      easing: `easeOutBounce`,
+                      scale: [`0`, `1`],
+                      targets: mask,
+                    },
+                    0
+                  );
+              } else {
+                anime({
+                  easing: `easeOutSine`,
+                  duration: 200,
+                  scale: 0,
+                  targets: highlight,
+                });
+              }
+            };
 
-          const handleBlur = () => {
-            if (!isHovered) {
-              highlightContract();
-            }
+            const handleResize = () => {
+              inner.style.height = ``;
+              innerHeight = inner.offsetHeight;
 
-            isFocused = false;
-          };
+              if (!!isAccordionActive) {
+                inner.style.height = _pxToRem(innerHeight);
+              } else {
+                inner.style.height = 0;
+              }
+            };
 
-          const handleFocus = () => {
-            if (!isHovered) {
-              highlightExpand();
-            }
+            btn.addEventListener(`blur`, handleBlur, false);
+            btn.addEventListener(`click`, handleClick, false);
+            btn.addEventListener(`focus`, handleFocus, false);
+            btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+            btn.addEventListener(`mouseleave`, handleMouseLeave, false);
 
-            isFocused = true;
-          };
+            inner.style.height = 0;
 
-          const handleMouseDown = () => {
-            maskExpand();
-          };
-
-          const handleMouseEnter = () => {
-            if (!isFocused) {
-              highlightExpand();
-            }
-
-            isHovered = true;
-          };
-
-          const handleMouseLeave = () => {
-            if (!isFocused) {
-              highlightContract();
-            }
-
-            isHovered = false;
-          };
-
-          const handleMouseUp = () => {
-            maskContract();
-          };
-
-          const handleResize = () => {
-            inner.setAttribute(`style`, ``);
-            height = inner.offsetHeight;
-
-            if (!!isActive) {
-              inner.setAttribute(`style`, `height:${_pxToRem(height)};`);
-            } else {
-              inner.setAttribute(`style`, `height:${_pxToRem(0)};`);
-            }
-          };
-
-          inner.setAttribute(`style`, `height:${_pxToRem(0)};`);
-
-          btn.addEventListener(`click`, handleClick, false);
-          btn.addEventListener(`blur`, handleBlur, false);
-          btn.addEventListener(`focus`, handleFocus, false);
-          // btn.addEventListener(`mousedown`, handleMouseDown, false);
-          btn.addEventListener(`mouseenter`, handleMouseEnter, false);
-          btn.addEventListener(`mouseleave`, handleMouseLeave, false);
-          // btn.addEventListener(`mouseup`, handleMouseUp, false);
-
-          window.addEventListener(`resize`, handleResize, false);
+            window.addEventListener(`resize`, handleResize, false);
+          });
         },
         className: `${_namespace}-accordion`,
+      },
+      imgSlider: {
+        fn: (elems) => {
+          const BEM = _BEM(`img-slider`);
+
+          elems.forEach((elem) => {
+            //
+          });
+        },
+        className: `${_namespace}-img-slider`,
       },
     };
 
@@ -225,18 +295,37 @@ const PiggyBack = (() => {
 
     compNames.forEach((compName) => {
       const elems = [
-        ...document.getElementsByClassName(comps[compName].className),
+        ...document.querySelectorAll(`.${comps[compName].className}`),
       ];
 
       if (!!elems.length) {
-        elems.forEach((elem) => {
-          comps[compName].fn(elem);
-        });
+        comps[compName].fn(elems);
       }
     });
   };
 
-  const _addCSS = ([...URLs], fn) => {
+  const _addDefaultClassNamesToElements = (selector, ...tagNames) => {
+    const entries = document.querySelectorAll(selector);
+
+    if (!!entries.length) {
+      entries.forEach((entry) => {
+        const elems = entry.querySelectorAll([...tagNames]);
+
+        elems.forEach((elem) => {
+          const tagName = elem.tagName.toLowerCase();
+          const defaultClassName = `${UpDS.utils.getNamespace()}-${tagName}`;
+
+          if (!elem.classList.contains(defaultClassName)) {
+            elem.classList.add(defaultClassName);
+          }
+        });
+      });
+    } else {
+      console.warn(`PiggyBack.js: Couldn't find a valid DOM entry.`);
+    }
+  };
+
+  const _addStyleSheets = ([...URLs], fn) => {
     if (!_isPiggyBacked) {
       _isPiggyBacked = true;
 
@@ -268,30 +357,9 @@ const PiggyBack = (() => {
 
       head.appendChild(style);
 
-      // style.onload = fn;
-
       style.addEventListener(`load`, fn, false);
     } else {
       fn();
-    }
-  };
-
-  const _addDefaultClassNamesToElements = (entry, ...tagNames) => {
-    const id = document.getElementById(entry);
-
-    if (!!id) {
-      const elems = id.querySelectorAll([...tagNames]);
-
-      elems.forEach((elem) => {
-        const tagName = elem.tagName.toLowerCase();
-        const defaultClassName = `${UpDS.utils.getNamespace()}-${tagName}`;
-
-        if (!elem.classList.contains(defaultClassName)) {
-          elem.classList.add(defaultClassName);
-        }
-      });
-    } else {
-      console.warn(`PiggyBack.js: Couldn't find a valid DOM entry.`);
     }
   };
 
@@ -328,14 +396,19 @@ const PiggyBack = (() => {
       `abbr`,
       `mark`,
     ];
-    const stagingCSS = [`./css/components.css`];
-    // const prodCSS = [
-    //   `https://danmad.github.io/upds/css/components.min.css`,
-    //   `https://danmad.github.io/upds/css/piggyback.min.css`,
-    // ];
+    const styleSheets = [
+      // Staging
+      // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      `./css/components.css`,
 
-    _addCSS(stagingCSS, () => {
-      _addDefaultClassNamesToElements(`page-content`, ...CMSElements);
+      // Prod
+      // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      // `https://danmad.github.io/upds/css/components.min.css`,
+      // `https://danmad.github.io/upds/css/piggyback.min.css`,
+    ];
+
+    _addStyleSheets(styleSheets, () => {
+      _addDefaultClassNamesToElements(`#page-content`, ...CMSElements);
       _addComponents(UpDS.components);
     });
   };
