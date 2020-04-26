@@ -73,7 +73,6 @@
   transform: scale(0);
   transform-origin: 50% 50%;
   fill: rgba($primary-1, $opacity-3);
-  transition: fill $duration-2 $easing-default;
   pointer-events: none;
 }
 
@@ -89,6 +88,7 @@
   transform: translateY(-50%);
   opacity: $opacity-3;
   stroke: $black-opaque;
+  stroke-linecap: round;
   transition: opacity $duration-2 $easing-default,
     transform $duration-2 $easing-default;
   transition-delay: $duration-0, $duration-4;
