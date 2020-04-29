@@ -9,7 +9,12 @@
 // 1 Pattern outline
 // =============================================================================
 
-// .icon
+// .icon__mask
+// | .icon__mask.icon__mask--visible
+// | .icon__mask.icon__mask--hidden
+// .icon__tint
+// .icon__strokes
+// | .icon-stroke
 
 // 2 Imports
 // =============================================================================
@@ -19,79 +24,112 @@
 // 3 Small devices
 // =============================================================================
 
-.#{$ns}-highlight {
-  position: absolute;
-  top: rem(-8px);
-  left: rem(-8px);
+.#{$ns}-icon {
+  stroke-linecap: round;
+  stroke-linejoin: round;
   pointer-events: none;
 }
 
-.#{$ns}-highlight__tint {
+.#{$ns}-icon__mask--visible {
+  fill: #fff;
+}
+
+.#{$ns}-icon__mask--hidden {
+  fill: #000;
+}
+
+.#{$ns}-icon__tint {
   transform: scale(0);
   transform-origin: 50% 50%;
   fill: rgba($primary-1, $opacity-3);
-  transition: fill $duration-3 $easing-default;
 }
 
-.#{$ns}-active > .#{$ns}-highlight > .#{$ns}-highlight__tint {
-  fill: $primary-1;
-}
-
-.#{$ns}-highlight__mask {
-  transform: scale(0);
-  transform-origin: 50% 50%;
-}
-
-.#{$ns}-icon {
+.#{$ns}-icon__strokes {
   opacity: $opacity-3;
-  transition: opacity $duration-1 $easing-default;
-  pointer-events: none;
+  stroke: $black-opaque;
+  transition: opacity $duration-2 $easing-default;
 }
 
-.#{$ns}-icon--complete {
-  opacity: $tertiary-3;
+:hover > .#{$ns}-icon > .#{$ns}-icon__strokes {
+  opacity: $opacity-5;
 }
-
-.#{$ns}-icon--incomplete {
-  opacity: $opacity-1;
-}
-
-:hover > .#{$ns}-icon {
+:focus > .#{$ns}-icon > .#{$ns}-icon__strokes {
   opacity: $opacity-5;
 }
 
-.#{$ns}-icon__stroke {
-  fill: none;
-  stroke: rgb(0, 0, 9);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1;
-  transition: stroke $duration-1 $easing-default;
-}
+// .#{$ns}-highlight {
+//   position: absolute;
+//   top: rem(-8px);
+//   left: rem(-8px);
+//   pointer-events: none;
+// }
 
-.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
-  transform-origin: rem(12px 7.5px);
-  transition: transform $duration-3 $easing-bounce-out;
-}
+// .#{$ns}-highlight__tint {
+//   transform: scale(0);
+//   transform-origin: 50% 50%;
+//   fill: rgba($primary-1, $opacity-3);
+//   transition: fill $duration-3 $easing-default;
+// }
 
-.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
-  transition-delay: $duration-2;
-}
+// .#{$ns}-active > .#{$ns}-highlight > .#{$ns}-highlight__tint {
+//   fill: $primary-1;
+// }
 
-.#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
-  transform-origin: rem(12px 16.5px);
-  transition: transform $duration-3 $easing-bounce-out;
-}
+// .#{$ns}-highlight__mask {
+//   transform: scale(0);
+//   transform-origin: 50% 50%;
+// }
 
-.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
-  transform: translate(#{rem(0, 4.5px)}) rotate(45deg);
-}
+// .#{$ns}-icon {
+//   opacity: $opacity-3;
+//   transition: opacity $duration-1 $easing-default;
+//   pointer-events: none;
+// }
 
-.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
-  stroke: rgba($black, 0);
-  transition-delay: 0ms;
-}
+// .#{$ns}-icon--complete {
+//   opacity: $tertiary-3;
+// }
 
-.#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
-  transform: translate(#{rem(0, -4.5px)}) rotate(-45deg);
-}
+// .#{$ns}-icon--incomplete {
+//   opacity: $opacity-1;
+// }
+
+// :hover > .#{$ns}-icon {
+//   opacity: $opacity-5;
+// }
+
+// .#{$ns}-icon__stroke {
+//   fill: none;
+//   stroke: rgb(0, 0, 9);
+//   stroke-linecap: round;
+//   stroke-linejoin: round;
+//   stroke-width: 1;
+//   transition: stroke $duration-1 $easing-default;
+// }
+
+// .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
+//   transform-origin: rem(12px 7.5px);
+//   transition: transform $duration-3 $easing-bounce-out;
+// }
+
+// .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
+//   transition-delay: $duration-2;
+// }
+
+// .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
+//   transform-origin: rem(12px 16.5px);
+//   transition: transform $duration-3 $easing-bounce-out;
+// }
+
+// .#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(1) {
+//   transform: translate(#{rem(0, 4.5px)}) rotate(45deg);
+// }
+
+// .#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(2) {
+//   stroke: rgba($black, 0);
+//   transition-delay: 0ms;
+// }
+
+// .#{$ns}-active > .#{$ns}-icon--hamburger > .#{$ns}-icon__stroke:nth-of-type(3) {
+//   transform: translate(#{rem(0, -4.5px)}) rotate(-45deg);
+// }

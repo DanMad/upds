@@ -1,54 +1,20 @@
 'use strict';
 
-// import './polyfills/element.classList';
-
 const PiggyBack = (() => {
   const UpDS = (() => {
     const _namespace = `up`;
-
-    const _BEM = (block) => {
-      const B = () => {
-        return `${_namespace}-${block}`;
-      };
-
-      const E = (...elems) => {
-        const addedElems = [];
-        let str = ``;
-
-        elems.forEach((elem) => {
-          if (addedElems.indexOf(elem) === -1) {
-            str += `${_namespace}-${block}__${elem} `;
-
-            addedElems.push(elem);
-          }
-        });
-
-        return str.trim();
-      };
-
-      const M = (...modifiers) => {
-        const addedModifiers = [];
-        let str = ``;
-
-        modifiers.forEach((modifier) => {
-          if (addedModifiers.indexOf(modifier) === -1) {
-            str += `${_namespace}-${block}--${modifier} `;
-
-            addedModifiers.push(modifier);
-          }
-        });
-
-        return str.trim();
-      };
-
-      return { B, E, M };
-    };
+    let _uniqueIdCount = 0;
+    const _version = `v0.1.0 | "Elvis"`;
 
     const _pxToRem = (pixels, basePixels = 16) => {
-      basePixels = parseFloat(basePixels);
       pixels = parseFloat(pixels);
+      basePixels = parseFloat(basePixels);
 
       return `${pixels / basePixels}rem`;
+    };
+
+    const _uniqueId = () => {
+      return `${_namespace}-id-${_uniqueIdCount++}`;
     };
 
     // Public
@@ -57,64 +23,58 @@ const PiggyBack = (() => {
       getNamespace: () => {
         return _namespace;
       },
+      getVersion: () => {
+        return _version;
+      },
     };
 
     const components = {
       accordion: {
+        className: `${_namespace}-accordion`,
         fn: (elems) => {
-          const BEM = _BEM(`accordion`);
-
           elems.forEach((elem) => {
-            const btn = elem.querySelector(`.${BEM.E(`btn`)}`);
-            const highlight = elem.querySelector(`.${BEM.E(`highlight`)}`);
-            const inner = elem.querySelector(`.${BEM.E(`inner`)}`);
-            const mask = elem.querySelector(`.${BEM.E(`mask`)}`);
-
-            let innerHeight = inner.offsetHeight;
+            const btn = elem.querySelector(`.${_namespace}-accordion__btn`);
+            const inner = elem.querySelector(`.${_namespace}-accordion__inner`);
+            const mask = elem.querySelector(`.${_namespace}-icon__mask`);
+            const maskHidden = elem.querySelector(
+              `.${_namespace}-icon__mask--hidden`
+            );
+            const tint = elem.querySelector(`.${_namespace}-icon__tint`);
 
             let isAccordionActive = false;
             let isBtnFocused = false;
             let isBtnHovered = false;
             let isInnerAnimating = false;
 
-            const handleBlur = () => {
+            const uniqueId = _uniqueId();
+
+            const handleBtnBlur = () => {
               isBtnFocused = false;
 
-              anime.remove([mask, highlight]);
-
               if (!isBtnHovered) {
-                const timeline = anime.timeline({
-                  duration: 200,
-                  easing: `easeOutSine`,
+                anime.remove(tint);
+                anime({
+                  complete: () => {
+                    tint.style.transform = ``;
+                    tint.style.fill = ``;
+                  },
+                  duration: 300,
+                  easing: `easeInBack`,
+                  targets: tint,
+                  scale: 0,
+                  fill: `rgb(249, 122, 98)`,
                 });
-
-                timeline
-                  .add(
-                    {
-                      fill: `rgba(249, 122, 98, 0.55)`,
-                      targets: highlight,
-                      scale: `0`,
-                    },
-                    0
-                  )
-                  .add(
-                    {
-                      targets: mask,
-                      scale: `0`,
-                    },
-                    0
-                  );
               }
             };
 
-            const handleClick = (e) => {
-              const activeClassName = `${_namespace}-active`;
-
-              e.preventDefault();
-
+            const handleBtnClick = () => {
               if (!isInnerAnimating) {
-                const animeProps = {
+                const props = {
                   complete: () => {
+                    if (!isAccordionActive) {
+                      inner.removeAttribute(`style`);
+                    }
+
                     isInnerAnimating = false;
                   },
                   duration: 500,
@@ -125,160 +85,140 @@ const PiggyBack = (() => {
                 isAccordionActive = !isAccordionActive;
                 isInnerAnimating = true;
 
-                elem.classList.toggle(activeClassName);
+                elem.classList.toggle(`${_namespace}-active`);
 
-                if (elem.classList.contains(activeClassName)) {
+                if (elem.classList.contains(`${_namespace}-active`)) {
                   anime({
-                    ...animeProps,
-                    height: [0, _pxToRem(innerHeight)],
+                    ...props,
+                    height: [0, _pxToRem(inner.scrollHeight)],
                   });
                 } else {
                   anime({
-                    ...animeProps,
-                    height: [_pxToRem(innerHeight), 0],
+                    ...props,
                     delay: 100,
+                    height: [_pxToRem(inner.scrollHeight), 0],
                   });
                 }
               }
             };
 
-            const handleFocus = () => {
+            const handleBtnFocus = () => {
               isBtnFocused = true;
 
-              anime.remove([mask, highlight]);
-
               if (!isBtnHovered) {
-                const timeline = anime.timeline({
-                  duration: 500,
-                  easing: `easeOutBounce`,
+                anime.remove(tint);
+                anime({
+                  duration: 800,
+                  easing: `easeOutElastic(1, 0.6)`,
+                  targets: tint,
+                  scale: [0, 1],
+                  fill: `rgb(249, 122, 98)`,
                 });
-
-                timeline
-                  .add(
-                    {
-                      fill: `rgb(249, 122, 98)`,
-                      scale: [`0`, `1`],
-                      targets: highlight,
-                    },
-                    0
-                  )
-                  .add(
-                    {
-                      scale: [`0`, `1`],
-                      targets: mask,
-                    },
-                    0
-                  );
               }
             };
 
-            const handleMouseEnter = () => {
+            const handleBtnMouseEnter = () => {
               isBtnHovered = true;
 
-              anime.remove(highlight);
+              anime.remove(tint);
 
               if (isBtnFocused) {
                 const timeline = anime.timeline({
-                  duration: 200,
-                  easing: `easeInOutSine`,
+                  duration: 300,
+                  easing: `easeInOutCirc`,
                 });
 
                 timeline
                   .add(
                     {
+                      duration: 200,
+                      targets: tint,
                       fill: `rgba(249, 122, 98, 0.55)`,
-                      targets: highlight,
                     },
                     0
                   )
                   .add(
                     {
-                      scale: [`1`, `0`],
-                      targets: mask,
+                      begin: () => {
+                        maskHidden.style.transformOrigin = `50% 50%`;
+                      },
+                      targets: maskHidden,
+                      scale: [1, 0],
                     },
                     0
                   );
               } else {
                 anime({
-                  easing: `easeOutBounce`,
-                  duration: 500,
+                  begin: () => {
+                    maskHidden.style.transform = `scale(0)`;
+                    maskHidden.style.transformOrigin = `50% 50%`;
+                  },
+                  duration: 800,
+                  easing: `easeOutElastic(1, 0.6)`,
+                  targets: tint,
                   scale: [0, 1],
-                  targets: highlight,
                 });
               }
             };
 
-            const handleMouseLeave = () => {
+            const handleBtnMouseLeave = () => {
               isBtnHovered = false;
 
-              anime.remove(highlight);
+              anime.remove(tint);
 
               if (isBtnFocused) {
                 const timeline = anime.timeline({
-                  duration: 200,
-                  easing: `easeInOutSine`,
+                  duration: 300,
+                  easing: `easeInOutCirc`,
                 });
 
                 timeline
                   .add(
                     {
+                      duration: 200,
+                      targets: tint,
                       fill: `rgb(249, 122, 98)`,
-                      targets: highlight,
                     },
-                    0
+                    100
                   )
                   .add(
                     {
-                      duration: 500,
-                      easing: `easeOutBounce`,
+                      targets: maskHidden,
                       scale: [`0`, `1`],
-                      targets: mask,
                     },
                     0
                   );
               } else {
                 anime({
-                  easing: `easeOutSine`,
-                  duration: 200,
+                  complete: () => {
+                    maskHidden.removeAttribute(`style`);
+                    tint.style.transform = ``;
+                  },
+                  duration: 300,
+                  easing: `easeInBack`,
+                  targets: tint,
                   scale: 0,
-                  targets: highlight,
                 });
               }
             };
 
-            const handleResize = () => {
-              inner.style.height = ``;
-              innerHeight = inner.offsetHeight;
-
-              if (!!isAccordionActive) {
-                inner.style.height = _pxToRem(innerHeight);
-              } else {
-                inner.style.height = 0;
+            const handleWindowResize = () => {
+              if (isAccordionActive) {
+                inner.style.height = `auto`;
               }
             };
 
-            btn.addEventListener(`blur`, handleBlur, false);
-            btn.addEventListener(`click`, handleClick, false);
-            btn.addEventListener(`focus`, handleFocus, false);
-            btn.addEventListener(`mouseenter`, handleMouseEnter, false);
-            btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+            mask.id = uniqueId;
+            tint.style.mask = `url(#${uniqueId})`;
 
-            inner.style.height = 0;
-
-            window.addEventListener(`resize`, handleResize, false);
+            btn.addEventListener(`blur`, handleBtnBlur, false);
+            btn.addEventListener(`click`, handleBtnClick, false);
+            btn.addEventListener(`focus`, handleBtnFocus, false);
+            btn.addEventListener(`mouseenter`, handleBtnMouseEnter, false);
+            btn.addEventListener(`mouseleave`, handleBtnMouseLeave, false);
+            window.addEventListener(`resize`, handleWindowResize, false);
           });
         },
-        className: `${_namespace}-accordion`,
-      },
-      imgSlider: {
-        fn: (elems) => {
-          const BEM = _BEM(`img-slider`);
-
-          elems.forEach((elem) => {
-            //
-          });
-        },
-        className: `${_namespace}-img-slider`,
       },
     };
 
@@ -287,6 +227,9 @@ const PiggyBack = (() => {
       utils,
     };
   })();
+
+  const _namespace = UpDS.utils.getNamespace();
+  const _version = UpDS.utils.getVersion();
 
   let _isPiggyBacked = false;
 
@@ -313,7 +256,7 @@ const PiggyBack = (() => {
 
         elems.forEach((elem) => {
           const tagName = elem.tagName.toLowerCase();
-          const defaultClassName = `${UpDS.utils.getNamespace()}-${tagName}`;
+          const defaultClassName = `${_namespace}-${tagName}`;
 
           if (!elem.classList.contains(defaultClassName)) {
             elem.classList.add(defaultClassName);
@@ -327,32 +270,19 @@ const PiggyBack = (() => {
 
   const _addStyleSheets = ([...URLs], fn) => {
     if (!_isPiggyBacked) {
-      _isPiggyBacked = true;
-
       const addedCSS = [];
       const head = document.head;
       const style = document.createElement(`style`);
 
-      style.textContent = ``;
+      _isPiggyBacked = true;
+
+      style.textContent = `\n`;
 
       URLs.forEach((URL) => {
         if (addedCSS.indexOf(URL) === -1) {
-          style.textContent += `@import"${URL}";`;
+          style.textContent += `\t@import "${URL}";\n`;
           addedCSS.push(URL);
         }
-
-        // Possible JS latch option
-
-        // const link = document.createElement(`link`);
-
-        // link.rel = `stylesheet`;
-        // link.href = URL;
-
-        // link.onload = () => {
-        //   console.log(`${URL} has now loaded...`);
-        // };
-
-        // head.appendChild(link);
       });
 
       head.appendChild(style);
@@ -400,7 +330,6 @@ const PiggyBack = (() => {
       // Staging
       // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
       `./css/components.css`,
-
       // Prod
       // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
       // `https://danmad.github.io/upds/css/components.min.css`,
@@ -413,7 +342,12 @@ const PiggyBack = (() => {
     });
   };
 
+  const version = () => {
+    return _version;
+  };
+
   return {
     run,
+    version,
   };
 })();

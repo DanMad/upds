@@ -9,8 +9,7 @@
 
 // .accordion
 // | .accordion__btn
-// | | .accordion__highlight
-// | | | .accordion__mask
+// | | .accordion__label
 // | | .accordion__icon
 // | .accordion__inner
 
@@ -43,15 +42,11 @@
   padding: rem(12px 56px 12px 0);
   border: none;
   background-color: transparent;
-  color: $grey-3;
-  font-family: $subheadings;
-  font-size: rem(12px);
-  font-weight: 500;
-  line-height: $space-m;
   text-align: left;
-  text-transform: uppercase;
-  transition: color $duration-2 $easing-default;
-  transition-delay: $duration-4;
+}
+
+.#{$ns}-accordion_btn::-moz-focus-inner {
+  border: none;
 }
 
 .#{$ns}-accordion__btn:hover {
@@ -61,45 +56,29 @@
   outline: none;
 }
 
-.#{$ns}-active > .#{$ns}-accordion__btn {
+.#{$ns}-accordion__label {
+  color: $grey-3;
+  font-family: $subheadings;
+  font-size: rem(12px);
+  font-weight: 500;
+  line-height: $space-m;
+  text-transform: uppercase;
+  transition: color $duration-2 $easing-default;
+  transition-delay: $duration-4;
+}
+
+.#{$ns}-active > .#{$ns}-accordion__btn > .#{$ns}-accordion__label {
   color: $grey-4;
   transition-delay: $duration-0;
-}
-
-.#{$ns}-accordion__highlight {
-  position: absolute;
-  top: calc(50% - #{rem(32px)});
-  right: rem(-8px);
-  transform: scale(0);
-  transform-origin: 50% 50%;
-  fill: rgba($primary-1, $opacity-3);
-  pointer-events: none;
-}
-
-.#{$ns}-accordion__mask {
-  transform: scale(0);
-  transform-origin: 50% 50%;
 }
 
 .#{$ns}-accordion__icon {
   position: absolute;
   top: 50%;
-  right: rem(12px);
+  right: rem(-8px);
   transform: translateY(-50%);
-  opacity: $opacity-3;
-  stroke: $black-opaque;
-  stroke-linecap: round;
-  transition: opacity $duration-2 $easing-default,
-    transform $duration-2 $easing-default;
-  transition-delay: $duration-0, $duration-4;
-  pointer-events: none;
-}
-
-.#{$ns}-accordion__btn:hover > .#{$ns}-accordion__icon {
-  opacity: $opacity-5;
-}
-.#{$ns}-accordion__btn:focus > .#{$ns}-accordion__icon {
-  opacity: $opacity-5;
+  transition: transform $duration-2 $easing-default;
+  // transition-delay: $duration-4; ??
 }
 
 .#{$ns}-active > .#{$ns}-accordion__btn > .#{$ns}-accordion__icon {
@@ -109,6 +88,7 @@
 
 .#{$ns}-accordion__inner {
   opacity: 0;
+  height: 0;
   margin-top: 0;
   transition: opacity $duration-2 $easing-default,
     margin-top $duration-2 $easing-default;
@@ -123,12 +103,6 @@
   pointer-events: auto;
 }
 
-.#{$ns}-accordion__inner::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 // 3.1 Medium devices
 // =============================================================================
 
@@ -140,6 +114,9 @@
   .#{$ns}-accordion__btn {
     padding-top: $space-xs;
     padding-bottom: $space-xs;
+  }
+
+  .#{$ns}-accordion__label {
     font-size: rem(14px);
     line-height: rem(32px);
   }
@@ -149,7 +126,7 @@
 // =============================================================================
 
 @include media-query('large') {
-  .#{$ns}-accordion__btn {
+  .#{$ns}-accordion__label {
     font-size: rem(15px);
   }
 }
