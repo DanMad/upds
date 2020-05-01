@@ -4,7 +4,7 @@ const PiggyBack = (() => {
   const UpDS = (() => {
     const _namespace = `up`;
     let _uniqueIdCount = 0;
-    const _version = `v0.1.0 (Elvis)`;
+    const _version = `v0.2.0`;
 
     const _pxToRem = (pixels, basePixels = 16) => {
       pixels = parseFloat(pixels);
@@ -247,7 +247,7 @@ const PiggyBack = (() => {
     });
   };
 
-  const _addDefaultClassNamesToElements = (selector, ...tagNames) => {
+  const _addDefaultsToElems = (selector, ...tagNames) => {
     const entries = document.querySelectorAll(selector);
 
     if (!!entries.length) {
@@ -260,6 +260,14 @@ const PiggyBack = (() => {
 
           if (!elem.classList.contains(defaultClassName)) {
             elem.classList.add(defaultClassName);
+          }
+
+          if (tagName === `a`) {
+            // improve this, so that these attributes are
+            // only added if the href attribute is pointing
+            // to an external URL.
+            elem.rel = `noopener noreferrer`;
+            elem.target = `_blank`;
           }
         });
       });
@@ -337,7 +345,7 @@ const PiggyBack = (() => {
     ];
 
     _addStyleSheets(styleSheets, () => {
-      _addDefaultClassNamesToElements(`#page-content`, ...CMSElements);
+      _addDefaultsToElems(`#page-content`, ...CMSElements);
       _addComponents(UpDS.components);
     });
   };
