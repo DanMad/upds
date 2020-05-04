@@ -330,11 +330,13 @@ const PiggyBack = (() => {
           }
 
           if (tagName === `a`) {
-            // improve this, so that these attributes are
-            // only added or modified if the href attribute
-            // is pointing to an external URL.
-            elem.rel = `noopener noreferrer`;
-            elem.target = `_blank`;
+            const originURL = /((?:https?|ftp):\/\/(www\.)?)?(lucent\.baseux)\.com\/?/;
+
+            // If href URL is external
+            if (!originURL.test(elem.href)) {
+              elem.rel = `noopener noreferrer`;
+              elem.target = `_blank`;
+            }
           }
         });
       });
