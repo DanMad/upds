@@ -46,11 +46,28 @@
   line-height: rem(48px);
 }
 
+.#{$ns}-h1--alt {
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(30px);
+  font-weight: 500;
+  line-height: rem(40px);
+}
+
 .#{$ns}-h2 {
   margin-top: $space-xl;
   font-family: $headings;
   font-size: rem(36px);
   line-height: rem(40px);
+}
+
+.#{$ns}-h2--alt {
+  margin-top: $space-m;
+  color: $grey-4;
+  font-family: $subheadings;
+  font-size: rem(24px);
+  font-weight: 500;
+  line-height: rem(32px);
 }
 
 .#{$ns}-h3 {
@@ -62,6 +79,14 @@
   line-height: rem(40px);
 }
 
+.#{$ns}-h3--alt {
+  margin-top: $space-s;
+  color: $grey-3;
+  font-size: rem(18px);
+  line-height: rem(24px);
+  text-transform: uppercase;
+}
+
 .#{$ns}-h4 {
   margin-top: $space-m;
   color: $grey-4;
@@ -69,6 +94,18 @@
   font-size: rem(24px);
   font-weight: 500;
   line-height: rem(32px);
+}
+
+.#{$ns}-h4--alt {
+  margin-top: $space-xs;
+  color: $grey-3;
+  font-size: rem(12px);
+  line-height: rem(16px);
+  text-transform: uppercase;
+}
+
+.#{$ns}-p + .#{$ns}-h4--alt {
+  margin-top: 0;
 }
 
 .#{$ns}-h5 {
@@ -119,19 +156,19 @@
     text-justify: inter-word;
   }
 
-  // Contextual styles will overwrite the original styles in order to support
-  // subheadings.
-  @if $i != 1 {
-    .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
-      margin-top: rem(-16px);
-      color: $grey-3;
-      font-family: $subheadings;
-      font-size: rem(18px);
-      font-weight: 500;
-      line-height: rem(24px);
-      text-transform: uppercase;
-    }
-  }
+  // // Contextual styles will overwrite the original styles in order to support
+  // // subheadings.
+  // @if $i != 1 {
+  //   .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+  //     margin-top: rem(-16px);
+  //     color: $grey-3;
+  //     font-family: $subheadings;
+  //     font-size: rem(18px);
+  //     font-weight: 500;
+  //     line-height: rem(24px);
+  //     text-transform: uppercase;
+  //   }
+  // }
 }
 
 .#{$ns}-p {
@@ -407,9 +444,19 @@
     line-height: rem(56px);
   }
 
+  .#{$ns}-h1--alt {
+    font-size: rem(36px);
+    line-height: rem(48px);
+  }
+
   .#{$ns}-h2 {
     font-size: rem(43px);
     line-height: rem(48px);
+  }
+
+  .#{$ns}-h2--alt {
+    font-size: rem(30px);
+    line-height: rem(40px);
   }
 
   .#{$ns}-h3 {
@@ -417,9 +464,23 @@
     line-height: rem(48px);
   }
 
+  .#{$ns}-h3--alt {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
   .#{$ns}-h4 {
     font-size: rem(30px);
     line-height: rem(40px);
+  }
+
+  .#{$ns}-h4--alt {
+    font-size: rem(18px);
+    line-height: rem(24px);
+  }
+
+  .#{$ns}-p + .#{$ns}-h4--alt {
+    margin-top: rem(-8px);
   }
 
   .#{$ns}-h5 {
@@ -436,16 +497,16 @@
     margin-top: rem(-8px);
   }
 
-  @for $i from 1 through 6 {
-    // Contextual styles will overwrite the original styles in order to support
-    // subheadings.
-    @if $i != 1 {
-      .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
-        font-size: rem(24px);
-        line-height: rem(32px);
-      }
-    }
-  }
+  // @for $i from 1 through 6 {
+  //   // Contextual styles will overwrite the original styles in order to support
+  //   // subheadings.
+  //   @if $i != 1 {
+  //     .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+  //       font-size: rem(24px);
+  //       line-height: rem(32px);
+  //     }
+  //   }
+  // }
 
   .#{$ns}-p {
     margin-bottom: $space-s;
@@ -553,9 +614,19 @@
     line-height: rem(64px);
   }
 
+  .#{$ns}-h1--alt {
+    font-size: rem(42px);
+    line-height: rem(56px);
+  }
+
   .#{$ns}-h2 {
     font-size: rem(50px);
     line-height: rem(56px);
+  }
+
+  .#{$ns}-h2--alt {
+    font-size: rem(36px);
+    line-height: rem(48px);
   }
 
   .#{$ns}-h3 {
@@ -563,9 +634,19 @@
     line-height: rem(56px);
   }
 
+  .#{$ns}-h3--alt {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
   .#{$ns}-h4 {
     font-size: rem(36px);
     line-height: rem(48px);
+  }
+
+  .#{$ns}-h4--alt {
+    font-size: rem(24px);
+    line-height: rem(32px);
   }
 
   .#{$ns}-h5 {
@@ -578,16 +659,16 @@
     line-height: rem(32px);
   }
 
-  @for $i from 1 through 6 {
-    // Contextual styles will overwrite the original styles in order to support
-    // subheadings.
-    @if $i != 1 {
-      .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
-        font-size: rem(30px);
-        line-height: rem(40px);
-      }
-    }
-  }
+  // @for $i from 1 through 6 {
+  //   // Contextual styles will overwrite the original styles in order to support
+  //   // subheadings.
+  //   @if $i != 1 {
+  //     .#{$ns}-h#{$i - 1} + .#{$ns}-h#{$i} {
+  //       font-size: rem(30px);
+  //       line-height: rem(40px);
+  //     }
+  //   }
+  // }
 
   .#{$ns}-p {
     font-size: rem(18px);
