@@ -8,13 +8,11 @@
 // =============================================================================
 
 // .img
-// | .img__state
-// | | .img__number
-// | | .img__total
+// | .img__number
 // | .img__outer
 // | | .img__inner
-// | | | .img__border
-// | | | | .img_src
+// | | | .img__slide
+// | | | | .img__src
 // | .img__controls
 // | | .img__btn
 // | | .img__list
@@ -30,7 +28,7 @@
 // 3 Small devices
 // =============================================================================
 
-.#{$ns}-img__state {
+.#{$ns}-img__number {
   display: block;
   margin-bottom: $space-xs;
   color: $grey-3;
@@ -39,10 +37,6 @@
   font-weight: 400;
   pointer-events: none;
   user-select: none;
-}
-
-.#{$ns}-img__number {
-  font-weight: 500;
 }
 
 .#{$ns}-img__total {
@@ -68,7 +62,7 @@
   padding-top: 75%;
 }
 
-.#{$ns}-img__border {
+.#{$ns}-img__slide {
   position: absolute;
   left: rem(-8px);
   width: 100%;
@@ -78,24 +72,24 @@
   background-color: $bg-3;
 }
 
-.#{$ns}-img__border:nth-of-type(1) {
+.#{$ns}-img__slide:nth-of-type(1) {
   z-index: 3;
   bottom: rem(-8px);
   box-shadow: #{$shadow-4};
 }
-.#{$ns}-img__border:nth-of-type(2) {
+.#{$ns}-img__slide:nth-of-type(2) {
   z-index: 2;
   bottom: calc(-6.25% + #{rem(-8px)});
   // transform: translateX(-50%) scale(0.95) rotate(0.8deg);
   box-shadow: #{$shadow-3};
 }
-.#{$ns}-img__border:nth-of-type(3) {
+.#{$ns}-img__slide:nth-of-type(3) {
   z-index: 1;
   bottom: calc(-12.5% + #{rem(-8px)});
   // transform: translateX(-50%) scale(0.9025) rotate(-0.55deg);
   box-shadow: #{$shadow-2};
 }
-.#{$ns}-img__border:nth-of-type(4) {
+.#{$ns}-img__slide:nth-of-type(4) {
   z-index: 0;
   //   bottom: rem(-8px);
   //   transform: translateX(-50%) scale(0.8145);

@@ -220,6 +220,70 @@ const PiggyBack = (() => {
           });
         },
       },
+      imgSlider: {
+        className: `${_namespace}-img--slider`,
+        fn: (elems) => {
+          const loadImg = (URL, fn) => {
+            const img = new Image();
+            img.src = URL;
+            img.onload = () => {
+              fn();
+            };
+          };
+          //
+          elems.forEach((elem) => {
+            let currentImg = 0;
+
+            const imgs = [];
+            const inner = elem.querySelector(`.${_namespace}-img__inner`);
+            let slides = [
+              ...elem.querySelectorAll(`.${_namespace}-img__slide`),
+            ];
+
+            slides.forEach((slide) => {
+              const src = slide.querySelector(`.${_namespace}-img__src`);
+
+              const img = {
+                backgroundColor: src.dataset.backgroundColor,
+                URL: src.src,
+              };
+
+              slide.innerHTML = ``;
+              slide.style.backgroundColor = img.backgroundColor;
+
+              imgs.push(img);
+            });
+
+            if (slides.length === 1) {
+            } else {
+              if (slides.length > 3) {
+                inner.innerHTML = ``;
+
+                for (let i = 0; i < 3; i++) {
+                  const slide = slides[i];
+
+                  inner.appendChild(slide);
+                }
+
+                slides = [
+                  ...elem.querySelectorAll(`.${_namespace}-img__slide`),
+                ];
+
+                for (let i = 0; i < 3; i++) {
+                  const img = imgs[i];
+                  const slide = slides[i];
+
+                  slide.style.backgroundImage = `url("${img.URL}")`;
+
+                  if (i !== 0) {
+                    slide.style.transform = `scale(0.95) rotate(${Math.random()}deg)`;
+                  }
+                }
+              }
+            }
+          });
+        },
+      },
     };
 
     return {
@@ -264,8 +328,8 @@ const PiggyBack = (() => {
 
           if (tagName === `a`) {
             // improve this, so that these attributes are
-            // only added if the href attribute is pointing
-            // to an external URL.
+            // only added or modified if the href attribute
+            // is pointing to an external URL.
             elem.rel = `noopener noreferrer`;
             elem.target = `_blank`;
           }
