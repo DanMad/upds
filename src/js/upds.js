@@ -4,7 +4,10 @@ const PiggyBack = (() => {
   const UpDS = (() => {
     const _namespace = `up`;
     let _uniqueIdCount = 0;
-    const _version = `v0.2.0`;
+    const _version = {
+      name: `Elvis`,
+      number: `v0.2.0`,
+    };
 
     const _pxToRem = (pixels, basePixels = 16) => {
       pixels = parseFloat(pixels);
@@ -415,7 +418,7 @@ const PiggyBack = (() => {
   };
 
   const version = () => {
-    return _version;
+    return `${_version.name} ${_version.number}`;
   };
 
   return {
