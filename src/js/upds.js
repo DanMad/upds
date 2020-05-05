@@ -309,7 +309,19 @@ const PiggyBack = (() => {
       ];
 
       if (!!elems.length) {
-        comps[compName].fn(elems);
+        const elemsToPiggyBack = [];
+        const piggyBackClassName = `${_namespace}-piggybacked`;
+
+        elems.forEach((elem) => {
+          if (!elem.classList.contains(piggyBackClassName)) {
+            elem.classList.add(piggyBackClassName);
+            elemsToPiggyBack.push(elem);
+          }
+        });
+
+        if (!!elemsToPiggyBack.length) {
+          comps[compName].fn(elemsToPiggyBack);
+        }
       }
     });
   };
