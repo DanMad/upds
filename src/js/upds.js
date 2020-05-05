@@ -243,47 +243,47 @@ const PiggyBack = (() => {
               ...elem.querySelectorAll(`.${_namespace}-img__slide`),
             ];
 
-            slides.forEach((slide) => {
-              const src = slide.querySelector(`.${_namespace}-img__src`);
+            // slides.forEach((slide) => {
+            //   const src = slide.querySelector(`.${_namespace}-img__src`);
 
-              const img = {
-                backgroundColor: src.dataset.backgroundColor,
-                URL: src.src,
-              };
+            //   const img = {
+            //     backgroundColor: src.dataset.backgroundColor,
+            //     URL: src.dataset.src,
+            //   };
 
-              slide.innerHTML = ``;
-              slide.style.backgroundColor = img.backgroundColor;
+            //   slide.innerHTML = ``;
+            //   slide.style.backgroundColor = img.backgroundColor;
 
-              imgs.push(img);
-            });
+            //   imgs.push(img);
+            // });
 
-            if (slides.length === 1) {
-            } else {
-              if (slides.length > 3) {
-                inner.innerHTML = ``;
+            // if (slides.length === 1) {
+            // } else {
+            //   if (slides.length > 3) {
+            //     inner.innerHTML = ``;
 
-                for (let i = 0; i < 3; i++) {
-                  const slide = slides[i];
+            //     for (let i = 0; i < 3; i++) {
+            //       const slide = slides[i];
 
-                  inner.appendChild(slide);
-                }
+            //       inner.appendChild(slide);
+            //     }
 
-                slides = [
-                  ...elem.querySelectorAll(`.${_namespace}-img__slide`),
-                ];
+            //     slides = [
+            //       ...elem.querySelectorAll(`.${_namespace}-img__slide`),
+            //     ];
 
-                for (let i = 0; i < 3; i++) {
-                  const img = imgs[i];
-                  const slide = slides[i];
+            //     for (let i = 0; i < 3; i++) {
+            //       const img = imgs[i];
+            //       const slide = slides[i];
 
-                  slide.style.backgroundImage = `url("${img.URL}")`;
+            //       slide.style.backgroundImage = `url("${img.URL}")`;
 
-                  if (i !== 0) {
-                    slide.style.transform = `scale(0.95) rotate(${Math.random()}deg)`;
-                  }
-                }
-              }
-            }
+            //       // if (i !== 0) {
+            //       //   slide.style.transform = `scale(0.95) rotate(${Math.random()}deg)`;
+            //       // }
+            //     }
+            //   }
+            // }
           });
         },
       },

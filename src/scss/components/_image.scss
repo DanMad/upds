@@ -28,6 +28,10 @@
 // 3 Small devices
 // =============================================================================
 
+.#{$ns}-img--slider {
+  margin-bottom: $space-s;
+}
+
 .#{$ns}-img__number {
   display: block;
   margin-bottom: $space-xs;
@@ -37,10 +41,6 @@
   font-weight: 400;
   pointer-events: none;
   user-select: none;
-}
-
-.#{$ns}-img__total {
-  font-weight: 500;
 }
 
 .#{$ns}-img__outer {
@@ -54,21 +54,25 @@
   padding-top: 56.25%;
 }
 
-.#{$ns}-img--16x9 .#{$ns}-img__inner {
-  padding-top: 56.25%;
+.#{$ns}-img--1x1 .#{$ns}-img__inner {
+  padding-top: 100%;
 }
 
 .#{$ns}-img--3x4 .#{$ns}-img__inner {
   padding-top: 75%;
 }
 
+.#{$ns}-img--16x9 .#{$ns}-img__inner {
+  padding-top: 56.25%;
+}
+
 .#{$ns}-img__slide {
   position: absolute;
   left: rem(-8px);
   width: 100%;
-  border: 8px solid white;
+  height: 100%;
+  border: $space-xs solid $white;
   border-radius: $border-radius-xs;
-  // padding: $space-xs;
   background-color: $bg-3;
 }
 
@@ -79,50 +83,81 @@
 }
 .#{$ns}-img__slide:nth-of-type(2) {
   z-index: 2;
-  bottom: calc(-6.25% + #{rem(-8px)});
-  // transform: translateX(-50%) scale(0.95) rotate(0.8deg);
+  bottom: rem(-24px);
   box-shadow: #{$shadow-3};
+  transform: scale(0.95) rotate(0.8deg);
 }
 .#{$ns}-img__slide:nth-of-type(3) {
   z-index: 1;
-  bottom: calc(-12.5% + #{rem(-8px)});
-  // transform: translateX(-50%) scale(0.9025) rotate(-0.55deg);
+  bottom: rem(-40px);
   box-shadow: #{$shadow-2};
-}
-.#{$ns}-img__slide:nth-of-type(4) {
-  z-index: 0;
-  //   bottom: rem(-8px);
-  //   transform: translateX(-50%) scale(0.8145);
-  box-shadow: #{$shadow-1};
+  transform: scale(0.9025) rotate(-0.55deg);
 }
 
 .#{$ns}-img__src {
   opacity: 0;
-  height: 0;
-  padding-top: 56.25%;
-  border-radius: $border-radius-xxs;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
   background-size: cover;
-  transition: opacity $duration-5 $easing-default;
-}
-
-.#{$ns}-img--16x9 .#{$ns}-img__src {
-  padding-top: 56.25%;
-}
-
-.#{$ns}-img--3x4 .#{$ns}-img__src {
-  padding-top: 75%;
 }
 
 .#{$ns}-img__src.#{$ns}-loaded {
   opacity: 1;
 }
 
-// .#{$ns}-img__src::after {
-//   content: '';
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
-//   background-color: $grey-1;
-// }
+.#{$ns}-img__controls {
+  width: auto;
+  margin: 0 auto;
+}
+
+.#{$ns}-img__btn {
+  position: relative;
+  box-sizing: border-box;
+  width: rem(48px);
+  height: rem(48px);
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.#{$ns}-img__btn:hover {
+  cursor: pointer;
+}
+.#{$ns}-img__btn:focus {
+  outline: none;
+}
+
+.#{$ns}-img__icon {
+  position: absolute;
+  top: rem(-8px);
+  left: rem(-8px);
+}
+
+// 3.1 Medium devices
+// -----------------------------------------------------------------------------
+
+@include media-query('medium') {
+  .#{$ns}-img--slider {
+    margin-bottom: $space-m;
+  }
+
+  .#{$ns}-img__number {
+    font-size: rem(13px);
+  }
+
+  .#{$ns}-img__outer {
+    padding: $space-xs;
+    margin-bottom: rem(32px);
+  }
+}
+
+// 3.2 Large devices
+// -----------------------------------------------------------------------------
+
+@include media-query('large') {
+  .#{$ns}-img__number {
+    font-size: rem(14px);
+  }
+}
