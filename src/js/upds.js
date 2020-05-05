@@ -6,7 +6,7 @@ const PiggyBack = (() => {
     let _uniqueIdCount = 0;
     const _version = {
       name: `Elvis`,
-      number: `v0.1.1`,
+      number: `v0.1.2`,
     };
 
     const _pxToRem = (pixels, basePixels = 16) => {
@@ -245,7 +245,19 @@ const PiggyBack = (() => {
       ];
 
       if (!!elems.length) {
-        comps[compName].fn(elems);
+        const elemsToPiggyBack = [];
+        const piggyBackClassName = `${_namespace}-piggybacked`;
+
+        elems.forEach((elem) => {
+          if (!elem.classList.contains(piggyBackClassName)) {
+            elem.classList.add(piggyBackClassName);
+            elemsToPiggyBack.push(elem);
+          }
+        });
+
+        if (!!elemsToPiggyBack.length) {
+          comps[compName].fn(elemsToPiggyBack);
+        }
       }
     });
   };
