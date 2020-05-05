@@ -23,7 +23,7 @@
           <h4 class="up-h4 up-h4--alt">Alternative heading level 4</h4>
           <h5>Heading level 5</h5>
           <h6>Heading level 6</h6> -->
-          <!-- <div class="up-img up-img--slider">
+          <div class="up-img up-img--slider up-img--16x9">
             <span class="up-img__number" unselectable="on">
               <strong class="up-strong">1</strong> of
               <strong class="up-strong">8</strong></span
@@ -31,40 +31,270 @@
             <div class="up-img__outer">
               <div class="up-img__inner">
                 <div class="up-img__slide">
-                  <img
+                  <div
+                    aria-label="alt text"
                     class="up-img__src"
                     data-background-color="rgb(148, 238, 215)"
-                    src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
-                  />
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
                 </div>
                 <div class="up-img__slide">
-                  <img
+                  <div
+                    aria-label="alt text"
                     class="up-img__src"
                     data-background-color="rgb(87, 106, 137)"
-                    src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
-                  />
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
                 </div>
                 <div class="up-img__slide">
-                  <img
+                  <div
+                    aria-label="alt text"
                     class="up-img__src"
                     data-background-color="rgb(91, 122, 50)"
-                    src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
-                  />
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
+                    role="img"
+                  ></div>
                 </div>
-                <div class="up-img__slide">
-                  <img
+                <!-- <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
                     class="up-img__src"
                     data-background-color="rgb(202, 122, 89)"
-                    src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
-                  />
-                </div>
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div> -->
               </div>
             </div>
             <div class="up-img__controls">
-              <button class="up-img__btn up-img__btn--prev">&lt;</button>
-              <button class="up-img__btn up-img__btn--next">&gt;</button>
+              <button class="up-img__btn up-img__btn--prev" role="button">
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="28 28.5 24.5 32 28 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+              <button class="up-img__btn up-img__btn--next" role="button">
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="36 28.5 39.5 32 36 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
             </div>
-          </div> -->
+          </div>
+          <div class="up-img up-img--slider up-img--3x4">
+            <span class="up-img__number" unselectable="on">
+              <strong class="up-strong">1</strong> of
+              <strong class="up-strong">8</strong></span
+            >
+            <div class="up-img__outer">
+              <div class="up-img__inner">
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-color="rgb(148, 238, 215)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-color="rgb(91, 122, 50)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <!-- <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div> -->
+              </div>
+            </div>
+            <div class="up-img__controls">
+              <button class="up-img__btn up-img__btn--prev" role="button">
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="28 28.5 24.5 32 28 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+              <button class="up-img__btn up-img__btn--next" role="button">
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="36 28.5 39.5 32 36 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
           <table>
             <thead>
               <tr>
@@ -188,8 +418,10 @@
                 the purest places in the galaxy within the Force. A remote world
                 of swamps and forests, it served as a refuge for Jedi Grand
                 Master Yoda during his exile after the
-                <a href="https://example.com/" target="_self">destruction</a> of
-                the Jedi Order.
+                <a href="https://lucent.baseux.com/" target="_self"
+                  >destruction</a
+                >
+                of the Jedi Order.
               </p>
             </div>
           </div>
