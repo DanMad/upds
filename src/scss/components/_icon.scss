@@ -46,6 +46,7 @@
 
 .#{$ns}-icon__strokes {
   opacity: $opacity-3;
+  fill: none;
   stroke: $black-opaque;
   transition: opacity $duration-2 $easing-default;
 }
