@@ -125,8 +125,8 @@
 
 .#{$ns}-menu__item {
   position: relative;
-  display: block;
   box-sizing: border-box;
+  display: block;
   padding: rem(12px 0 12px 48px);
   color: $grey-4;
   font-size: rem(12px);

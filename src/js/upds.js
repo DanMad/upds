@@ -2,10 +2,134 @@
 
 const PiggyBack = (() => {
   const UpDS = (() => {
+    const _anime = {
+      tint: {
+        focusToHover: (icon) => {
+          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+
+          const timeline = anime.timeline({
+            duration: 300,
+            easing: `easeInOutCirc`,
+          });
+
+          timeline
+            .add(
+              {
+                duration: 200,
+                targets: tint,
+                fill: `rgba(249, 122, 98, 0.55)`,
+              },
+              0
+            )
+            .add(
+              {
+                begin: () => {
+                  mask.style.transformOrigin = `50% 50%`;
+                },
+                targets: mask,
+                scale: [1, 0],
+              },
+              0
+            );
+        },
+        focusToStatic: (icon) => {
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+          anime({
+            complete: () => {
+              tint.style.transform = ``;
+              tint.style.fill = ``;
+            },
+            duration: 300,
+            easing: `easeInBack`,
+            targets: tint,
+            scale: 0,
+            fill: `rgb(249, 122, 98)`,
+          });
+        },
+        hoverToFocus: (icon) => {
+          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+
+          const timeline = anime.timeline({
+            duration: 300,
+            easing: `easeInOutCirc`,
+          });
+
+          timeline
+            .add(
+              {
+                duration: 200,
+                targets: tint,
+                fill: `rgb(249, 122, 98)`,
+              },
+              100
+            )
+            .add(
+              {
+                targets: mask,
+                scale: [`0`, `1`],
+              },
+              0
+            );
+        },
+        hoverToStatic: (icon) => {
+          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+          anime({
+            complete: () => {
+              mask.removeAttribute(`style`);
+              tint.style.transform = ``;
+            },
+            duration: 300,
+            easing: `easeInBack`,
+            targets: tint,
+            scale: 0,
+          });
+        },
+        staticToFocus: (icon) => {
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+          anime({
+            duration: 800,
+            easing: `easeOutElastic(1, 0.6)`,
+            targets: tint,
+            scale: [0, 1],
+            fill: `rgb(249, 122, 98)`,
+          });
+        },
+        staticToHover: (icon) => {
+          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
+          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+
+          anime.remove(tint);
+          anime({
+            begin: () => {
+              mask.style.transform = `scale(0)`;
+              mask.style.transformOrigin = `50% 50%`;
+            },
+            duration: 800,
+            easing: `easeOutElastic(1, 0.6)`,
+            targets: tint,
+            scale: [0, 1],
+          });
+        },
+      },
+    };
+
     const _namespace = `up`;
     let _uniqueIdCount = 0;
     const _version = {
-      name: `Elvis`,
+      name: `Moon Landing`,
       number: `v0.2.0`,
     };
 
@@ -16,8 +140,17 @@ const PiggyBack = (() => {
       return `${pixels / basePixels}rem`;
     };
 
+    const _setIconMaskId = (icon) => {
+      const mask = icon.querySelector(`.${_namespace}-icon__mask`);
+      const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+      const id = _uniqueId();
+
+      mask.id = id;
+      tint.style.mask = `url(#${id})`;
+    };
+
     const _uniqueId = () => {
-      return `${_namespace}-id-${_uniqueIdCount++}`;
+      return `${_namespace}-id-${++_uniqueIdCount}`;
     };
 
     // Public
@@ -36,62 +169,50 @@ const PiggyBack = (() => {
         className: `${_namespace}-accordion`,
         fn: (elems) => {
           elems.forEach((elem) => {
+            const state = {
+              isActive: false,
+              isAnimating: false,
+              isFocused: false,
+              isHovered: false,
+            };
+
             const btn = elem.querySelector(`.${_namespace}-accordion__btn`);
+            const icon = elem.querySelector(`.${_namespace}-icon`);
             const inner = elem.querySelector(`.${_namespace}-accordion__inner`);
-            const mask = elem.querySelector(`.${_namespace}-icon__mask`);
-            const maskHidden = elem.querySelector(
-              `.${_namespace}-icon__mask--hidden`
-            );
-            const tint = elem.querySelector(`.${_namespace}-icon__tint`);
 
-            let isAccordionActive = false;
-            let isBtnFocused = false;
-            let isBtnHovered = false;
-            let isInnerAnimating = false;
+            const handleBlur = () => {
+              state.isFocused = false;
 
-            const uniqueId = _uniqueId();
-
-            const handleBtnBlur = () => {
-              isBtnFocused = false;
-
-              if (!isBtnHovered) {
-                anime.remove(tint);
-                anime({
-                  complete: () => {
-                    tint.style.transform = ``;
-                    tint.style.fill = ``;
-                  },
-                  duration: 300,
-                  easing: `easeInBack`,
-                  targets: tint,
-                  scale: 0,
-                  fill: `rgb(249, 122, 98)`,
-                });
+              if (!state.isHovered) {
+                _anime.tint.focusToStatic(icon);
               }
             };
 
-            const handleBtnClick = () => {
-              if (!isInnerAnimating) {
+            const handleClick = () => {
+              if (!state.isAnimating) {
                 const props = {
                   complete: () => {
-                    if (!isAccordionActive) {
+                    if (!state.isActive) {
                       inner.removeAttribute(`style`);
                     }
 
-                    isInnerAnimating = false;
+                    state.isAnimating = false;
                   },
                   duration: 500,
                   easing: `easeInOutSine`,
                   targets: inner,
                 };
 
-                isAccordionActive = !isAccordionActive;
-                isInnerAnimating = true;
+                state.isActive = !state.isActive;
+                state.isAnimating = true;
 
                 elem.classList.toggle(`${_namespace}-active`);
 
                 if (elem.classList.contains(`${_namespace}-active`)) {
                   anime({
+                    begin: () => {
+                      inner.style.visibility = `visible`;
+                    },
                     ...props,
                     height: [0, _pxToRem(inner.scrollHeight)],
                   });
@@ -105,185 +226,326 @@ const PiggyBack = (() => {
               }
             };
 
-            const handleBtnFocus = () => {
-              isBtnFocused = true;
+            const handleFocus = () => {
+              state.isFocused = true;
 
-              if (!isBtnHovered) {
-                anime.remove(tint);
-                anime({
-                  duration: 800,
-                  easing: `easeOutElastic(1, 0.6)`,
-                  targets: tint,
-                  scale: [0, 1],
-                  fill: `rgb(249, 122, 98)`,
-                });
+              if (!state.isHovered) {
+                _anime.tint.staticToFocus(icon);
               }
             };
 
-            const handleBtnMouseEnter = () => {
-              isBtnHovered = true;
+            const handleMouseEnter = () => {
+              state.isHovered = true;
 
-              anime.remove(tint);
-
-              if (isBtnFocused) {
-                const timeline = anime.timeline({
-                  duration: 300,
-                  easing: `easeInOutCirc`,
-                });
-
-                timeline
-                  .add(
-                    {
-                      duration: 200,
-                      targets: tint,
-                      fill: `rgba(249, 122, 98, 0.55)`,
-                    },
-                    0
-                  )
-                  .add(
-                    {
-                      begin: () => {
-                        maskHidden.style.transformOrigin = `50% 50%`;
-                      },
-                      targets: maskHidden,
-                      scale: [1, 0],
-                    },
-                    0
-                  );
+              if (state.isFocused) {
+                _anime.tint.focusToHover(icon);
               } else {
-                anime({
-                  begin: () => {
-                    maskHidden.style.transform = `scale(0)`;
-                    maskHidden.style.transformOrigin = `50% 50%`;
-                  },
-                  duration: 800,
-                  easing: `easeOutElastic(1, 0.6)`,
-                  targets: tint,
-                  scale: [0, 1],
-                });
+                _anime.tint.staticToHover(icon);
               }
             };
 
-            const handleBtnMouseLeave = () => {
-              isBtnHovered = false;
+            const handleMouseLeave = () => {
+              state.isHovered = false;
 
-              anime.remove(tint);
-
-              if (isBtnFocused) {
-                const timeline = anime.timeline({
-                  duration: 300,
-                  easing: `easeInOutCirc`,
-                });
-
-                timeline
-                  .add(
-                    {
-                      duration: 200,
-                      targets: tint,
-                      fill: `rgb(249, 122, 98)`,
-                    },
-                    100
-                  )
-                  .add(
-                    {
-                      targets: maskHidden,
-                      scale: [`0`, `1`],
-                    },
-                    0
-                  );
+              if (state.isFocused) {
+                _anime.tint.hoverToFocus(icon);
               } else {
-                anime({
-                  complete: () => {
-                    maskHidden.removeAttribute(`style`);
-                    tint.style.transform = ``;
-                  },
-                  duration: 300,
-                  easing: `easeInBack`,
-                  targets: tint,
-                  scale: 0,
-                });
+                _anime.tint.hoverToStatic(icon);
               }
             };
 
-            const handleWindowResize = () => {
-              if (isAccordionActive) {
+            const handleResize = () => {
+              if (state.isActive) {
                 inner.style.height = `auto`;
               }
             };
 
-            mask.id = uniqueId;
-            tint.style.mask = `url(#${uniqueId})`;
+            _setIconMaskId(icon);
 
-            btn.addEventListener(`blur`, handleBtnBlur, false);
-            btn.addEventListener(`click`, handleBtnClick, false);
-            btn.addEventListener(`focus`, handleBtnFocus, false);
-            btn.addEventListener(`mouseenter`, handleBtnMouseEnter, false);
-            btn.addEventListener(`mouseleave`, handleBtnMouseLeave, false);
-            window.addEventListener(`resize`, handleWindowResize, false);
+            btn.addEventListener(`blur`, handleBlur, false);
+            btn.addEventListener(`click`, handleClick, false);
+            btn.addEventListener(`focus`, handleFocus, false);
+            btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+            btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+
+            window.addEventListener(`resize`, handleResize, false);
           });
         },
       },
       imgSlider: {
         className: `${_namespace}-img--slider`,
         fn: (elems) => {
-          const loadImg = (URL, fn) => {
-            const img = new Image();
-            img.src = URL;
-            img.onload = () => {
-              fn();
-            };
-          };
-          //
+          // const loadImg = (URL, fn) => {
+          //   const img = new Image();
+          //   img.src = URL;
+          //   img.onload = () => {
+          //     fn();
+          //   };
+          // };
+
           elems.forEach((elem) => {
-            let currentImg = 0;
+            const state = {
+              isAnimating: false,
+              isFocused: {
+                btnNext: false,
+                btnPrev: false,
+              },
+              isHovered: {
+                btnNext: false,
+                btnPrev: false,
+              },
+            };
 
-            const imgs = [];
-            const inner = elem.querySelector(`.${_namespace}-img__inner`);
-            let slides = [
-              ...elem.querySelectorAll(`.${_namespace}-img__slide`),
-            ];
+            const btns = elem.querySelectorAll(`.${_namespace}-img__btn`);
+            const icons = elem.querySelectorAll(`.${_namespace}-icon`);
 
+            const handleBlur = (e) => {
+              const btn = e.target;
+              let icon = icons[0];
+
+              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
+                if (!state.isHovered.btnPrev) {
+                  _anime.tint.focusToStatic(icon);
+                }
+
+                state.isFocused.btnPrev = false;
+              } else {
+                icon = icons[1];
+
+                if (!state.isHovered.btnNext) {
+                  _anime.tint.focusToStatic(icon);
+                }
+
+                state.isFocused.btnNext = false;
+              }
+            };
+
+            const handleFocus = (e) => {
+              const btn = e.target;
+              let icon = icons[0];
+
+              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
+                if (!state.isHovered.btnPrev) {
+                  _anime.tint.staticToFocus(icon);
+                }
+
+                state.isFocused.btnPrev = true;
+              } else {
+                icon = icons[1];
+
+                if (!state.isHovered.btnNext) {
+                  _anime.tint.staticToFocus(icon);
+                }
+
+                state.isFocused.btnNext = true;
+              }
+            };
+
+            const handleMouseEnter = (e) => {
+              const btn = e.target;
+              let icon = icons[0];
+
+              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
+                if (state.isFocused.btnPrev) {
+                  _anime.tint.focusToHover(icon);
+                } else {
+                  _anime.tint.staticToHover(icon);
+                }
+
+                state.isHovered.btnPrev = true;
+              } else {
+                icon = icons[1];
+
+                if (state.isFocused.btnNext) {
+                  _anime.tint.focusToHover(icon);
+                } else {
+                  _anime.tint.staticToHover(icon);
+                }
+
+                state.isHovered.btnNext = true;
+              }
+            };
+
+            const handleMouseLeave = (e) => {
+              const btn = e.target;
+              let icon = icons[0];
+
+              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
+                if (state.isFocused.btnPrev) {
+                  _anime.tint.hoverToFocus(icon);
+                } else {
+                  _anime.tint.hoverToStatic(icon);
+                }
+
+                state.isHovered.btnPrev = false;
+              } else {
+                icon = icons[1];
+
+                if (state.isFocused.btnNext) {
+                  _anime.tint.hoverToFocus(icon);
+                } else {
+                  _anime.tint.hoverToStatic(icon);
+                }
+
+                state.isHovered.btnNext = false;
+              }
+            };
+
+            icons.forEach((icon) => {
+              _setIconMaskId(icon);
+            });
+
+            btns.forEach((btn) => {
+              btn.addEventListener(`blur`, handleBlur, false);
+              btn.addEventListener(`focus`, handleFocus, false);
+              btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+              btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+            });
+
+            // const imgs = [];
+            // const inner = elem.querySelector(`.${_namespace}-img__inner`);
+            // let slides = [
+            //   ...elem.querySelectorAll(`.${_namespace}-img__slide`),
+            // ];
+            // const mask = elem.querySelector(`.${_namespace}-icon__mask`);
+            // const maskHidden = elem.querySelector(
+            //   `.${_namespace}-icon__mask--hidden`
+            // );
+            // const tint = elem.querySelector(`.${_namespace}-icon__tint`);
+            // let isNextBtnFocused = false;
+            // let isPrevBtnFocused = false;
+            // let isNextBtnHovered = false;
+            // let isPrevBtnHovered = false;
+            // // let isInnerAnimating = false;
+            // const setImgNumber = (currImg = 0) => {
+            //   const number = elem.querySelector(`.${_namespace}-img__number`);
+            //   number.innerHTML = `<strong class="${_namespace}-strong">${
+            //     currImg + 1
+            //   }</strong> of <strong class="${_namespace}-strong">${
+            //     imgs.length
+            //   }</strong>`;
+            // };
+            // const handleNextBtnMouseEnter = (e) => {
+            //   isNextBtnHovered = true;
+            //   console.log(e.target);
+            //   anime.remove(tint);
+            //   if (isNextBtnFocused) {
+            //     const timeline = anime.timeline({
+            //       duration: 300,
+            //       easing: `easeInOutCirc`,
+            //     });
+            //     timeline
+            //       .add(
+            //         {
+            //           duration: 200,
+            //           targets: tint,
+            //           fill: `rgba(249, 122, 98, 0.55)`,
+            //         },
+            //         0
+            //       )
+            //       .add(
+            //         {
+            //           begin: () => {
+            //             maskHidden.style.transformOrigin = `50% 50%`;
+            //           },
+            //           targets: maskHidden,
+            //           scale: [1, 0],
+            //         },
+            //         0
+            //       );
+            //   } else {
+            //     anime({
+            //       begin: () => {
+            //         maskHidden.style.transform = `scale(0)`;
+            //         maskHidden.style.transformOrigin = `50% 50%`;
+            //       },
+            //       duration: 800,
+            //       easing: `easeOutElastic(1, 0.6)`,
+            //       targets: tint,
+            //       scale: [0, 1],
+            //     });
+            //   }
+            // };
+            // const handleNextBtnMouseLeave = () => {
+            //   isNextBtnHovered = false;
+            //   anime.remove(tint);
+            //   if (isNextBtnFocused) {
+            //     const timeline = anime.timeline({
+            //       duration: 300,
+            //       easing: `easeInOutCirc`,
+            //     });
+            //     timeline
+            //       .add(
+            //         {
+            //           duration: 200,
+            //           targets: tint,
+            //           fill: `rgb(249, 122, 98)`,
+            //         },
+            //         100
+            //       )
+            //       .add(
+            //         {
+            //           targets: maskHidden,
+            //           scale: [`0`, `1`],
+            //         },
+            //         0
+            //       );
+            //   } else {
+            //     anime({
+            //       complete: () => {
+            //         maskHidden.removeAttribute(`style`);
+            //         tint.style.transform = ``;
+            //       },
+            //       duration: 300,
+            //       easing: `easeInBack`,
+            //       targets: tint,
+            //       scale: 0,
+            //     });
+            //   }
+            // };
             // slides.forEach((slide) => {
             //   const src = slide.querySelector(`.${_namespace}-img__src`);
-
             //   const img = {
             //     backgroundColor: src.dataset.backgroundColor,
             //     URL: src.dataset.src,
             //   };
-
             //   slide.innerHTML = ``;
             //   slide.style.backgroundColor = img.backgroundColor;
-
             //   imgs.push(img);
             // });
-
+            // setImgNumber();
             // if (slides.length === 1) {
             // } else {
             //   if (slides.length > 3) {
             //     inner.innerHTML = ``;
-
             //     for (let i = 0; i < 3; i++) {
             //       const slide = slides[i];
-
             //       inner.appendChild(slide);
             //     }
-
             //     slides = [
             //       ...elem.querySelectorAll(`.${_namespace}-img__slide`),
             //     ];
-
             //     for (let i = 0; i < 3; i++) {
             //       const img = imgs[i];
             //       const slide = slides[i];
-
             //       slide.style.backgroundImage = `url("${img.URL}")`;
-
             //       // if (i !== 0) {
             //       //   slide.style.transform = `scale(0.95) rotate(${Math.random()}deg)`;
             //       // }
             //     }
             //   }
             // }
+            // const prevBtn = elem.querySelector(`.${_namespace}-img__btn--prev`);
+            // prevBtn.addEventListener(
+            //   `mouseenter`,
+            //   handleNextBtnMouseEnter,
+            //   false
+            // );
+            // prevBtn.addEventListener(
+            //   `mouseleave`,
+            //   handleNextBtnMouseLeave,
+            //   false
+            // );
           });
         },
       },
