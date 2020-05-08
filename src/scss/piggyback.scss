@@ -8,6 +8,21 @@
 // 2 Small devices
 // =============================================================================
 
+// Resolves double number issue.
+ol {
+  list-style-type: none;
+}
+
+// Resolves double bullet issue.
+li {
+  list-style-type: none;
+}
+
+// Resolves bullet issue on subtopic section headings.
+.bux-tick-none.up-li::before {
+  display: none;
+}
+
 // #page {
 //  padding-top: 0;
 //  padding-left:0;
