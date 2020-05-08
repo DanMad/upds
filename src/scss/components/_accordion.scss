@@ -46,10 +46,6 @@
   text-align: left;
 }
 
-.#{$ns}-accordion_btn::-moz-focus-inner {
-  border: none;
-}
-
 .#{$ns}-accordion__btn:hover {
   cursor: pointer;
 }

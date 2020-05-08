@@ -10,6 +10,10 @@
 // Declarations
 // =============================================================================
 
+::-moz-focus-inner {
+  border: 0;
+}
+
 // The background-color property of the ::-moz-selection rule gives control of the
 // browser window's selection color in Firefox.
 ::-moz-selection {
