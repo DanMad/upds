@@ -1,37 +1,45 @@
+// Imports
+// =============================================================================
+
+@import '../utilities/variables';
+
+// Declarations
+// =============================================================================
+
 :root {
-  --white: $white;
+  --up-white: #{$white};
 
-  --grey-1: $grey-1;
-  --grey-2: $grey-2;
-  --grey-3: $grey-3;
-  --grey-4: $grey-4;
+  --up-grey-1: #{$grey-1};
+  --up-grey-2: #{$grey-2};
+  --up-grey-3: #{$grey-3};
+  --up-grey-4: #{$grey-4};
 
-  --black: $black;
+  --up-black: #{$black};
 
-  --bg-1: $bg-1;
-  --bg-2: $bg-2;
-  --bg-3: $bg-3;
+  --up-bg-1: #{$bg-1};
+  --up-bg-2: #{$bg-2};
+  --up-bg-3: #{$bg-3};
 
-  --shadow: $shadow;
+  --up-shadow: #{$shadow};
 
-  --primary-1: $primary-1;
-  --primary-2: $primary-2;
-  --primary-3: $primary-3;
-  --primary-4: $primary-4;
+  --up-primary-1: #{$primary-1};
+  --up-primary-2: #{$primary-2};
+  --up-primary-3: #{$primary-3};
+  --up-primary-4: #{$primary-4};
 
-  --secondary-1: $secondary-1;
-  --secondary-2: $secondary-2;
-  --secondary-3: $secondary-3;
-  --secondary-4: $secondary-4;
+  --up-secondary-1: #{$secondary-1};
+  --up-secondary-2: #{$secondary-2};
+  --up-secondary-3: #{$secondary-3};
+  --up-secondary-4: #{$secondary-4};
 
-  --tertiary-1: $tertiary-1;
-  --tertiary-2: $tertiary-2;
-  --tertiary-3: $tertiary-3;
-  --tertiary-4: $tertiary-4;
+  --up-tertiary-1: #{$tertiary-1};
+  --up-tertiary-2: #{$tertiary-2};
+  --up-tertiary-3: #{$tertiary-3};
+  --up-tertiary-4: #{$tertiary-4};
 
-  --accent-1: $accent-1;
-  --accent-2: $accent-2;
-  --accent-3: $accent-3;
-  --accent-4: $accent-4;
-  --accent-5: $accent-5;
+  --up-accent-1: #{$accent-1};
+  --up-accent-2: #{$accent-2};
+  --up-accent-3: #{$accent-3};
+  --up-accent-4: #{$accent-4};
+  --up-accent-5: #{$accent-5};
 }
