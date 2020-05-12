@@ -34,7 +34,7 @@
     "build-staging": "node-sass src/scss -o dist/staging/css --output-style compressed && postcss dist/staging/css/*.css --replace --use autoprefixer && babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
     "deploy": "gh-pages -d dist",
     "test": "jest",
-    "watch": "node-sass src/scss -o dist/staging/css --watch && babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
+    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
   },
   "husky": {
     "hooks": {
