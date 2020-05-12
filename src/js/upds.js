@@ -1,594 +1,892 @@
 'use strict';
 
-const PiggyBack = (() => {
-  const UpDS = (() => {
-    const _anime = {
-      tint: {
-        focusToHover: (icon) => {
-          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+// if (!Element.hasOwnPoperty(`removeAttributes`)) {
+//   Element.prototype.removeAttributes = function(...attrs) {
+//     attrs.forEach((attr) => {
+//       this.removeAttribute(attr)
+//     });
+//   }
+// }
 
-          anime.remove(tint);
+// if (!Element.hasOwnPoperty(`removeStyle`)) {}
 
-          const timeline = anime.timeline({
-            duration: 300,
-            easing: `easeInOutCirc`,
-          });
+const UpDS = (() => {
+  const state = {
+    hasCSSVarSupport:
+      !!typeof CSS !== `undefined` && CSS.supports(`color`, `var(--var)`),
+  };
 
-          timeline
-            .add(
-              {
-                duration: 200,
-                targets: tint,
-                fill: `rgba(249, 122, 98, 0.55)`,
-              },
-              0
-            )
-            .add(
-              {
-                begin: () => {
-                  mask.style.transformOrigin = `50% 50%`;
-                },
-                targets: mask,
-                scale: [1, 0],
-              },
-              0
-            );
-        },
-        focusToStatic: (icon) => {
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
+  const ns = `up`;
+  let uid = 0;
+  const ver = {
+    name: `Moon Landing`,
+    number: `v0.2.0`,
+  };
 
-          anime.remove(tint);
-          anime({
-            complete: () => {
-              tint.style.transform = ``;
-              tint.style.fill = ``;
-            },
-            duration: 300,
-            easing: `easeInBack`,
-            targets: tint,
-            scale: 0,
-            fill: `rgb(249, 122, 98)`,
-          });
-        },
-        hoverToFocus: (icon) => {
-          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
-
-          anime.remove(tint);
-
-          const timeline = anime.timeline({
-            duration: 300,
-            easing: `easeInOutCirc`,
-          });
-
-          timeline
-            .add(
-              {
-                duration: 200,
-                targets: tint,
-                fill: `rgb(249, 122, 98)`,
-              },
-              100
-            )
-            .add(
-              {
-                targets: mask,
-                scale: [`0`, `1`],
-              },
-              0
-            );
-        },
-        hoverToStatic: (icon) => {
-          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
-
-          anime.remove(tint);
-          anime({
-            complete: () => {
-              mask.removeAttribute(`style`);
-              tint.style.transform = ``;
-            },
-            duration: 300,
-            easing: `easeInBack`,
-            targets: tint,
-            scale: 0,
-          });
-        },
-        staticToFocus: (icon) => {
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
-
-          anime.remove(tint);
-          anime({
-            duration: 800,
-            easing: `easeOutElastic(1, 0.6)`,
-            targets: tint,
-            scale: [0, 1],
-            fill: `rgb(249, 122, 98)`,
-          });
-        },
-        staticToHover: (icon) => {
-          const mask = icon.querySelector(`.${_namespace}-icon__mask--hidden`);
-          const tint = icon.querySelector(`.${_namespace}-icon__tint`);
-
-          anime.remove(tint);
-          anime({
-            begin: () => {
-              mask.style.transform = `scale(0)`;
-              mask.style.transformOrigin = `50% 50%`;
-            },
-            duration: 800,
-            easing: `easeOutElastic(1, 0.6)`,
-            targets: tint,
-            scale: [0, 1],
-          });
-        },
+  const animation = {
+    misc: {
+      fadeIn: (elems) => {
+        anime.remove(elems);
+        anime({
+          duration: 500,
+          easing: `easeInOutCirc`,
+          opacity: 1,
+          targets: elems,
+        });
       },
-    };
+    },
+    tint: {
+      focusToHover: (icon) => {
+        const mask = icon.querySelector(`.${ns}-icon__mask--hidden`);
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
 
-    const _namespace = `up`;
-    let _uniqueIdCount = 0;
-    const _version = {
-      name: `Moon Landing`,
-      number: `v0.2.0`,
-    };
+        anime.remove(tint);
 
-    const _pxToRem = (pixels, basePixels = 16) => {
-      pixels = parseFloat(pixels);
-      basePixels = parseFloat(basePixels);
+        const timeline = anime.timeline({
+          duration: 300,
+          easing: `easeInOutCirc`,
+        });
 
-      return `${pixels / basePixels}rem`;
-    };
-
-    const _setIconMaskId = (icon) => {
-      const mask = icon.querySelector(`.${_namespace}-icon__mask`);
-      const tint = icon.querySelector(`.${_namespace}-icon__tint`);
-      const id = _uniqueId();
-
-      mask.id = id;
-      tint.style.mask = `url(#${id})`;
-    };
-
-    const _uniqueId = () => {
-      return `${_namespace}-id-${++_uniqueIdCount}`;
-    };
-
-    // Public
-    // ---------------------------------------------------------------------------
-    const utils = {
-      getNamespace: () => {
-        return _namespace;
+        timeline
+          .add(
+            {
+              duration: 200,
+              targets: tint,
+              fill: `rgba(249, 122, 98, 0.55)`,
+            },
+            0
+          )
+          .add(
+            {
+              begin: () => {
+                mask.style.transformOrigin = `50% 50%`;
+              },
+              targets: mask,
+              scale: [1, 0],
+            },
+            0
+          );
       },
-      getVersion: () => {
-        return _version;
+      focusToStatic: (icon) => {
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
+
+        anime.remove(tint);
+        anime({
+          complete: () => {
+            tint.style.transform = ``;
+            tint.style.fill = ``;
+          },
+          duration: 300,
+          easing: `easeInBack`,
+          targets: tint,
+          scale: 0,
+          fill: `rgb(249, 122, 98)`,
+        });
       },
-    };
+      hoverToFocus: (icon) => {
+        const mask = icon.querySelector(`.${ns}-icon__mask--hidden`);
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
 
-    const components = {
-      accordion: {
-        className: `${_namespace}-accordion`,
-        fn: (elems) => {
-          elems.forEach((elem) => {
-            const state = {
-              isActive: false,
-              isAnimating: false,
-              isFocused: false,
-              isHovered: false,
-            };
+        anime.remove(tint);
 
-            const btn = elem.querySelector(`.${_namespace}-accordion__btn`);
-            const icon = elem.querySelector(`.${_namespace}-icon`);
-            const inner = elem.querySelector(`.${_namespace}-accordion__inner`);
+        const timeline = anime.timeline({
+          duration: 300,
+          easing: `easeInOutCirc`,
+        });
 
-            const handleBlur = () => {
-              state.isFocused = false;
+        timeline
+          .add(
+            {
+              duration: 200,
+              targets: tint,
+              fill: `rgb(249, 122, 98)`,
+            },
+            100
+          )
+          .add(
+            {
+              targets: mask,
+              scale: [`0`, `1`],
+            },
+            0
+          );
+      },
+      hoverToStatic: (icon) => {
+        const mask = icon.querySelector(`.${ns}-icon__mask--hidden`);
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
 
-              if (!state.isHovered) {
-                _anime.tint.focusToStatic(icon);
-              }
-            };
+        anime.remove(tint);
+        anime({
+          complete: () => {
+            mask.removeAttribute(`style`);
+            tint.style.transform = ``;
+          },
+          duration: 300,
+          easing: `easeInBack`,
+          targets: tint,
+          scale: 0,
+        });
+      },
+      staticToFocus: (icon) => {
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
 
-            const handleClick = () => {
-              if (!state.isAnimating) {
-                const props = {
+        anime.remove(tint);
+        anime({
+          duration: 800,
+          easing: `easeOutElastic(1, 0.6)`,
+          targets: tint,
+          scale: [0, 1],
+          fill: `rgb(249, 122, 98)`,
+        });
+      },
+      staticToHover: (icon) => {
+        const mask = icon.querySelector(`.${ns}-icon__mask--hidden`);
+        const tint = icon.querySelector(`.${ns}-icon__tint`);
+
+        anime.remove(tint);
+        anime({
+          begin: () => {
+            mask.style.transform = `scale(0)`;
+            mask.style.transformOrigin = `50% 50%`;
+          },
+          duration: 800,
+          easing: `easeOutElastic(1, 0.6)`,
+          targets: tint,
+          scale: [0, 1],
+        });
+      },
+    },
+  };
+
+  const pxToRem = (pixels, basePixels = 16) => {
+    pixels = parseFloat(pixels);
+    basePixels = parseFloat(basePixels);
+
+    return `${pixels / basePixels}rem`;
+  };
+
+  const setIconMaskId = (icon) => {
+    const mask = icon.querySelector(`.${ns}-icon__mask`);
+    const tint = icon.querySelector(`.${ns}-icon__tint`);
+    const id = uniqueId();
+
+    mask.id = id;
+    tint.style.mask = `url("#${id}")`;
+  };
+
+  const uniqueId = () => {
+    return `${ns}-uid-${++uid}`;
+  };
+
+  const components = {
+    accordion: {
+      className: `${ns}-accordion`,
+      fn: (elems) => {
+        elems.forEach((elem) => {
+          const state = {
+            isActive: false,
+            isAnimating: false,
+            isFocused: false,
+            isHovered: false,
+          };
+
+          const btn = elem.querySelector(`.${ns}-accordion__btn`);
+          const icon = elem.querySelector(`.${ns}-icon`);
+          const inner = elem.querySelector(`.${ns}-accordion__inner`);
+
+          const handleBlur = () => {
+            state.isFocused = false;
+
+            if (!state.isHovered) {
+              animation.tint.focusToStatic(icon);
+            }
+          };
+
+          const handleClick = () => {
+            if (!state.isAnimating) {
+              state.isActive = !state.isActive;
+              state.isAnimating = true;
+
+              elem.classList.toggle(`${ns}-active`);
+
+              if (state.isActive) {
+                anime({
+                  begin: () => {
+                    btn.ariaExpanded = true;
+                    btn.title = `Contract`;
+                    inner.style.visibility = `visible`;
+                  },
                   complete: () => {
-                    if (!state.isActive) {
-                      inner.removeAttribute(`style`);
-                    }
-
                     state.isAnimating = false;
                   },
                   duration: 500,
                   easing: `easeInOutSine`,
+                  height: [0, pxToRem(inner.scrollHeight)],
                   targets: inner,
-                };
+                });
+              } else {
+                anime({
+                  complete: () => {
+                    btn.ariaExpanded = false;
+                    btn.title = `Expand`;
+                    inner.removeAttribute(`style`);
 
-                state.isActive = !state.isActive;
-                state.isAnimating = true;
+                    state.isAnimating = false;
+                  },
+                  duration: 500,
+                  delay: 100,
+                  easing: `easeInOutSine`,
+                  targets: inner,
 
-                elem.classList.toggle(`${_namespace}-active`);
+                  height: [pxToRem(inner.scrollHeight), 0],
+                });
+              }
+            }
+          };
 
-                if (elem.classList.contains(`${_namespace}-active`)) {
-                  anime({
-                    begin: () => {
-                      inner.style.visibility = `visible`;
+          const handleFocus = () => {
+            state.isFocused = true;
+
+            if (!state.isHovered) {
+              animation.tint.staticToFocus(icon);
+            }
+          };
+
+          const handleMouseEnter = () => {
+            state.isHovered = true;
+
+            if (state.isFocused) {
+              animation.tint.focusToHover(icon);
+            } else {
+              animation.tint.staticToHover(icon);
+            }
+          };
+
+          const handleMouseLeave = () => {
+            state.isHovered = false;
+
+            if (state.isFocused) {
+              animation.tint.hoverToFocus(icon);
+            } else {
+              animation.tint.hoverToStatic(icon);
+            }
+          };
+
+          const handleResize = () => {
+            if (state.isActive) {
+              inner.style.height = `auto`;
+            }
+          };
+
+          setIconMaskId(icon);
+
+          btn.addEventListener(`blur`, handleBlur, false);
+          btn.addEventListener(`click`, handleClick, false);
+          btn.addEventListener(`focus`, handleFocus, false);
+          btn.addEventListener(`mouseenter`, handleMouseEnter, false);
+          btn.addEventListener(`mouseleave`, handleMouseLeave, false);
+
+          window.addEventListener(`resize`, handleResize, false);
+        });
+      },
+    },
+    imgSlider: {
+      className: `${ns}-img--slider`,
+      fn: (elems) => {
+        const getSlideData = (elem) => {
+          const slideData = [];
+          const slides = [...elem.querySelectorAll(`.${ns}-img__slide`)];
+
+          if (slides.length > 12) {
+            slides.length = 12;
+          }
+
+          slides.forEach((slide) => {
+            const src = slide.querySelector(`.${ns}-img__src`);
+            const data = {
+              altText: src.ariaLabel,
+              backgroundColor: src.dataset.backgroundColor,
+              URL: src.dataset.src,
+            };
+
+            src.removeAttribute(`data-background-color`);
+            src.removeAttribute(`data-src`);
+
+            slideData.push(data);
+          });
+
+          return slideData;
+        };
+
+        const loadImg = (URL, fn) => {
+          const img = new Image();
+          img.src = URL;
+          img.addEventListener(`load`, fn, false);
+        };
+
+        const setIcon = (elem, state) => {
+          const btnPrev = elem.querySelector(`.${ns}-img__btn--prev`);
+          const btnNext = elem.querySelector(`.${ns}-img__btn--next`);
+          const iconPrev = btnPrev.querySelector(`.${ns}-icon`);
+          const iconNext = btnNext.querySelector(`.${ns}-icon`);
+
+          if (state.slideNum === 0) {
+            if (state.isHovered.btnPrev) {
+              state.isHovered.btnPrev = false;
+
+              animation.tint.hoverToStatic(iconPrev);
+            } else if (state.isFocused.btnPrev) {
+              state.isFocused.btnPrev = false;
+
+              animation.tint.focusToStatic(iconPrev);
+            }
+
+            btnPrev.classList.add(`${ns}-img__btn--disabled`);
+            btnPrev.disabled = true;
+
+            btnNext.focus();
+          } else {
+            btnPrev.classList.remove(`${ns}-img__btn--disabled`);
+            btnPrev.disabled = false;
+          }
+
+          if (state.slideNum === state.slideData.length - 1) {
+            if (state.isHovered.btnNext) {
+              state.isHovered.btnNext = false;
+
+              animation.tint.hoverToStatic(iconNext);
+            } else if (state.isFocused.btnNext) {
+              state.isFocused.btnNext = false;
+
+              animation.tint.focusToStatic(iconNext);
+            }
+
+            btnNext.classList.add(`${ns}-img__btn--disabled`);
+            btnNext.disabled = true;
+
+            btnPrev.focus();
+          } else {
+            btnNext.classList.remove(`${ns}-img__btn--disabled`);
+            btnNext.disabled = false;
+          }
+        };
+
+        // fn: (elems) => {
+
+        //   // const setList = (elem, itemTotal, itemNum = 0) => {
+        //   //   const list = elem.querySelector(`.${ns}-img__list`);
+
+        //   //   for (let i = 0; i < itemTotal; i++) {
+        //   //     if (i === itemNum) {
+        //   //       list.innerHTML += `<div class="${ns}-img__item ${ns}-img__item--active"></div>`;
+        //   //     } else {
+        //   //       if (i === 5) {
+        //   //         if (itemTotal > 6) {
+        //   //           list.innerHTML += `<div class="${ns}-img__item ${ns}-img__item--compact"></div>`;
+        //   //         } else {
+        //   //           list.innerHTML += `<div class="${ns}-img__item"></div>`;
+        //   //         }
+
+        //   //         break;
+        //   //       } else {
+        //   //         list.innerHTML += `<div class="${ns}-img__item"></div>`;
+        //   //       }
+        //   //     }
+        //   //   }
+        //   // };
+
+        //   });
+        // },
+
+        const setNum = (elem, state) => {
+          const number = elem.querySelector(`.${ns}-img__number`);
+
+          number.innerHTML =
+            `<strong class="${ns}-strong">${state.slideNum + 1}</strong>` +
+            ` of ` +
+            `<strong class="${ns}-strong">${state.slideData.length}</strong>`;
+        };
+
+        const setSlide = (elem, state, initSlideNum) => {
+          const inner = elem.querySelector(`.${ns}-img__inner`);
+
+          if (typeof initSlideNum === `undefined`) {
+            inner.innerHTML = ``;
+
+            for (let i = 0; i < 4; i++) {
+              const slide = state.slideData[i];
+
+              if (!!slide) {
+                inner.innerHTML +=
+                  `<div class="${ns}-img__slide" style="background-color: ${slide.backgroundColor}">` +
+                  `<div aria-label="${slide.altText}" class="${ns}-img__src" role="img" style="background-image: url('${slide.URL}');"></div>` +
+                  `</div>`;
+
+                loadImg(slide.URL, () => {
+                  let src = elem.querySelectorAll(`.${ns}-img__src`)[i];
+
+                  animation.misc.fadeIn(src);
+                });
+              }
+            }
+          } else {
+            const slideNext = state.slideData[initSlideNum + 4];
+            const slidePrev = state.slideData[initSlideNum - 1];
+            const slides = elem.querySelectorAll(`.${ns}-img__slide`);
+
+            const addSlide = (cb) => {
+              if (!!slidePrev) {
+                if (slides[3]) {
+                  slides[3].remove();
+                }
+
+                const slide = document.createElement(`div`);
+                slide.classList.add(`${ns}-img__slide`);
+                slide.style.left = `-150%`;
+                slide.style.backgroundColor = slidePrev.backgroundColor;
+
+                slide.innerHTML = `<div aria-label="${slidePrev.altText}" class="${ns}-img__src" role="img" style="opacity: 1;background-image: url('${slidePrev.URL}');"></div>`;
+
+                inner.prepend(slide);
+              }
+
+              cb();
+            };
+
+            if (initSlideNum > state.slideNum) {
+              addSlide(() => {
+                const timeline = anime.timeline({
+                  begin: () => {
+                    state.isAnimating = true;
+                  },
+                  complete: () => {
+                    state.isAnimating = false;
+                  },
+                  duration: 1000,
+                  easing: `easeInOutSine`,
+                });
+
+                timeline
+                  .add(
+                    {
+                      bottom: [pxToRem(`-40px`), pxToRem(`-8px`)],
+                      boxShadow: [
+                        `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 0.5rem 0.5rem -0.125rem rgba(34, 17, 65, 0.25)`,
+                        `none`,
+                      ],
+                      duration: 500,
+                      easing: `easeInBack`,
+                      scale: [0.9025, 0.8145],
+                      rotate: [`-0.55deg`, `0deg`],
+                      targets: elem.querySelectorAll(`.${ns}-img__slide`)[3],
                     },
-                    ...props,
-                    height: [0, _pxToRem(inner.scrollHeight)],
-                  });
-                } else {
-                  anime({
-                    ...props,
-                    delay: 100,
-                    height: [_pxToRem(inner.scrollHeight), 0],
-                  });
+                    0
+                  )
+                  .add(
+                    {
+                      bottom: [pxToRem(`-24px`), pxToRem(`-40px`)],
+                      boxShadow: [
+                        `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1rem 1rem -0.25rem rgba(34, 17, 65, 0.2)`,
+                        `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 0.5rem 0.5rem -0.125rem rgba(34, 17, 65, 0.25)`,
+                      ],
+                      duration: 500,
+                      easing: `easeInOutSine`,
+                      scale: [0.95, 0.9025],
+                      rotate: [`0.8deg`, `-0.55deg`],
+                      targets: elem.querySelectorAll(`.${ns}-img__slide`)[2],
+                    },
+                    100
+                  )
+                  .add(
+                    {
+                      bottom: [pxToRem(`-8px`), pxToRem(`-24px`)],
+                      boxShadow: [
+                        `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1.5rem 1.5rem -0.375rem rgba(34, 17, 65, 0.15)`,
+                        `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1rem 1rem -0.25rem rgba(34, 17, 65, 0.2)`,
+                      ],
+                      duration: 500,
+                      easing: `easeInOutSine`,
+                      scale: [1, 0.95],
+                      rotate: [`0deg`, `0.8deg`],
+                      targets: elem.querySelectorAll(`.${ns}-img__slide`)[1],
+                    },
+                    150
+                  )
+                  .add(
+                    {
+                      duration: 500,
+                      easing: `easeOutCirc`,
+                      left: [`-150%`, pxToRem(`-8px`)],
+                      targets: elem.querySelectorAll(`.${ns}-img__slide`)[0],
+                    },
+                    0
+                  );
+              });
+            } else {
+              const timeline = anime.timeline({
+                begin: () => {
+                  state.isAnimating = true;
+                },
+                complete: () => {
+                  state.isAnimating = false;
+
+                  slides[0].remove();
+
+                  if (!!slideNext) {
+                    inner.innerHTML +=
+                      `<div class="${ns}-img__slide" style="background-color: ${slideNext.backgroundColor}">` +
+                      `<div aria-label="${slideNext.altText}" class="${ns}-img__src" role="img" style="opacity: 1;background-image: url('${slideNext.URL}');"></div>` +
+                      `</div>`;
+                  }
+                },
+                duration: 1000,
+                easing: `easeInOutSine`,
+              });
+
+              timeline
+                .add(
+                  {
+                    duration: 500,
+                    left: `-150%`,
+                    targets: slides[0],
+                  },
+                  0
+                )
+                .add(
+                  {
+                    bottom: [pxToRem(`-24px`), pxToRem(`-8px`)],
+                    boxShadow: [
+                      `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1rem 1rem -0.25rem rgba(34, 17, 65, 0.2)`,
+                      `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1.5rem 1.5rem -0.375rem rgba(34, 17, 65, 0.15)`,
+                    ],
+                    duration: 500,
+                    easing: `easeInOutSine`,
+                    scale: [0.95, 1],
+                    rotate: [`0.8deg`, `0deg`],
+                    targets: slides[1],
+                  },
+                  100
+                )
+                .add(
+                  {
+                    bottom: [pxToRem(`-40px`), pxToRem(`-24px`)],
+                    boxShadow: [
+                      `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 0.5rem 0.5rem -0.125rem rgba(34, 17, 65, 0.25)`,
+                      `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 1rem 1rem -0.25rem rgba(34, 17, 65, 0.2)`,
+                    ],
+                    duration: 500,
+                    easing: `easeInOutSine`,
+                    scale: [0.9025, 0.95],
+                    rotate: [`-0.55deg`, `0.8deg`],
+                    targets: slides[2],
+                  },
+                  150
+                )
+                .add(
+                  {
+                    bottom: [pxToRem(`-8px`), pxToRem(`-40px`)],
+                    boxShadow: [
+                      `none`,
+                      `0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 0.5rem 0.5rem -0.125rem rgba(34, 17, 65, 0.25)`,
+                    ],
+                    duration: 500,
+                    easing: `easeOutBack`,
+                    scale: [0.8145, 0.9025],
+                    rotate: [`0deg`, `-0.55deg`],
+                    targets: slides[3],
+                  },
+                  200
+                );
+            }
+          }
+
+          setIcon(elem, state);
+          setNum(elem, state);
+        };
+
+        elems.forEach((elem) => {
+          const state = {
+            isAnimating: false,
+            isFocused: {
+              btnNext: false,
+              btnPrev: false,
+            },
+            isHovered: {
+              btnNext: false,
+              btnPrev: false,
+            },
+            slideNum: 0,
+            slideData: getSlideData(elem),
+          };
+
+          const btns = elem.querySelectorAll(`.${ns}-img__btn`);
+          const icons = elem.querySelectorAll(`.${ns}-icon`);
+
+          const handleBlur = (e) => {
+            if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
+              state.isFocused.btnPrev = false;
+
+              if (!state.isHovered.btnPrev) {
+                animation.tint.focusToStatic(icons[0]);
+              }
+            } else {
+              state.isFocused.btnNext = false;
+
+              if (!state.isHovered.btnNext) {
+                animation.tint.focusToStatic(icons[1]);
+              }
+            }
+          };
+
+          const handleClick = (e) => {
+            if (!state.isAnimating) {
+              if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
+                if (state.slideNum !== 0) {
+                  setSlide(elem, state, state.slideNum--);
+                }
+              } else {
+                if (state.slideNum + 1 <= state.slideData.length - 1) {
+                  setSlide(elem, state, state.slideNum++);
                 }
               }
-            };
+            }
+          };
 
-            const handleFocus = () => {
-              state.isFocused = true;
+          const handleFocus = (e) => {
+            if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
+              state.isFocused.btnPrev = true;
 
-              if (!state.isHovered) {
-                _anime.tint.staticToFocus(icon);
+              if (!state.isHovered.btnPrev) {
+                animation.tint.staticToFocus(icons[0]);
               }
-            };
+            } else {
+              state.isFocused.btnNext = true;
 
-            const handleMouseEnter = () => {
-              state.isHovered = true;
+              if (!state.isHovered.btnNext) {
+                animation.tint.staticToFocus(icons[1]);
+              }
+            }
+          };
 
-              if (state.isFocused) {
-                _anime.tint.focusToHover(icon);
+          const handleMouseEnter = (e) => {
+            const iconPrev = icons[0];
+            const iconNext = icons[1];
+
+            if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
+              state.isHovered.btnPrev = true;
+
+              if (state.isFocused.btnPrev) {
+                animation.tint.focusToHover(iconPrev);
               } else {
-                _anime.tint.staticToHover(icon);
+                animation.tint.staticToHover(iconPrev);
               }
-            };
+            } else {
+              state.isHovered.btnNext = true;
 
-            const handleMouseLeave = () => {
-              state.isHovered = false;
-
-              if (state.isFocused) {
-                _anime.tint.hoverToFocus(icon);
+              if (state.isFocused.btnNext) {
+                animation.tint.focusToHover(iconNext);
               } else {
-                _anime.tint.hoverToStatic(icon);
+                animation.tint.staticToHover(iconNext);
               }
-            };
+            }
+          };
 
-            const handleResize = () => {
-              if (state.isActive) {
-                inner.style.height = `auto`;
+          const handleMouseLeave = (e) => {
+            const iconPrev = icons[0];
+            const iconNext = icons[1];
+
+            if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
+              state.isHovered.btnPrev = false;
+
+              if (state.isFocused.btnPrev) {
+                animation.tint.hoverToFocus(iconPrev);
+              } else {
+                animation.tint.hoverToStatic(iconPrev);
               }
-            };
+            } else {
+              state.isHovered.btnNext = false;
 
-            _setIconMaskId(icon);
+              if (state.isFocused.btnNext) {
+                animation.tint.hoverToFocus(iconNext);
+              } else {
+                animation.tint.hoverToStatic(iconNext);
+              }
+            }
+          };
 
+          icons.forEach((icon) => {
+            setIconMaskId(icon);
+          });
+
+          btns.forEach((btn) => {
             btn.addEventListener(`blur`, handleBlur, false);
             btn.addEventListener(`click`, handleClick, false);
             btn.addEventListener(`focus`, handleFocus, false);
             btn.addEventListener(`mouseenter`, handleMouseEnter, false);
             btn.addEventListener(`mouseleave`, handleMouseLeave, false);
-
-            window.addEventListener(`resize`, handleResize, false);
           });
-        },
+
+          setSlide(elem, state);
+        });
       },
-      imgSlider: {
-        className: `${_namespace}-img--slider`,
-        fn: (elems) => {
-          // const loadImg = (URL, fn) => {
-          //   const img = new Image();
-          //   img.src = URL;
-          //   img.onload = () => {
-          //     fn();
-          //   };
-          // };
-
-          elems.forEach((elem) => {
-            const state = {
-              isAnimating: false,
-              isFocused: {
-                btnNext: false,
-                btnPrev: false,
-              },
-              isHovered: {
-                btnNext: false,
-                btnPrev: false,
-              },
-            };
-
-            const btns = elem.querySelectorAll(`.${_namespace}-img__btn`);
-            const icons = elem.querySelectorAll(`.${_namespace}-icon`);
-
-            const handleBlur = (e) => {
-              const btn = e.target;
-              let icon = icons[0];
-
-              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
-                if (!state.isHovered.btnPrev) {
-                  _anime.tint.focusToStatic(icon);
-                }
-
-                state.isFocused.btnPrev = false;
-              } else {
-                icon = icons[1];
-
-                if (!state.isHovered.btnNext) {
-                  _anime.tint.focusToStatic(icon);
-                }
-
-                state.isFocused.btnNext = false;
-              }
-            };
-
-            const handleFocus = (e) => {
-              const btn = e.target;
-              let icon = icons[0];
-
-              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
-                if (!state.isHovered.btnPrev) {
-                  _anime.tint.staticToFocus(icon);
-                }
-
-                state.isFocused.btnPrev = true;
-              } else {
-                icon = icons[1];
-
-                if (!state.isHovered.btnNext) {
-                  _anime.tint.staticToFocus(icon);
-                }
-
-                state.isFocused.btnNext = true;
-              }
-            };
-
-            const handleMouseEnter = (e) => {
-              const btn = e.target;
-              let icon = icons[0];
-
-              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
-                if (state.isFocused.btnPrev) {
-                  _anime.tint.focusToHover(icon);
-                } else {
-                  _anime.tint.staticToHover(icon);
-                }
-
-                state.isHovered.btnPrev = true;
-              } else {
-                icon = icons[1];
-
-                if (state.isFocused.btnNext) {
-                  _anime.tint.focusToHover(icon);
-                } else {
-                  _anime.tint.staticToHover(icon);
-                }
-
-                state.isHovered.btnNext = true;
-              }
-            };
-
-            const handleMouseLeave = (e) => {
-              const btn = e.target;
-              let icon = icons[0];
-
-              if (btn.classList.contains(`${_namespace}-img__btn--prev`)) {
-                if (state.isFocused.btnPrev) {
-                  _anime.tint.hoverToFocus(icon);
-                } else {
-                  _anime.tint.hoverToStatic(icon);
-                }
-
-                state.isHovered.btnPrev = false;
-              } else {
-                icon = icons[1];
-
-                if (state.isFocused.btnNext) {
-                  _anime.tint.hoverToFocus(icon);
-                } else {
-                  _anime.tint.hoverToStatic(icon);
-                }
-
-                state.isHovered.btnNext = false;
-              }
-            };
-
-            icons.forEach((icon) => {
-              _setIconMaskId(icon);
-            });
-
-            btns.forEach((btn) => {
-              btn.addEventListener(`blur`, handleBlur, false);
-              btn.addEventListener(`focus`, handleFocus, false);
-              btn.addEventListener(`mouseenter`, handleMouseEnter, false);
-              btn.addEventListener(`mouseleave`, handleMouseLeave, false);
-            });
-
-            // const imgs = [];
-            // const inner = elem.querySelector(`.${_namespace}-img__inner`);
-            // let slides = [
-            //   ...elem.querySelectorAll(`.${_namespace}-img__slide`),
-            // ];
-            // const mask = elem.querySelector(`.${_namespace}-icon__mask`);
-            // const maskHidden = elem.querySelector(
-            //   `.${_namespace}-icon__mask--hidden`
-            // );
-            // const tint = elem.querySelector(`.${_namespace}-icon__tint`);
-            // let isNextBtnFocused = false;
-            // let isPrevBtnFocused = false;
-            // let isNextBtnHovered = false;
-            // let isPrevBtnHovered = false;
-            // // let isInnerAnimating = false;
-            // const setImgNumber = (currImg = 0) => {
-            //   const number = elem.querySelector(`.${_namespace}-img__number`);
-            //   number.innerHTML = `<strong class="${_namespace}-strong">${
-            //     currImg + 1
-            //   }</strong> of <strong class="${_namespace}-strong">${
-            //     imgs.length
-            //   }</strong>`;
-            // };
-            // const handleNextBtnMouseEnter = (e) => {
-            //   isNextBtnHovered = true;
-            //   console.log(e.target);
-            //   anime.remove(tint);
-            //   if (isNextBtnFocused) {
-            //     const timeline = anime.timeline({
-            //       duration: 300,
-            //       easing: `easeInOutCirc`,
-            //     });
-            //     timeline
-            //       .add(
-            //         {
-            //           duration: 200,
-            //           targets: tint,
-            //           fill: `rgba(249, 122, 98, 0.55)`,
-            //         },
-            //         0
-            //       )
-            //       .add(
-            //         {
-            //           begin: () => {
-            //             maskHidden.style.transformOrigin = `50% 50%`;
-            //           },
-            //           targets: maskHidden,
-            //           scale: [1, 0],
-            //         },
-            //         0
-            //       );
-            //   } else {
-            //     anime({
-            //       begin: () => {
-            //         maskHidden.style.transform = `scale(0)`;
-            //         maskHidden.style.transformOrigin = `50% 50%`;
-            //       },
-            //       duration: 800,
-            //       easing: `easeOutElastic(1, 0.6)`,
-            //       targets: tint,
-            //       scale: [0, 1],
-            //     });
-            //   }
-            // };
-            // const handleNextBtnMouseLeave = () => {
-            //   isNextBtnHovered = false;
-            //   anime.remove(tint);
-            //   if (isNextBtnFocused) {
-            //     const timeline = anime.timeline({
-            //       duration: 300,
-            //       easing: `easeInOutCirc`,
-            //     });
-            //     timeline
-            //       .add(
-            //         {
-            //           duration: 200,
-            //           targets: tint,
-            //           fill: `rgb(249, 122, 98)`,
-            //         },
-            //         100
-            //       )
-            //       .add(
-            //         {
-            //           targets: maskHidden,
-            //           scale: [`0`, `1`],
-            //         },
-            //         0
-            //       );
-            //   } else {
-            //     anime({
-            //       complete: () => {
-            //         maskHidden.removeAttribute(`style`);
-            //         tint.style.transform = ``;
-            //       },
-            //       duration: 300,
-            //       easing: `easeInBack`,
-            //       targets: tint,
-            //       scale: 0,
-            //     });
-            //   }
-            // };
-            // slides.forEach((slide) => {
-            //   const src = slide.querySelector(`.${_namespace}-img__src`);
-            //   const img = {
-            //     backgroundColor: src.dataset.backgroundColor,
-            //     URL: src.dataset.src,
-            //   };
-            //   slide.innerHTML = ``;
-            //   slide.style.backgroundColor = img.backgroundColor;
-            //   imgs.push(img);
-            // });
-            // setImgNumber();
-            // if (slides.length === 1) {
-            // } else {
-            //   if (slides.length > 3) {
-            //     inner.innerHTML = ``;
-            //     for (let i = 0; i < 3; i++) {
-            //       const slide = slides[i];
-            //       inner.appendChild(slide);
-            //     }
-            //     slides = [
-            //       ...elem.querySelectorAll(`.${_namespace}-img__slide`),
-            //     ];
-            //     for (let i = 0; i < 3; i++) {
-            //       const img = imgs[i];
-            //       const slide = slides[i];
-            //       slide.style.backgroundImage = `url("${img.URL}")`;
-            //       // if (i !== 0) {
-            //       //   slide.style.transform = `scale(0.95) rotate(${Math.random()}deg)`;
-            //       // }
-            //     }
-            //   }
-            // }
-            // const prevBtn = elem.querySelector(`.${_namespace}-img__btn--prev`);
-            // prevBtn.addEventListener(
-            //   `mouseenter`,
-            //   handleNextBtnMouseEnter,
-            //   false
-            // );
-            // prevBtn.addEventListener(
-            //   `mouseleave`,
-            //   handleNextBtnMouseLeave,
-            //   false
-            // );
-          });
-        },
-      },
-    };
-
-    return {
-      components,
-      utils,
-    };
-  })();
-
-  const _namespace = UpDS.utils.getNamespace();
-  const _version = UpDS.utils.getVersion();
-
-  let _isPiggyBacked = false;
-
-  const _addComponents = (comps) => {
-    const compNames = Object.keys(comps);
-
-    compNames.forEach((compName) => {
-      const elems = [
-        ...document.querySelectorAll(`.${comps[compName].className}`),
-      ];
-
-      if (!!elems.length) {
-        const elemsToPiggyBack = [];
-        const piggyBackClassName = `${_namespace}-piggybacked`;
-
+    },
+    imgHero: {
+      className: `${ns}-img--hero`,
+      fn: (elems) => {
         elems.forEach((elem) => {
-          if (!elem.classList.contains(piggyBackClassName)) {
-            elem.classList.add(piggyBackClassName);
-            elemsToPiggyBack.push(elem);
+          const img = document.createElement(`img`);
+          const outer = elem.querySelector(`.${ns}-img__outer`);
+          const URL = outer.style.backgroundImage
+            .slice(4, -1)
+            .replace(/"/g, ``);
+
+          const handleLoad = (e) => {
+            const colorThief = new ColorThief();
+            const heading = elem.querySelector(`.${ns}-img__heading`);
+            const subheading = elem.querySelector(`.${ns}-img__subheading`);
+            const rgb = colorThief.getColor(e.target);
+            let rgba = `rgba(`;
+
+            rgb.forEach((val) => {
+              rgba += `${val}, `;
+            });
+
+            rgba += `0.55)`;
+
+            const headings = [heading];
+
+            if (!!subheading) {
+              headings.push(subheading);
+            }
+
+            const timeline = anime.timeline({
+              begin: () => {
+                headings.forEach((heading) => {
+                  heading.style.backgroundColor = rgba;
+                });
+              },
+              duration: 1100,
+            });
+
+            timeline
+              .add(
+                {
+                  backgroundPosition: {
+                    duration: 800,
+                    easing: `easeOutSine`,
+                    value: [`50% 0%`, `50% 50%`],
+                  },
+                  duration: 800,
+                  easing: `easeOutSine`,
+                  opacity: 1,
+                  targets: outer,
+                },
+                0
+              )
+              .add(
+                {
+                  bottom: [`-5rem`, `0rem`],
+                  delay: anime.stagger(100),
+                  duration: 500,
+                  opacity: 1,
+                  targets: headings,
+                },
+                500
+              );
+          };
+
+          img.src = URL;
+          img.addEventListener(`load`, handleLoad, false);
+        });
+      },
+    },
+  };
+
+  const addComponents = (selector, ...compNames) => {
+    const entries = document.querySelectorAll(selector);
+    let supportedCompNames = [];
+
+    if (!!compNames.length) {
+      compNames.forEach((compName) => {
+        if (!!components[compName]) {
+          supportedCompNames.push(compName);
+        } else {
+          console.error(`UpDS: "${compName}" is not a supported component.`);
+        }
+      });
+    } else {
+      supportedCompNames = Object.keys(components);
+    }
+
+    if (!!entries.length) {
+      entries.forEach((entry) => {
+        let prevCompdElemsCount = 0;
+
+        supportedCompNames.forEach((supportedCompName) => {
+          const elems = [
+            ...entry.querySelectorAll(
+              `.${components[supportedCompName].className}`
+            ),
+          ];
+
+          if (!!elems.length) {
+            const elemsToComp = [];
+            const flagClassName = `${ns}-mounted`;
+
+            elems.forEach((elem) => {
+              if (!elem.classList.contains(flagClassName)) {
+                elem.classList.add(flagClassName);
+                elemsToComp.push(elem);
+              } else {
+                prevCompdElemsCount++;
+              }
+            });
+
+            if (!!elemsToComp.length) {
+              components[supportedCompName].fn(elemsToComp);
+            }
           }
         });
 
-        if (!!elemsToPiggyBack.length) {
-          comps[compName].fn(elemsToPiggyBack);
+        if (!!prevCompdElemsCount) {
+          console.warn(
+            `UpDS: addComponents() called on ${prevCompdElemsCount} previously componentised elements.`
+          );
         }
-      }
-    });
+      });
+    } else {
+      console.error(`UpDS: addComponents() couldn't find a valid DOM entry.`);
+    }
   };
 
-  const _addDefaultsToElems = (selector, ...tagNames) => {
+  const getNamespace = () => {
+    return ns;
+  };
+
+  const getVersion = () => {
+    return `${ver.name} ${ver.number}`;
+  };
+
+  const listComponents = () => {
+    return Object.keys(components);
+  };
+
+  console.log(state);
+
+  return {
+    addComponents,
+    listComponents,
+    getNamespace,
+    getVersion,
+  };
+})();
+
+const PiggyBack = (() => {
+  const state = {
+    isPiggyBacked: false,
+  };
+
+  const addDefaults = (selector, ...tagNames) => {
     const entries = document.querySelectorAll(selector);
 
     if (!!entries.length) {
@@ -597,7 +895,7 @@ const PiggyBack = (() => {
 
         elems.forEach((elem) => {
           const tagName = elem.tagName.toLowerCase();
-          const defaultClassName = `${_namespace}-${tagName}`;
+          const defaultClassName = `${UpDS.getNamespace()}-${tagName}`;
 
           if (!elem.classList.contains(defaultClassName)) {
             elem.classList.add(defaultClassName);
@@ -606,7 +904,6 @@ const PiggyBack = (() => {
           if (tagName === `a`) {
             const originURL = /((?:https?|ftp):\/\/(www\.)?)?(lucent\.baseux)\.com\/?/;
 
-            // If href URL is external
             if (!originURL.test(elem.href)) {
               elem.rel = `noopener noreferrer`;
               elem.target = `_blank`;
@@ -614,38 +911,36 @@ const PiggyBack = (() => {
           }
         });
       });
+
+      UpDS.addComponents(selector);
     } else {
-      console.warn(`PiggyBack.js: Couldn't find a valid DOM entry.`);
+      console.error(`PiggyBack.js: run() couldn't find a valid DOM entry.`);
     }
   };
 
-  const _addStyleSheets = ([...URLs], fn) => {
-    if (!_isPiggyBacked) {
-      const addedCSS = [];
-      const head = document.head;
-      const style = document.createElement(`style`);
+  const addStyleSheets = ([...URLs], fn) => {
+    if (!state.isPiggyBacked) {
+      state.isPiggyBacked = true;
 
-      _isPiggyBacked = true;
+      const addedCSS = [];
+      const style = document.createElement(`style`);
 
       style.textContent = `\n`;
 
       URLs.forEach((URL) => {
         if (addedCSS.indexOf(URL) === -1) {
-          style.textContent += `\t@import "${URL}";\n`;
           addedCSS.push(URL);
+          style.textContent += `\t@import "${URL}";\n`;
         }
       });
 
-      head.appendChild(style);
-
+      document.head.appendChild(style);
       style.addEventListener(`load`, fn, false);
     } else {
       fn();
     }
   };
 
-  // Public
-  // ---------------------------------------------------------------------------
   const run = () => {
     const CMSElements = [
       `h1`,
@@ -677,6 +972,7 @@ const PiggyBack = (() => {
       `abbr`,
       `mark`,
     ];
+
     const styleSheets = [
       // Staging
       // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -687,18 +983,12 @@ const PiggyBack = (() => {
       // `https://danmad.github.io/upds/css/piggyback.min.css`,
     ];
 
-    _addStyleSheets(styleSheets, () => {
-      _addDefaultsToElems(`#page-content`, ...CMSElements);
-      _addComponents(UpDS.components);
+    addStyleSheets(styleSheets, () => {
+      addDefaults(`#page-content`, ...CMSElements);
     });
-  };
-
-  const version = () => {
-    return `${_version.name} ${_version.number}`;
   };
 
   return {
     run,
-    version,
   };
 })();

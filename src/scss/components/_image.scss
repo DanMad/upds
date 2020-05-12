@@ -7,7 +7,13 @@
 // 1 Pattern outline
 // =============================================================================
 
-// .img
+// .img.img--header
+// | .img__outer
+// | | .img__inner
+// | | | .img__heading
+// | | | .img__subheading
+
+// .img.img--slider
 // | .img__number
 // | .img__outer
 // | | .img__inner
@@ -16,6 +22,7 @@
 // | .img__controls
 // | | .img__btn
 // | | .img__list
+// | | | .img__item
 // | | .img__btn
 
 // 2 Imports
@@ -27,6 +34,81 @@
 
 // 3 Small devices
 // =============================================================================
+
+.#{$ns}-img--hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 100%; // 1:1
+  background-color: $grey-1;
+}
+
+.#{$ns}-img--hero > .#{$ns}-img__outer {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.#{$ns}-img--hero .#{$ns}-img__inner {
+  position: absolute;
+  bottom: $space-m;
+  left: $space-m;
+  width: calc(100% - #{rem(48px)});
+  max-width: rem(1280px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.#{$ns}-img__heading {
+  opacity: 0;
+  position: relative;
+  display: table;
+  backdrop-filter: blur($space-s) contrast(40%);
+  font-family: $headings;
+  font-size: rem(43px);
+  font-style: normal;
+  line-height: rem(48px);
+
+  // The word-wrap property set to break-word enables long URLs to reflow
+  // over multiple lines, rather than text flowing outside its container.
+  word-wrap: break-word;
+}
+
+.#{$ns}-img__heading::-moz-selection {
+  background-color: transparent;
+}
+.#{$ns}-img__heading::selection {
+  background-color: transparent;
+}
+
+.#{$ns}-img__subheading {
+  opacity: 0;
+  position: relative;
+  display: table;
+  margin-top: $space-xs;
+  backdrop-filter: blur($space-s);
+  font-family: $subheadings;
+  font-size: rem(18px);
+  font-style: normal;
+  font-weight: 500;
+  line-height: rem(24px);
+
+  // The word-wrap property set to break-word enables long URLs to reflow
+  // over multiple lines, rather than text flowing outside its container.
+  word-wrap: break-word;
+}
+
+.#{$ns}-img__subheading::-moz-selection {
+  background-color: transparent;
+}
+.#{$ns}-img__subheading::selection {
+  background-color: transparent;
+}
 
 .#{$ns}-img--slider {
   margin-bottom: $space-s;
@@ -43,12 +125,12 @@
   user-select: none;
 }
 
-.#{$ns}-img__outer {
+.#{$ns}-img--slider > .#{$ns}-img__outer {
   padding: $space-xs;
   margin-bottom: $space-m;
 }
 
-.#{$ns}-img__inner {
+.#{$ns}-img--slider .#{$ns}-img__inner {
   position: relative;
   height: 0;
   padding-top: 56.25%;
@@ -93,6 +175,10 @@
   box-shadow: #{$shadow-2};
   transform: scale(0.9025) rotate(-0.55deg);
 }
+.#{$ns}-img__slide:nth-of-type(4) {
+  bottom: rem(-8px);
+  transform: scale(0.9025);
+}
 
 .#{$ns}-img__src {
   opacity: 0;
@@ -101,6 +187,7 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: opacity $duration-4 $easing-default;
 }
 
 .#{$ns}-img__src.#{$ns}-loaded {
@@ -108,8 +195,43 @@
 }
 
 .#{$ns}-img__controls {
-  width: auto;
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
+}
+
+.#{$ns}-img__list {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 0 $space-xs;
+}
+
+.#{$ns}-img__item {
+  position: relative;
+  width: $space-s;
+  height: rem(48px);
+}
+
+.#{$ns}-img__item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: $space-xs;
+  height: $space-xs;
+  border-radius: 100%;
+  background-color: $grey-1;
+}
+
+.#{$ns}-img__item--active::before {
+  background-color: red; // REMOVE
+}
+
+.#{$ns}-img__item--compact::before {
+  width: rem(4px);
+  height: rem(4px);
 }
 
 .#{$ns}-img__btn {
@@ -129,16 +251,45 @@
   outline: none;
 }
 
+.#{$ns}-img__btn--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .#{$ns}-img__icon {
   position: absolute;
   top: rem(-8px);
   left: rem(-8px);
 }
 
+.#{$ns}-img__btn--disabled > .#{$ns}-img__icon {
+  opacity: $opacity-3; // 0.55 * 0.55 = 0.3025 (aka $opacity-2);
+}
+
 // 3.1 Medium devices
 // -----------------------------------------------------------------------------
 
 @include media-query('medium') {
+  .#{$ns}-img--hero {
+    padding-top: 75%; // 3:4
+  }
+
+  .#{$ns}-img--hero .#{$ns}-img__inner {
+    bottom: $space-l;
+    left: $space-l;
+    width: calc(100% - #{rem(80px)});
+  }
+
+  .#{$ns}-img__heading {
+    font-size: rem(50px);
+    line-height: rem(56px);
+  }
+
+  .#{$ns}-img__subheading {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
   .#{$ns}-img--slider {
     margin-bottom: $space-m;
   }
@@ -147,9 +298,13 @@
     font-size: rem(13px);
   }
 
-  .#{$ns}-img__outer {
+  .#{$ns}-img--slider > .#{$ns}-img__outer {
     padding: $space-xs;
     margin-bottom: rem(32px);
+  }
+
+  .#{$ns}-img__list {
+    padding: 0 $space-s;
   }
 }
 
@@ -157,6 +312,27 @@
 // -----------------------------------------------------------------------------
 
 @include media-query('large') {
+  .#{$ns}-img--hero {
+    padding-top: 56.25%; // 16:9
+  }
+
+  .#{$ns}-img--hero .#{$ns}-img__inner {
+    right: $space-xl;
+    bottom: $space-xl;
+    left: $space-xl;
+    width: calc(100% - #{rem(128px)});
+  }
+
+  .#{$ns}-img__heading {
+    font-size: rem(58px);
+    line-height: rem(64px);
+  }
+
+  .#{$ns}-img__subheading {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
   .#{$ns}-img__number {
     font-size: rem(14px);
   }
