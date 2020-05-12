@@ -9,17 +9,17 @@
 // =============================================================================
 
 // Resolves double number issue.
-ol {
+ol.up-ol {
   list-style-type: none;
 }
 
 // Resolves double bullet issue.
-li {
+ul.up-ul {
   list-style-type: none;
 }
 
 // Resolves bullet issue on subtopic section headings.
-.bux-tick-none.up-li::before {
+li.up-li.bux-tick-none::before {
   display: none;
 }
 
