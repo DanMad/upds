@@ -28,6 +28,12 @@
   // color: $white;
 }
 
+// The ::-webkit-scrollbar property controls scrollbars in Chrome, Edge, and
+// Safari browsers.
+::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   background-color: $bg-3;
@@ -51,6 +57,10 @@ body {
   // The caret-color property gives control over that caret color in browsers
   // that support it.
   caret-color: $black;
+
+  // The scrollbar-width property controls the width of scrollbars in Firefox
+  // browsers.
+  scrollbar-width: thin;
 }
 
 img {
