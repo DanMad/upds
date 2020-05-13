@@ -5,359 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UP's Design System | Staging</title>
     <script src="./js/anime.min.js"></script>
+    <script src="./js/color-thief.min.js"></script>
     <script src="./js/upds.min.js"></script>
     <link href="./css/base.css" rel="stylesheet" />
+    <link href="./css/components.css" rel="stylesheet" />
+    <link
+      href="img/favicons/16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      href="img/favicons/32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="img/favicons/96x96.png"
+      rel="icon"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link href="img/favicons/120x120.png" rel="apple-touch-icon" />
+    <link
+      href="img/favicons/152x152.png"
+      rel="apple-touch-icon"
+      sizes="152x152"
+    />
+    <link
+      href="img/favicons/167x167.png"
+      rel="apple-touch-icon"
+      sizes="167x167"
+    />
+    <link
+      href="img/favicons/180x180.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
   </head>
   <body>
-    <main id="page-content">
+    <main class="app">
+      <div class="up-img up-img--hero">
+        <div
+          class="up-img__outer"
+          style="background-image: url('./img/hero.jpg');"
+        >
+          <div class="up-img__inner">
+            <h1 class="up-img__heading" style="color: #fff;">
+              Welcome on board!
+            </h1>
+            <h2 class="up-img__subheading" style="color: #fff;">
+              The Certificate IV in Personal Training
+            </h2>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="up-img up-img--hero">
+        <div
+          class="up-img__outer"
+          style="background-image: url('./img/hero-2.jpg');"
+        >
+          <div class="up-img__inner">
+            <h1 class="up-img__heading">
+              Welcome on board!
+            </h1>
+          </div>
+        </div>
+      </div> -->
       <div class="up-grid up-grid--gutter">
         <div class="up-grid__item up-grid__item--s-12">
-          <h1>Staging environment</h1>
-          <!-- <h1>Heading level 1</h1>
-          <h1 class="up-h1 up-h1--alt">Alternative heading level 1</h1>
-          <h2>Heading level 2</h2>
-          <h2 class="up-h2 up-h2--alt">Alternative heading level 2</h2>
-          <h3>Heading level 3</h3>
-          <h3 class="up-h3 up-h3--alt">Alternative heading level 3</h3>
-          <h4>Heading level 4</h4>
-          <h4 class="up-h4 up-h4--alt">Alternative heading level 4</h4>
-          <h5>Heading level 5</h5>
-          <h6>Heading level 6</h6> -->
-          <div class="up-img up-img--slider up-img--16x9">
-            <span class="up-img__number" unselectable="on">
-              <strong class="up-strong">1</strong> of
-              <strong class="up-strong">8</strong></span
-            >
-            <div class="up-img__outer">
-              <div class="up-img__inner">
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-background-color="rgb(148, 238, 215)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-background-color="rgb(87, 106, 137)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-background-color="rgb(91, 122, 50)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <!-- <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-background-color="rgb(202, 122, 89)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
-                    role="img"
-                  ></div>
-                </div> -->
-              </div>
-            </div>
-            <div class="up-img__controls">
-              <button class="up-img__btn up-img__btn--prev" role="button">
-                <svg
-                  aria-hidden="true"
-                  class="up-img__icon up-icon"
-                  height="64px"
-                  viewBox="0 0 64 64"
-                  version="1.1"
-                  width="64px"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <defs>
-                    <mask class="up-icon__mask">
-                      <rect
-                        class="up-icon__mask up-icon__mask--visible"
-                        height="64"
-                        width="64"
-                        x="0"
-                        y="0"
-                      />
-                      <circle
-                        class="up-icon__mask up-icon__mask--hidden"
-                        cx="32"
-                        cy="32"
-                        r="18"
-                      />
-                    </mask>
-                  </defs>
-                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
-                  <g class="up-icon__strokes">
-                    <polyline
-                      class="up-icon__stroke"
-                      points="28 28.5 24.5 32 28 35.5"
-                    />
-                    <line
-                      class="up-icon__stroke"
-                      x1="24.5"
-                      y1="32"
-                      x2="39.5"
-                      y2="32"
-                    />
-                  </g>
-                </svg>
-              </button>
-              <button class="up-img__btn up-img__btn--next" role="button">
-                <svg
-                  aria-hidden="true"
-                  class="up-img__icon up-icon"
-                  height="64px"
-                  viewBox="0 0 64 64"
-                  version="1.1"
-                  width="64px"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <defs>
-                    <mask class="up-icon__mask">
-                      <rect
-                        class="up-icon__mask up-icon__mask--visible"
-                        height="64"
-                        width="64"
-                        x="0"
-                        y="0"
-                      />
-                      <circle
-                        class="up-icon__mask up-icon__mask--hidden"
-                        cx="32"
-                        cy="32"
-                        r="18"
-                      />
-                    </mask>
-                  </defs>
-                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
-                  <g class="up-icon__strokes">
-                    <polyline
-                      class="up-icon__stroke"
-                      points="36 28.5 39.5 32 36 35.5"
-                    />
-                    <line
-                      class="up-icon__stroke"
-                      x1="24.5"
-                      y1="32"
-                      x2="39.5"
-                      y2="32"
-                    />
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="up-img up-img--slider up-img--3x4">
-            <span class="up-img__number" unselectable="on">
-              <strong class="up-strong">1</strong> of
-              <strong class="up-strong">8</strong></span
-            >
-            <div class="up-img__outer">
-              <div class="up-img__inner">
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-color="rgb(148, 238, 215)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-color="rgb(87, 106, 137)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-color="rgb(91, 122, 50)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
-                    role="img"
-                  ></div>
-                </div>
-                <!-- <div class="up-img__slide">
-                  <div
-                    aria-label="alt text"
-                    class="up-img__src"
-                    data-color="rgb(202, 122, 89)"
-                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
-                    role="img"
-                  ></div>
-                </div> -->
-              </div>
-            </div>
-            <div class="up-img__controls">
-              <button class="up-img__btn up-img__btn--prev" role="button">
-                <svg
-                  aria-hidden="true"
-                  class="up-img__icon up-icon"
-                  height="64px"
-                  viewBox="0 0 64 64"
-                  version="1.1"
-                  width="64px"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <defs>
-                    <mask class="up-icon__mask">
-                      <rect
-                        class="up-icon__mask up-icon__mask--visible"
-                        height="64"
-                        width="64"
-                        x="0"
-                        y="0"
-                      />
-                      <circle
-                        class="up-icon__mask up-icon__mask--hidden"
-                        cx="32"
-                        cy="32"
-                        r="18"
-                      />
-                    </mask>
-                  </defs>
-                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
-                  <g class="up-icon__strokes">
-                    <polyline
-                      class="up-icon__stroke"
-                      points="28 28.5 24.5 32 28 35.5"
-                    />
-                    <line
-                      class="up-icon__stroke"
-                      x1="24.5"
-                      y1="32"
-                      x2="39.5"
-                      y2="32"
-                    />
-                  </g>
-                </svg>
-              </button>
-              <button class="up-img__btn up-img__btn--next" role="button">
-                <svg
-                  aria-hidden="true"
-                  class="up-img__icon up-icon"
-                  height="64px"
-                  viewBox="0 0 64 64"
-                  version="1.1"
-                  width="64px"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                  <defs>
-                    <mask class="up-icon__mask">
-                      <rect
-                        class="up-icon__mask up-icon__mask--visible"
-                        height="64"
-                        width="64"
-                        x="0"
-                        y="0"
-                      />
-                      <circle
-                        class="up-icon__mask up-icon__mask--hidden"
-                        cx="32"
-                        cy="32"
-                        r="18"
-                      />
-                    </mask>
-                  </defs>
-                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
-                  <g class="up-icon__strokes">
-                    <polyline
-                      class="up-icon__stroke"
-                      points="36 28.5 39.5 32 36 35.5"
-                    />
-                    <line
-                      class="up-icon__stroke"
-                      x1="24.5"
-                      y1="32"
-                      x2="39.5"
-                      y2="32"
-                    />
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Environment</th>
-                <th>URL</th>
+          <p class="up-p">
+            Welcome on board The Certificate IV in Personal Training. We're
+            ecstatic you've chosen to study through UP Education. Continue
+            reading the Course Overview below to learn a little more about
+            what's in store.
+          </p>
+          <h3 class="up-h3">Module outline</h3>
+          <table class="up-table">
+            <thead class="up-thead">
+              <tr class="up-tr">
+                <th class="up-th">Block</th>
+                <th class="up-th">Module</th>
+                <th class="up-th">Description</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Staging</td>
-                <td>https://danmad.github.io/upds/staging/</td>
-              </tr>
-              <tr>
-                <td>Prod</td>
-                <td>https://danmad.github.io/upds/</td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <p>
-                    A more complex table data cell that has body copy
-                    descendents to think about...
+            <tbody class="up-tbody">
+              <tr class="up-tr">
+                <td class="up-td">Introduction to Personal Training</td>
+                <td class="up-td">
+                  <p class="up-p">
+                    <strong class="up-strong">Module 1:</strong><br />Anatomy
+                    and physiology
                   </p>
-                  <p>Blaxh. I'm now going to add a list:</p>
-                  <ul>
-                    <li>shdhfjh</li>
-                    <li>ksdjhfkjshdf skdjhfkjhsdf</li>
-                  </ul>
+                  <p class="up-p">
+                    <strong class="up-strong">Module 2:</strong><br />Exercise
+                    principles
+                  </p>
+                </td>
+                <td class="up-td">
+                  Develop your knowledge of human anatomy, components of fitness
+                  and appropriate training methods.
+                </td>
+              </tr>
+              <tr class="up-tr">
+                <td class="up-td">Health and safety</td>
+                <td class="up-td">
+                  <p class="up-p">
+                    <strong class="up-strong">Module 3:</strong><br />Safe and
+                    effective gym techniques
+                  </p>
+                  <p class="up-p">
+                    <strong class="up-strong">Module 4:</strong><br />Nutrition
+                  </p>
+                  <p class="up-p">
+                    <strong class="up-strong">Module 5:</strong><br />Ethics and
+                    customer safety
+                  </p>
+                </td>
+                <td class="up-td">
+                  <p class="up-p">
+                    Learn the correct techniques to ensure you and your clients
+                    are safe.
+                  </p>
+                  <p class="up-p">
+                    Developing and maintaining a healthy lifestyle.
+                  </p>
+                </td>
+              </tr>
+              <tr class="up-tr">
+                <td class="up-td">Programming</td>
+                <td class="up-td">
+                  <p class="up-p">
+                    <strong class="up-strong">Module 6:</strong><br />Exercise
+                    programming
+                  </p>
+                </td>
+                <td class="up-td">
+                  How to prepare and create programs to meet clients needs and
+                  help them achieve their goals.
+                </td>
+              </tr>
+              <tr class="up-tr">
+                <td class="up-td">Business</td>
+                <td class="up-td">
+                  <p class="up-p">
+                    <strong class="up-strong">Module 7:</strong><br />PT as a
+                    business
+                  </p>
+                </td>
+                <td class="up-td">
+                  Learn how to create a successful business plan and find out
+                  how to make the most from your marketing strategy.
+                </td>
+              </tr>
+              <tr class="up-tr">
+                <td class="up-td">Special Populations</td>
+                <td class="up-td">
+                  <p class="up-p">
+                    <strong class="up-strong">Module 8:</strong><br />Special
+                    populations
+                  </p>
+                </td>
+                <td class="up-td">
+                  Discover ways to support common health conditions, how to
+                  modify your program and motivate your clients.
                 </td>
               </tr>
             </tbody>
           </table>
-          <table class="up-table up-table--compact">
-            <thead>
-              <tr>
-                <th>Environment</th>
-                <th>URL</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Staging</td>
-                <td><code>https://danmad.github.io/upds/staging/</code></td>
-              </tr>
-              <tr>
-                <td>Prod</td>
-                <td><code>https://danmad.github.io/upds/</code></td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <p>
-                    A more complex table data cell that has body copy
-                    descendents to think about...
-                  </p>
-                  <p>Blaxh. I'm now going to add a list:</p>
-                  <ul>
-                    <li>shdhfjh</li>
-                    <li>ksdjhfkjshdf skdjhfkjhsdf</li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Accordion component</h2>
+          <h3 class="up-h3">Accordion component</h3>
           <div class="up-accordion">
             <button
               aria-expanded="false"
@@ -412,13 +229,23 @@
               </svg>
             </button>
             <div class="up-accordion__inner">
-              <p>
+              <p class="up-p">
                 Dagobah was a planet in the
-                <a href="https://example.com/">Dagobah</a> system, and one of
-                the purest places in the galaxy within the Force. A remote world
-                of swamps and forests, it served as a refuge for Jedi Grand
-                Master Yoda during his exile after the
-                <a href="https://lucent.baseux.com/" target="_self"
+                <a
+                  class="up-a"
+                  href="https://example.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Dagobah</a
+                >
+                system, and one of the purest places in the galaxy within the
+                Force. A remote world of swamps and forests, it served as a
+                refuge for Jedi Grand Master Yoda during his exile after the
+                <a
+                  class="up-a"
+                  href="https://lucent.baseux.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >destruction</a
                 >
                 of the Jedi Order.
@@ -430,6 +257,7 @@
               aria-expanded="false"
               class="up-accordion__btn"
               role="button"
+              title="Expand"
             >
               <span class="up-accordion__label">Hoth</span>
               <svg
@@ -479,7 +307,7 @@
               </svg>
             </button>
             <div class="up-accordion__inner">
-              <p>
+              <p class="up-p">
                 Hoth was the arena of a battle between the Galactic Empire and
                 the Rebel Alliance, which had installed its temporary
                 headquarters, Echo Base, on the ice planet.
@@ -491,6 +319,7 @@
               aria-expanded="false"
               class="up-accordion__btn"
               role="button"
+              title="Expand"
             >
               <span class="up-accordion__label">Endor</span>
               <svg
@@ -540,7 +369,7 @@
               </svg>
             </button>
             <div class="up-accordion__inner">
-              <p>
+              <p class="up-p">
                 Endor, designated IX3244-A, also known as the Forest Moon of
                 Endor or the Sanctuary Moon, was a small forested moon that
                 orbited the Outer Rim planet of the same name and was the
@@ -549,11 +378,403 @@
               </p>
             </div>
           </div>
+          <h3 class="up-h3">Slider component</h3>
+          <div class="up-img up-img--slider up-img--16x9">
+            <span class="up-img__number" unselectable="on">
+              <strong class="up-strong">1</strong> of
+              <strong class="up-strong">12</strong></span
+            >
+            <div class="up-img__outer">
+              <div class="up-img__inner">
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(148, 238, 215)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(91, 122, 50)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(148, 238, 215)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(91, 122, 50)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(148, 238, 215)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+
+                <!--    <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(202, 122, 89)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_540790687.jpg"
+                    role="img"
+                  ></div>
+                </div> -->
+              </div>
+            </div>
+            <div class="up-img__controls">
+              <button
+                class="up-img__btn up-img__btn--prev"
+                role="button"
+                title="Previous"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="28 28.5 24.5 32 28 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+              <div class="up-img__list"></div>
+              <button
+                class="up-img__btn up-img__btn--next"
+                role="button"
+                title="Next"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="36 28.5 39.5 32 36 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="up-img up-img--slider up-img--3x4">
+            <span class="up-img__number" unselectable="on">
+              <strong class="up-strong">1</strong> of
+              <strong class="up-strong">12</strong></span
+            >
+            <div class="up-img__outer">
+              <div class="up-img__inner">
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(148, 238, 215)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_394521556.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(87, 106, 137)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_300591083.jpg"
+                    role="img"
+                  ></div>
+                </div>
+                <div class="up-img__slide">
+                  <div
+                    aria-label="alt text"
+                    class="up-img__src"
+                    data-background-color="rgb(91, 122, 50)"
+                    data-src="https://cms-lucent.baseux.com/sites/default/files/inline-images/shutterstock_693756772.jpg"
+                    role="img"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="up-img__controls">
+              <button
+                class="up-img__btn up-img__btn--prev"
+                role="button"
+                title="Previous"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="28 28.5 24.5 32 28 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+              <div class="up-img__list"></div>
+              <button
+                class="up-img__btn up-img__btn--next"
+                role="button"
+                title="Next"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="up-img__icon up-icon"
+                  height="64px"
+                  viewBox="0 0 64 64"
+                  version="1.1"
+                  width="64px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <mask class="up-icon__mask">
+                      <rect
+                        class="up-icon__mask up-icon__mask--visible"
+                        height="64"
+                        width="64"
+                        x="0"
+                        y="0"
+                      />
+                      <circle
+                        class="up-icon__mask up-icon__mask--hidden"
+                        cx="32"
+                        cy="32"
+                        r="18"
+                      />
+                    </mask>
+                  </defs>
+                  <circle class="up-icon__tint" cx="32" cy="32" r="20" />
+                  <g class="up-icon__strokes">
+                    <polyline
+                      class="up-icon__stroke"
+                      points="36 28.5 39.5 32 36 35.5"
+                    />
+                    <line
+                      class="up-icon__stroke"
+                      x1="24.5"
+                      y1="32"
+                      x2="39.5"
+                      y2="32"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
     <script>
-      PiggyBack.run();
+      UpDS.addComponents(`.app`);
+      // PiggyBack.run();
     </script>
   </body>
 </html>
