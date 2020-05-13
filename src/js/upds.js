@@ -343,8 +343,6 @@ const UpDS = (() => {
 
             btnPrev.classList.add(`${ns}-img__btn--disabled`);
             btnPrev.disabled = true;
-
-            btnNext.focus();
           } else {
             btnPrev.classList.remove(`${ns}-img__btn--disabled`);
             btnPrev.disabled = false;
@@ -363,40 +361,11 @@ const UpDS = (() => {
 
             btnNext.classList.add(`${ns}-img__btn--disabled`);
             btnNext.disabled = true;
-
-            btnPrev.focus();
           } else {
             btnNext.classList.remove(`${ns}-img__btn--disabled`);
             btnNext.disabled = false;
           }
         };
-
-        // fn: (elems) => {
-
-        //   // const setList = (elem, itemTotal, itemNum = 0) => {
-        //   //   const list = elem.querySelector(`.${ns}-img__list`);
-
-        //   //   for (let i = 0; i < itemTotal; i++) {
-        //   //     if (i === itemNum) {
-        //   //       list.innerHTML += `<div class="${ns}-img__item ${ns}-img__item--active"></div>`;
-        //   //     } else {
-        //   //       if (i === 5) {
-        //   //         if (itemTotal > 6) {
-        //   //           list.innerHTML += `<div class="${ns}-img__item ${ns}-img__item--compact"></div>`;
-        //   //         } else {
-        //   //           list.innerHTML += `<div class="${ns}-img__item"></div>`;
-        //   //         }
-
-        //   //         break;
-        //   //       } else {
-        //   //         list.innerHTML += `<div class="${ns}-img__item"></div>`;
-        //   //       }
-        //   //     }
-        //   //   }
-        //   // };
-
-        //   });
-        // },
 
         const setNum = (elem, state) => {
           const number = elem.querySelector(`.${ns}-img__number`);
@@ -639,14 +608,25 @@ const UpDS = (() => {
           };
 
           const handleClick = (e) => {
+            const btnPrev = elem.querySelector(`.${ns}-img__btn--prev`);
+            const btnNext = elem.querySelector(`.${ns}-img__btn--next`);
+
             if (!state.isAnimating) {
               if (e.target.classList.contains(`${ns}-img__btn--prev`)) {
                 if (state.slideNum !== 0) {
                   setSlide(elem, state, state.slideNum--);
                 }
+
+                if (state.slideNum === 0) {
+                  btnNext.focus();
+                }
               } else {
                 if (state.slideNum + 1 <= state.slideData.length - 1) {
                   setSlide(elem, state, state.slideNum++);
+                }
+
+                if (state.slideNum === state.slideData.length - 1) {
+                  btnPrev.focus();
                 }
               }
             }
@@ -870,8 +850,6 @@ const UpDS = (() => {
   const listComponents = () => {
     return Object.keys(components);
   };
-
-  console.log(state);
 
   return {
     addComponents,
