@@ -50,6 +50,11 @@ li.bux-tick-sub {
 #co-sub-header-text::selection {
   background-color: transparent; }
 
+.bux-container-content {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0; }
+
 #page {
   padding-top: 0;
   margin-top: 4rem; }
