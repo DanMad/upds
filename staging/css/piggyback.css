@@ -11,8 +11,21 @@ li.bux-tick,
 li.bux-tick-sub {
   cursor: pointer; }
 
-#co > .co-header-text {
-  left: 1.5rem; }
+#co-header-image {
+  position: relative; }
+
+#co {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: calc(100% - 3rem); }
+
+#co-header-text {
+  position: static; }
+
+#co-sub-header-text {
+  position: static;
+  margin-top: 0.5rem; }
 
 #page {
   padding-top: 0;
@@ -81,8 +94,10 @@ table.up-table[style] {
 @media only screen and (min-width: 30.0625em) {
   .navbar {
     height: 4.5rem; }
-  #co > .co-header-text {
-    left: 2.5rem; }
+  #co {
+    bottom: 2.5rem;
+    left: 2.5rem;
+    width: calc(100% - 5rem); }
   #page {
     margin-top: 4.5rem; }
   .bux-container-content,
@@ -92,8 +107,10 @@ table.up-table[style] {
     margin-left: 2.5rem; } }
 
 @media only screen and (min-width: 48.0625em) {
-  #co > .co-header-text {
-    left: 4rem; }
+  #co {
+    bottom: 4rem;
+    left: 4rem;
+    width: calc(100% - 8rem); }
   .bux-container-content,
   #region-main {
     margin-top: 4rem;
