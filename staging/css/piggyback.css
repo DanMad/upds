@@ -16,7 +16,8 @@
 
 body #page > #page-content {
   margin-left: 0;
-  color: rgba(0, 0, 9, 0.959); }
+  color: rgba(0, 0, 9, 0.959);
+  font-family: "Roboto", Arial, sans-serif; }
 
 .bux-container-content {
   margin-top: 1.5rem;
@@ -25,6 +26,24 @@ body #page > #page-content {
 
 .bux-container-content :first-child {
   margin-top: 0; }
+
+h1.up-h1[style] {
+  padding: 0; }
+
+h2.up-h2[style] {
+  padding: 0; }
+
+h3.up-h3[style] {
+  padding: 0; }
+
+h4.up-h4[style] {
+  padding: 0; }
+
+h5.up-h5[style] {
+  padding: 0; }
+
+h6.up-h6[style] {
+  padding: 0; }
 
 p {
   color: rgba(0, 0, 9, 0.959); }
