@@ -21,10 +21,12 @@ li.bux-tick-sub {
   width: calc(100% - 3rem); }
 
 #co-header-text {
-  position: static; }
+  position: static;
+  display: table; }
 
 #co-sub-header-text {
   position: static;
+  display: table;
   margin-top: 0.5rem; }
 
 #page {
@@ -37,8 +39,7 @@ body #page > #page-content[style] {
   color: rgba(0, 0, 9, 0.959);
   font-family: "Roboto", Arial, sans-serif; }
 
-.bux-container-content,
-#region-main {
+.bux-container-content {
   margin-top: 1.5rem;
   margin-right: 1.5rem;
   margin-left: 1.5rem; }
@@ -100,8 +101,7 @@ table.up-table[style] {
     width: calc(100% - 5rem); }
   #page {
     margin-top: 4.5rem; }
-  .bux-container-content,
-  #region-main {
+  .bux-container-content {
     margin-top: 2.5rem;
     margin-right: 2.5rem;
     margin-left: 2.5rem; } }
@@ -111,8 +111,7 @@ table.up-table[style] {
     bottom: 4rem;
     left: 4rem;
     width: calc(100% - 8rem); }
-  .bux-container-content,
-  #region-main {
+  .bux-container-content {
     margin-top: 4rem;
     margin-right: 4rem;
     margin-left: 4rem; } }
