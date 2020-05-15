@@ -7,7 +7,8 @@
 #nav-drawer.closed {
   left: -20.3125rem; }
 
-li.bux-tick {
+li.bux-tick,
+li.bux-tick-sub {
   cursor: pointer; }
 
 #co > .co-header-text {
@@ -17,18 +18,26 @@ li.bux-tick {
   padding-top: 0;
   margin-top: 4rem; }
 
-body #page > #page-content {
-  margin-left: 0;
+body #page > #page-content,
+body #page > #page-content[style] {
+  margin-left: 0 !important;
   color: rgba(0, 0, 9, 0.959);
   font-family: "Roboto", Arial, sans-serif; }
 
-.bux-container-content {
+.bux-container-content,
+#region-main {
   margin-top: 1.5rem;
   margin-right: 1.5rem;
   margin-left: 1.5rem; }
 
 .bux-container-content :first-child {
   margin-top: 0; }
+
+ul#0.up-ul {
+  margin: 0; }
+
+ul#0.up-ul::before {
+  display: none; }
 
 h1.up-h1[style] {
   padding: 0 !important; }
@@ -72,11 +81,12 @@ table.up-table[style] {
 @media only screen and (min-width: 30.0625em) {
   .navbar {
     height: 4.5rem; }
-  #page {
-    margin-top: 4.5rem; }
   #co > .co-header-text {
     left: 2.5rem; }
-  .bux-container-content {
+  #page {
+    margin-top: 4.5rem; }
+  .bux-container-content,
+  #region-main {
     margin-top: 2.5rem;
     margin-right: 2.5rem;
     margin-left: 2.5rem; } }
@@ -84,7 +94,8 @@ table.up-table[style] {
 @media only screen and (min-width: 48.0625em) {
   #co > .co-header-text {
     left: 4rem; }
-  .bux-container-content {
+  .bux-container-content,
+  #region-main {
     margin-top: 4rem;
     margin-right: 4rem;
     margin-left: 4rem; } }
