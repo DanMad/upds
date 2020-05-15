@@ -11,13 +11,15 @@
 .bux-tick-sub {
   cursor: pointer; }
 
-.bux-dropdown-menu {
-  border: none;
-  box-shadow: 0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 2.5rem 2.5rem -0.625rem rgba(34, 17, 65, 0.1); }
-
 #dropdown-1 {
   outline: none;
   user-select: none; }
+
+.bux-dropdown-menu {
+  box-shadow: 0 0 1.25rem 0.25rem rgba(152, 1, 1, 0.02), 0 2.5rem 2.5rem -0.625rem rgba(34, 17, 65, 0.1); }
+
+.ml-auto.d-flex > span[onclick] {
+  cursor: pointer; }
 
 #co-header-image {
   position: relative;
@@ -162,7 +164,7 @@ table.up-table[style] {
     line-height: 2rem; }
   #page {
     margin-top: 4.5rem; }
-  #region-main > div:not([id]) {
+  #region-main > div:not([role]) {
     margin-top: 2.5rem;
     margin-right: 2.5rem;
     margin-left: 2.5rem; } }
@@ -183,7 +185,7 @@ table.up-table[style] {
   #co-sub-header-text {
     font-size: 1.875rem;
     line-height: 2.5rem; }
-  #region-main > div:not([id]) {
+  #region-main > div:not([role]) {
     margin-top: 4rem;
     margin-right: 4rem;
     margin-left: 4rem; } }
