@@ -1,14 +1,20 @@
+.navbar {
+  height: 4rem; }
+
 .up-legacy-nav__bar {
   border-bottom: none; }
 
 #nav-drawer.closed {
   left: -20.3125rem; }
 
+#co > .co-header-text {
+  left: 1.5rem; }
+
 #page {
   padding-top: 0;
-  margin-top: 4.5rem; }
+  margin-top: 4rem; }
 
-#page > div#page-content {
+body #page > #page-content {
   margin-left: 0;
   color: rgba(0, 0, 9, 0.959); }
 
@@ -38,13 +44,24 @@ ul.up-ul {
 li.up-li.bux-tick-none::before {
   display: none; }
 
+table.up-table[width] {
+  width: 100% !important; }
+
 @media only screen and (min-width: 30.0625em) {
+  .navbar {
+    height: 4.5rem; }
+  #page {
+    margin-top: 4.5rem; }
+  #co > .co-header-text {
+    left: 2.5rem; }
   .bux-container-content {
     margin-top: 2.5rem;
     margin-right: 2.5rem;
     margin-left: 2.5rem; } }
 
 @media only screen and (min-width: 48.0625em) {
+  #co > .co-header-text {
+    left: 4rem; }
   .bux-container-content {
     margin-top: 4rem;
     margin-right: 4rem;
