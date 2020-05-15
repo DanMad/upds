@@ -22,12 +22,33 @@ li.bux-tick-sub {
 
 #co-header-text {
   position: static;
-  display: table; }
+  display: table;
+  font-family: "DM Serif Text", Georgia, serif;
+  font-size: 2.6875rem;
+  font-style: normal;
+  line-height: 3rem;
+  word-wrap: break-word; }
+
+#co-header-text::-moz-selection {
+  background-color: transparent; }
+
+#co-header-text::selection {
+  background-color: transparent; }
 
 #co-sub-header-text {
   position: static;
   display: table;
-  margin-top: 0.5rem; }
+  margin-top: 0.5rem;
+  font-family: "Oswald", Tahoma, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem; }
+
+#co-sub-header-text::-moz-selection {
+  background-color: transparent; }
+
+#co-sub-header-text::selection {
+  background-color: transparent; }
 
 #page {
   padding-top: 0;
@@ -99,6 +120,12 @@ table.up-table[style] {
     bottom: 2.5rem;
     left: 2.5rem;
     width: calc(100% - 5rem); }
+  #co-header-text {
+    font-size: 3.125rem;
+    line-height: 3.5rem; }
+  #co-sub-header-text {
+    font-size: 1.5rem;
+    line-height: 2rem; }
   #page {
     margin-top: 4.5rem; }
   .bux-container-content {
@@ -111,6 +138,12 @@ table.up-table[style] {
     bottom: 4rem;
     left: 4rem;
     width: calc(100% - 8rem); }
+  #co-header-text {
+    font-size: 3.625rem;
+    line-height: 4rem; }
+  #co-sub-header-text {
+    font-size: 1.875rem;
+    line-height: 2.5rem; }
   .bux-container-content {
     margin-top: 4rem;
     margin-right: 4rem;
