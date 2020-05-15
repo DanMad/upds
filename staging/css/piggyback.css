@@ -44,7 +44,7 @@ ul.up-ul {
 li.up-li.bux-tick-none::before {
   display: none; }
 
-table.up-table[width] {
+table.up-table[style] {
   width: 100% !important; }
 
 @media only screen and (min-width: 30.0625em) {
