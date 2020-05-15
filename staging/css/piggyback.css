@@ -80,6 +80,9 @@
   height: auto !important;
   margin-bottom: 0; }
 
+#region-main .box ~ br {
+  display: none; }
+
 #page {
   padding-top: 0;
   margin-top: 4rem; }
@@ -102,11 +105,27 @@ body #page > #page-content[style] {
   margin: 0 auto 1.5rem;
   vertical-align: baseline; }
 
+#region-main-box span[onclick] > img {
+  margin-bottom: 0; }
+
 .bux-container-content :first-child {
   margin-top: 0; }
 
 .card-body.p-2 {
   padding: 0 !important; }
+
+.bux-module-number {
+  line-height: 3rem; }
+
+.bux-module-name {
+  line-height: 3rem; }
+
+div[id^='topic-header-'] {
+  height: 3rem;
+  margin-top: 4rem; }
+
+div[id^='topic-header-'] + div[id^='topic-menu-'] + .up-h2 {
+  margin-top: 0; }
 
 h1.up-h1[style] {
   padding: 0 !important; }
