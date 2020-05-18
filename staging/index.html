@@ -45,7 +45,7 @@
     />
   </head>
   <body>
-    <main class="app">
+    <main id="page-content" class="app">
       <div class="up-img up-img--hero">
         <div
           class="up-img__outer"
@@ -81,6 +81,19 @@
             reading the Course Overview below to learn a little more about
             what's in store.
           </p>
+          <p>&nbsp; &#10;&#9;</p>
+          <p>&nbsp; &#9; &nbsp;&#9;</p>
+          <p></p>
+          <p><img src="./img/hero.jpg" /></p>
+          <iframe
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen=""
+            frameborder="0"
+            height="315"
+            src="https://www.youtube.com/embed/VW42KKmjEZY"
+            width="560"
+          ></iframe>
+          <hr />
           <h3 class="up-h3">Module outline</h3>
           <table class="up-table">
             <thead class="up-thead">
@@ -678,11 +691,15 @@
               </button>
             </div>
           </div>
+          <p class="up-p">
+            One final test...
+          </p>
         </div>
       </div>
     </main>
     <script>
-      UpDS.addComponents(`.app`);
+      PiggyBack.run();
+      // UpDS.addComponents(`.app`);
     </script>
   </body>
 </html>
