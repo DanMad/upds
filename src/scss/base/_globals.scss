@@ -18,14 +18,12 @@
 // browser window's selection color in Firefox.
 ::-moz-selection {
   background-color: rgba($primary-1, 0.55);
-  // color: $white;
 }
 
 // The background-color property of the ::selection rule gives control of the
 // browser window's selection color.
 ::selection {
   background-color: rgba($primary-1, 0.55);
-  // color: $white;
 }
 
 // The ::-webkit-scrollbar property controls scrollbars in Chrome, Edge, and
