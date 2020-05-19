@@ -20,7 +20,7 @@ const UpDS = (() => {
   let uid = 0;
   const ver = {
     name: `Moon Landing`,
-    number: `v0.2.0`,
+    number: `v0.2.1`,
   };
 
   const animation = {
@@ -848,7 +848,14 @@ const UpDS = (() => {
   };
 
   const listComponents = () => {
-    return Object.keys(components);
+    const comps = Object.keys(components);
+    const compList = {};
+
+    comps.forEach((comp) => {
+      compList[comp] = components[comp].className;
+    });
+
+    return compList;
   };
 
   return {
@@ -861,7 +868,22 @@ const UpDS = (() => {
 
 const PiggyBack = (() => {
   const state = {
+    components: UpDS.listComponents(),
     isPiggyBacked: false,
+  };
+
+  const hasAscendantSelector = (child, ascendantSelector) => {
+    let node = child.parentNode;
+
+    while (node !== null) {
+      if (!!node.classList && node.classList.contains(ascendantSelector)) {
+        return true;
+      }
+
+      node = node.parentNode;
+    }
+
+    return false;
   };
 
   const addDefaults = (selector, ...tagNames) => {
@@ -875,8 +897,35 @@ const PiggyBack = (() => {
           const tagName = elem.tagName.toLowerCase();
           const defaultClassName = `${UpDS.getNamespace()}-${tagName}`;
 
-          if (!elem.classList.contains(defaultClassName)) {
-            elem.classList.add(defaultClassName);
+          if (tagName === `iframe`) {
+            const iframe = document.createElement(`div`);
+
+            elem.classList.add(`${UpDS.getNamespace()}-iframe__inner`);
+            elem.removeAttribute(`height`);
+            elem.removeAttribute(`width`);
+
+            iframe.classList.add(`${UpDS.getNamespace()}-iframe`);
+
+            if (!hasAscendantSelector(elem, `${UpDS.getNamespace()}-iframe`)) {
+              elem.parentNode.insertBefore(iframe, elem);
+              iframe.appendChild(elem);
+            }
+          }
+
+          if (tagName === `p`) {
+            if (!hasAscendantSelector(elem, state.components.accordion)) {
+              if (elem.children.length === 0) {
+                elem.innerText = elem.innerText.trim();
+
+                if (!elem.innerText.length) {
+                  elem.remove();
+                }
+              }
+            }
+          }
+
+          if (tagName === `hr`) {
+            elem.remove();
           }
 
           if (tagName === `a`) {
@@ -885,6 +934,15 @@ const PiggyBack = (() => {
             if (!originURL.test(elem.href)) {
               elem.rel = `noopener noreferrer`;
               elem.target = `_blank`;
+            } else {
+              elem.removeAttribute(`rel`);
+              elem.removeAttribute(`target`);
+            }
+          }
+
+          if (tagName !== `iframe`) {
+            if (!elem.classList.contains(defaultClassName)) {
+              elem.classList.add(defaultClassName);
             }
           }
         });
@@ -939,6 +997,8 @@ const PiggyBack = (() => {
       `tr`,
       `th`,
       `td`,
+      `hr`,
+      `iframe`,
       `strong`,
       `em`,
       `a`,
@@ -954,11 +1014,11 @@ const PiggyBack = (() => {
     const styleSheets = [
       // Staging
       // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-      `./css/components.css`,
+      // `./css/components.css`,
       // Prod
       // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-      // `https://danmad.github.io/upds/css/components.min.css`,
-      // `https://danmad.github.io/upds/css/piggyback.min.css`,
+      `https://danmad.github.io/upds/css/components.min.css`,
+      `https://danmad.github.io/upds/css/piggyback.min.css`,
     ];
 
     addStyleSheets(styleSheets, () => {

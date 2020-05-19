@@ -1,36 +1,342 @@
-// 1 Imports
+// Imports
 // =============================================================================
 
 @import './utilities/variables';
 @import './vendors/rem';
 @import './mixins/media-query';
 
-// 2 Small devices
+// Small Context
 // =============================================================================
 
-// Resolves double number issue.
-ol.up-ol {
-  list-style-type: none;
+// Navigation layout overwrites
+// -----------------------------------------------------------------------------
+.navbar {
+  height: rem(64px);
 }
 
-// Resolves double bullet issue.
-ul.up-ul {
-  list-style-type: none;
+.#{$ns}-legacy-nav__bar {
+  border-bottom: none;
 }
 
-// Resolves bullet issue on subtopic section headings.
-li.up-li.bux-tick-none::before {
+#nav-drawer.closed {
+  left: rem(-325px);
+}
+
+.bux-tick,
+.bux-tick-sub {
+  cursor: pointer;
+}
+
+#dropdown-1 {
+  outline: none;
+  user-select: none;
+}
+
+.bux-dropdown-menu {
+  box-shadow: $shadow-5;
+}
+
+.ml-auto.d-flex > span[onclick] {
+  cursor: pointer;
+}
+
+// Hero image layout overwrites
+// -----------------------------------------------------------------------------
+#co-header-image {
+  position: relative;
+  width: auto;
+  margin-top: rem(-24px);
+  margin-right: rem(-24px);
+  margin-bottom: $space-m;
+  margin-left: rem(-24px);
+}
+
+#co {
+  position: absolute;
+  bottom: $space-m;
+  left: $space-m;
+  width: calc(100% - #{rem(48px)});
+}
+
+#co-header-text {
+  position: static;
+  display: table;
+  font-family: $headings;
+  font-size: rem(43px);
+  font-style: normal;
+  line-height: rem(48px);
+  word-wrap: break-word;
+}
+
+#co-header-text::-moz-selection {
+  background-color: transparent;
+}
+#co-header-text::selection {
+  background-color: transparent;
+}
+
+#co-sub-header-text {
+  position: static;
+  display: table;
+  margin-top: $space-xs;
+  font-family: $subheadings;
+  font-size: rem(18px);
+  font-weight: 500;
+  line-height: rem(24px);
+}
+
+#co-sub-header-text::-moz-selection {
+  background-color: transparent;
+}
+#co-sub-header-text::selection {
+  background-color: transparent;
+}
+
+.bux-container-content {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#region-main .box {
+  width: calc(100% + #{rem(48px)});
+  margin-right: rem(-24px);
+  margin-bottom: $space-m;
+  margin-left: rem(-24px);
+}
+
+#region-main .box > .bux-topic-img[height] {
+  height: auto !important;
+  margin-bottom: 0;
+}
+
+#region-main .box ~ br {
   display: none;
 }
 
-// #page {
-//  padding-top: 0;
-//  padding-left:0;
-//  margin-top: $space-xl;
+// Course Overview & Topic layout overwrites
+// -----------------------------------------------------------------------------
+#page {
+  padding-top: 0;
+  margin-top: rem(64px);
+}
+
+#page ::-moz-selection {
+  background-color: rgba($primary-1, 0.55);
+}
+#page ::selection {
+  background-color: rgba($primary-1, 0.55);
+}
+
+#page > #page-content,
+#page > #page-content[style] {
+  margin-left: 0 !important;
+  color: $black;
+  font-family: $body-copy;
+}
+
+#region-main > div:not([role]) {
+  margin-top: $space-m;
+  margin-right: $space-m;
+  margin-bottom: $space-l;
+  margin-left: $space-m;
+}
+
+#region-main-box img {
+  // display: block;
+  max-width: 100%;
+  max-height: none;
+  // margin: 0 auto $space-m;
+  margin-bottom: $space-m;
+  vertical-align: baseline;
+}
+
+#region-main-box span[onclick] > img {
+  margin-bottom: 0;
+}
+
+.bux-container-content :first-child {
+  margin-top: 0;
+}
+
+.card-body.p-2 {
+  padding: 0 !important;
+}
+
+.bux-module-number {
+  line-height: rem(48px);
+}
+
+.bux-module-name {
+  line-height: rem(48px);
+}
+
+div[id^='topic-header-'] {
+  height: rem(48px);
+  margin-top: $space-xl;
+}
+
+div[id^='topic-header-'] + div[id^='topic-menu-'] + .#{$ns}-h2 {
+  margin-top: 0;
+}
+
+// Global typography overwrites
+// -----------------------------------------------------------------------------
+// iframe[href*='youtube.com/embed/'] {
+//   position: relative;
+//   width: 100% !important;
+//   height: auto !important;
 // }
 
-// #page-content {
-//   padding: 0;
-//   padding-top: 0;
-//   color: $black;
+// iframe[href*='youtube.com/embed/']::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   padding-top: 56.25%;
 // }
+
+// Global typography overwrites
+// -----------------------------------------------------------------------------
+@for $i from 1 through 6 {
+  h#{$i}.#{$ns}-h#{$i}[style] {
+    padding: 0 !important;
+  }
+}
+
+p {
+  color: $black;
+}
+
+.#{$ns}-ol {
+  padding-left: 0;
+}
+
+ol.#{$ns}-ol {
+  list-style-type: none;
+}
+
+.#{$ns}-ul {
+  padding-left: 0;
+}
+
+ul.#{$ns}-ul {
+  list-style-type: none;
+}
+
+ul.#{$ns}-ul#\30 {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+ul.#{$ns}-ul#\30::before {
+  display: none;
+}
+
+li.#{$ns}-li.bux-tick-none::before {
+  display: none;
+}
+
+table.#{$ns}-table[style] {
+  width: 100% !important;
+}
+
+// Medium Context
+// =============================================================================
+@include media-query('medium') {
+  // Navigation overwrites
+  // ---------------------------------------------------------------------------
+  .navbar {
+    height: rem(72px);
+  }
+
+  // Hero image layout overwrites
+  // ---------------------------------------------------------------------------
+  #co-header-image {
+    margin-top: rem(-40px);
+    margin-right: rem(-40px);
+    margin-bottom: $space-l;
+    margin-left: rem(-40px);
+  }
+
+  #co {
+    bottom: $space-l;
+    left: $space-l;
+    width: calc(100% - #{rem(80px)});
+  }
+
+  #co-header-text {
+    font-size: rem(50px);
+    line-height: rem(56px);
+  }
+
+  #co-sub-header-text {
+    font-size: rem(24px);
+    line-height: rem(32px);
+  }
+
+  #region-main .box {
+    width: calc(100% + #{rem(80px)});
+    margin-right: rem(-40px);
+    margin-bottom: $space-l;
+    margin-left: rem(-40px);
+  }
+
+  // Course Overview & Topic layout overwrites
+  // ---------------------------------------------------------------------------
+  #page {
+    margin-top: rem(72px);
+  }
+
+  #region-main > div:not([role]) {
+    margin-top: $space-l;
+    margin-right: $space-l;
+    margin-bottom: $space-xl;
+    margin-left: $space-l;
+  }
+}
+
+// Large Context
+// =============================================================================
+@include media-query('large') {
+  // Hero image layout overwrites
+  // ---------------------------------------------------------------------------
+  #co-header-image {
+    margin-top: rem(-64px);
+    margin-right: rem(-64px);
+    margin-bottom: $space-xl;
+    margin-left: rem(-64px);
+  }
+
+  #co {
+    bottom: $space-xl;
+    left: $space-xl;
+    width: calc(100% - #{rem(128px)});
+  }
+
+  #co-header-text {
+    font-size: rem(58px);
+    line-height: rem(64px);
+  }
+
+  #co-sub-header-text {
+    font-size: rem(30px);
+    line-height: rem(40px);
+  }
+
+  #region-main .box {
+    width: calc(100% + #{rem(128px)});
+    margin-right: rem(-64px);
+    margin-bottom: $space-xl;
+    margin-left: rem(-64px);
+  }
+
+  // Course Overview & Topic layout overwrites
+  // ---------------------------------------------------------------------------
+  #region-main > div:not([role]) {
+    margin-top: $space-xl;
+    margin-right: $space-xl;
+    margin-bottom: rem(104px);
+    margin-left: $space-xl;
+  }
+}
