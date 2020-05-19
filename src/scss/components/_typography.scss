@@ -212,7 +212,6 @@
   color: $secondary-3;
   font-weight: 400;
   text-decoration: underline;
-  white-space: nowrap;
   transition: color $duration-2 $easing-default;
 }
 
@@ -740,8 +739,21 @@
 // 4 Retina displays.
 // =============================================================================
 
+//! Might not be necessary in future as you can rely on body's same declaration.
 @include media-query('retina') {
   .#{$ns}-p {
+    font-weight: 300;
+  }
+
+  .#{$ns}-ol {
+    font-weight: 300;
+  }
+
+  .#{$ns}-ul {
+    font-weight: 300;
+  }
+
+  .#{$ns}-td {
     font-weight: 300;
   }
 }
