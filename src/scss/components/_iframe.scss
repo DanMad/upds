@@ -1,0 +1,43 @@
+// 1 Pattern outline
+// 2 Imports
+// 3 Declarations
+
+// 1 Pattern outline
+// =============================================================================
+
+// .iframe
+// | .iframe__inner
+
+// 2 Imports
+// =============================================================================
+
+@import '../utilities/variables';
+@import '../vendors/rem';
+@import '../mixins/media-query';
+
+// 3 Declarations
+// =============================================================================
+
+.#{$ns}-iframe {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  margin-bottom: $space-s;
+}
+
+.#{$ns}-iframe__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// 3.1 Medium devices
+// -----------------------------------------------------------------------------
+
+@include media-query('medium') {
+  .#{$ns}-iframe {
+    margin-bottom: $space-m;
+  }
+}
