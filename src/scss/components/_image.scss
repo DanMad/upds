@@ -68,7 +68,7 @@
   opacity: 0;
   position: relative;
   display: table;
-  backdrop-filter: blur($space-s) contrast(40%);
+  backdrop-filter: blur($space-s);
   font-family: $headings;
   font-size: rem(43px);
   font-style: normal;

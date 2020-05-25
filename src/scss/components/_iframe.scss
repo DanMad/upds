@@ -25,6 +25,18 @@
   margin-bottom: $space-s;
 }
 
+.#{$ns}-iframe--1x1 {
+  padding-top: 100%;
+}
+
+.#{$ns}-iframe--3x4 {
+  padding-top: 75%;
+}
+
+.#{$ns}-iframe--16x9 {
+  padding-top: 56.25%;
+}
+
 .#{$ns}-iframe__inner {
   position: absolute;
   top: 0;
