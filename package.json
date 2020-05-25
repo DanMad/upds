@@ -1,18 +1,32 @@
 {
   "name": "up-design-system",
   "displayName": "UP Design System",
+  "version": "0.2.2",
+  "private": true,
   "description": "UP Education's Design System",
-  "license": "MIT",
-  "author": "DanMad",
-  "version": "0.1.0",
-  "main": "index.html",
   "homepage": "https://github.com/danmad/upds#readme",
+  "bugs": {
+    "url": "https://github.com/danmad/upds/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danmad/upds.git"
   },
-  "bugs": {
-    "url": "https://github.com/danmad/upds/issues"
+  "license": "MIT",
+  "author": "DanMad",
+  "main": "index.html",
+  "scripts": {
+    "build:prod": "node-sass src/scss/base.scss dist/css/base.min.css --output-style compressed && node-sass src/scss/components.scss dist/css/components.min.css --output-style compressed && node-sass src/scss/piggyback.scss dist/css/piggyback.min.css --output-style compressed && postcss dist/css/*.css --replace --no-map --use autoprefixer && babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
+    "build:staging": "node-sass src/scss -o dist/staging/css --output-style compressed && postcss dist/staging/css/*.css --replace --use autoprefixer && babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
+    "deploy": "gh-pages -d dist",
+    "sort": "npx sort-package-json",
+    "test": "jest",
+    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -28,17 +42,5 @@
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1"
-  },
-  "scripts": {
-    "build-prod": "node-sass src/scss/base.scss dist/css/base.min.css --output-style compressed && node-sass src/scss/components.scss dist/css/components.min.css --output-style compressed && node-sass src/scss/piggyback.scss dist/css/piggyback.min.css --output-style compressed && postcss dist/css/*.css --replace --no-map --use autoprefixer && babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
-    "build-staging": "node-sass src/scss -o dist/staging/css --output-style compressed && postcss dist/staging/css/*.css --replace --use autoprefixer && babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
-    "deploy": "gh-pages -d dist",
-    "test": "jest",
-    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
   }
 }
