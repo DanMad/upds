@@ -20,7 +20,7 @@ const UpDS = (() => {
   let uid = 0;
   const ver = {
     name: `Moon Landing`,
-    number: `v0.2.1`,
+    number: `v0.2.2`,
   };
 
   const animation = {
@@ -989,7 +989,7 @@ const PiggyBack = (() => {
       `ol`,
       `ul`,
       `li`,
-      `blockquote`,
+      // `blockquote`,
       `pre`,
       `table`,
       `thead`,
