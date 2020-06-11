@@ -1,7 +1,7 @@
 {
   "name": "up-design-system",
   "displayName": "UP Design System",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
   "description": "UP Education's Design System",
   "homepage": "https://github.com/danmad/upds#readme",
@@ -16,24 +16,63 @@
   "author": "DanMad",
   "main": "index.html",
   "scripts": {
-    "build:prod": "node-sass src/scss/base.scss dist/css/base.min.css --output-style compressed && node-sass src/scss/components.scss dist/css/components.min.css --output-style compressed && node-sass src/scss/piggyback.scss dist/css/piggyback.min.css --output-style compressed && postcss dist/css/*.css --replace --no-map --use autoprefixer && babel src --out-file dist/js/upds.min.js --ignore '**/*.test.js'",
-    "build:staging": "node-sass src/scss -o dist/staging/css --output-style compressed && postcss dist/staging/css/*.css --replace --use autoprefixer && babel src --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'",
+    "browserify:prod": "npm run browserify:prod:piggyback && npm run browserify:prod:upds",
+    "browserify:prod:piggyback": "browserify src/js/piggyback.js --standalone PiggyBack --outfile dist/js/piggyback.js",
+    "browserify:prod:upds": "browserify src/js/upds.js --standalone UpDS --outfile dist/js/upds.js",
+    "browserify:staging": "npm run browserify:staging:piggyback && npm run browserify:staging:upds",
+    "browserify:staging:piggyback": "browserify src/js/piggyback.js --standalone PiggyBack --outfile dist/staging/js/piggyback.js",
+    "browserify:staging:upds": "browserify src/js/upds.js --standalone UpDS --outfile dist/staging/js/upds.js",
+    "build:prod": "npm run node-sass:prod && npm run postcss:prod & npm run browserify:prod && npm run uglify:prod",
+    "build:staging": "npm run node-sass:staging && npm run postcss:staging & npm run browserify:staging && npm run uglify:staging",
     "deploy": "gh-pages -d dist",
-    "sort": "npx sort-package-json",
+    "node-sass:prod": "npm run node-sass:prod:base & npm run node-sass:prod:components & npm run node-sass:prod:piggyback",
+    "node-sass:prod:base": "node-sass src/scss/base.scss dist/css/base.min.css --output-style compressed",
+    "node-sass:prod:components": "node-sass src/scss/components.scss dist/css/components.min.css --output-style compressed",
+    "node-sass:prod:piggyback": "node-sass src/scss/piggyback.scss dist/css/piggyback.min.css --output-style compressed",
+    "node-sass:staging": "node-sass src/scss -o dist/staging/css --output-style compressed",
+    "postcss:prod": "postcss dist/css/*.css --replace --no-map --use autoprefixer",
+    "postcss:staging": "postcss dist/staging/css/*.css --replace --use autoprefixer",
+    "sort": "sort-package-json",
     "test": "jest",
-    "watch": "node-sass src/scss -o dist/staging/css --watch & babel src --watch --out-file dist/staging/js/upds.min.js --ignore '**/*.test.js'"
+    "uglify:prod": "npm run uglify:prod:piggyback && npm run uglify:prod:upds",
+    "uglify:prod:piggyback": "uglifyjs dist/js/piggyback.js --compress --output dist/js/piggyback.min.js",
+    "postuglify:prod:piggyback": "rm dist/js/piggyback.js",
+    "uglify:prod:upds": "uglifyjs dist/js/upds.js --compress --output dist/js/upds.min.js",
+    "postuglify:prod:upds": "rm dist/js/upds.js",
+    "uglify:staging": "npm run uglify:staging:piggyback && npm run uglify:staging:upds",
+    "uglify:staging:piggyback": "uglifyjs dist/staging/js/piggyback.js --compress --output dist/staging/js/piggyback.min.js",
+    "postuglify:staging:piggyback": "rm dist/staging/js/piggyback.js",
+    "uglify:staging:upds": "uglifyjs dist/staging/js/upds.js --compress --output dist/staging/js/upds.min.js",
+    "postuglify:staging:upds": "rm dist/staging/js/upds.js"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
   },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "comments": false,
+          "presets": [
+            "@babel/preset-env"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "animejs": "^3.2.0",
+    "color-thief": "^2.2.5"
+  },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.10.0",
     "@babel/preset-env": "^7.9.5",
     "autoprefixer": "^9.7.6",
-    "babel-preset-minify": "^0.5.1",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.1",
     "gh-pages": "^2.2.0",
     "husky": "^4.2.5",
     "jest": "^25.4.0",
@@ -41,6 +80,9 @@
     "postcss": "^7.0.29",
     "postcss-cli": "^7.1.1",
     "prettier": "^2.0.5",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "sort-package-json": "^1.44.0",
+    "uglify-js": "^3.9.3",
+    "watchify": "^3.11.1"
   }
 }
